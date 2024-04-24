@@ -9,4 +9,11 @@
     width: 95%;
     max-width: 80rem;
     margin: 0 auto;
+    overflow: hidden;
+}
+
+.login__card-image {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
