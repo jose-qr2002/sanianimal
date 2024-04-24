@@ -1,0 +1,12 @@
+@use '../global/variables' as v;
+
+.fondo-secundario {
+    min-height: 100vh;
+    background: linear-gradient(156deg, #0f172a 50%, #94a3b8 50%);
+}
+
+.login-contenedor {
+    width: 95%;
+    max-width: 80rem;
+    margin: 0 auto;
+}
