@@ -1,8 +1,8 @@
 @extends('menu')
 
 @section('contenido')
+<h2 class="title-menu">Medicamentos</h2>
 <div class="table-header">
-    <h2 class="table-title">Medicamentos</h2>
     <button><a href="{{ route('medicamentos.create') }}">Registrar</a></button>
     <div class="table-search">
         <input type="search" placeholder="Buscar">

@@ -1,6 +1,7 @@
 @extends('menu')
 
 @section('contenido')
+<h1 class="title-menu">Clientes</h1>
 <div class="table-header">
     <button>
         <a href="{{ route('clientes.create') }}">Registrar</a>

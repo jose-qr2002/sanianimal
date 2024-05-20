@@ -1,8 +1,8 @@
 @extends('menu')
 
 @section('contenido')
+<h2 class="title-menu">Mascotas</h2>
 <div class="table-header">
-    <h2 class="table-title">Medicamentos</h2>
     <button><a href="{{ route('medicamentos.create') }}">Registrar</a></button>
     <div class="table-search">
         <input type="search" placeholder="Buscar">
@@ -21,81 +21,27 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Rocky</td>
-                <td>Alejandro</td>
-                <td>Canino</td>
-                <td>Marron</td>
-                <td>
-                    <i class="ri-file-edit-line" id="icons"></i>
-                    <i class="ri-delete-bin-line" id="icons"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>Chevas</td>
-                <td>Mario</td>
-                <td>Canino</td>
-                <td>Marron</td>
-                <td>
-                    <i class="ri-file-edit-line" id="icons"></i>
-                    <i class="ri-delete-bin-line" id="icons"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>Jazy</td>
-                <td>Alejandro</td>
-                <td>Canino</td>
-                <td>Negro</td>
-                <td>
-                    <i class="ri-file-edit-line" id="icons"></i>
-                    <i class="ri-delete-bin-line" id="icons"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>Leo</td>
-                <td>Rosendo</td>
-                <td>Canino</td>
-                <td>Blanco</td>
-                <td>
-                    <i class="ri-file-edit-line" id="icons"></i>
-                    <i class="ri-delete-bin-line" id="icons"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>Pereira</td>
-                <td>Rene</td>
-                <td>Canino</td>
-                <td>Blanco</td>
-                <td>
-                    <i class="ri-file-edit-line" id="icons"></i>
-                    <i class="ri-delete-bin-line" id="icons"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>Pelusa</td>
-                <td>Alejandro</td>
-                <td>Gato</td>
-                <td>Negro</td>
-                <td>
-                    <i class="ri-file-edit-line" id="icons"></i>
-                    <i class="ri-delete-bin-line" id="icons"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>Jota</td>
-                <td>Elizabeth</td>
-                <td>Gato</td>
-                <td>Negro</td>
-                <td>
-                    <i class="ri-file-edit-line" id="icons"></i>
-                    <i class="ri-delete-bin-line" id="icons"></i>
-                </td>
-            </tr>
+            @forelse ($mascotas as $mascota)
+                <tr>
+                    <td>{{$mascota->nombre}}</td>
+                    <td>{{$mascota->cliente->nombre}}</td>
+                    <td>{{$mascota->especie->especie}}</td>
+                    <td>{{$mascota->color}}</td>
+                    <td>
+                        <i class="ri-file-edit-line" id="icons"></i>
+                        <i class="ri-delete-bin-line" id="icons"></i>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6">No se encontraron mascotas registradas</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
 
 <div class="table-footer">
-    <p>Total de Filas: 7</p>
+    <p>Total de Filas: 1</p>
 </div>
 @endsection

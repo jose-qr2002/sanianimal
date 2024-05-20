@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\MedicamentoController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,4 @@ Route::get('/medicamentos', [MedicamentoController::class, 'index'])->name('medi
 Route::get('/medicamentos/create', [MedicamentoController::class, 'create'])->name('medicamentos.create');
 
 // Mascotas
-Route::get('/mascotas', function() { return view('mascotas.index'); })->name('mascotas.index');
+Route::get('/mascotas', [MascotaController::class, 'index'])->name('mascotas.index');
