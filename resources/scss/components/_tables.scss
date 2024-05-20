@@ -1,0 +1,98 @@
+@use '../global/mixins' as m;
+@use '../global/variables' as v;
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 20px 30px 0;
+
+    .table-title {
+        font-weight: bold;
+    }
+
+    button {
+        outline: none;
+        border: none;
+        background-color: v.$color-400;
+        color: #000;
+        padding: 10px 30px;
+        font-weight: 600;
+        border-radius: 20px;
+        text-transform: uppercase;
+        font-size: 14px;
+        cursor: pointer;
+        &:hover {
+            background-color: #1c6b99;
+            color: #fff;
+        }
+    }
+
+    .table-search {
+        position: relative;
+        input {
+            border-radius: 30px;
+            width: 200px;
+            padding: 10px 20px;
+            outline: none;
+            border: 1px solid #c9c9c9;
+            box-sizing: border-box;
+            padding-right: 50px;
+        }
+        #search {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            margin-right: 1rem;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    margin-top: 1rem;
+    thead {
+        background-color: v.$color-700;
+        color: #fff;
+        tr {
+            th {
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #dfdfdf;
+            }
+        }
+    }
+    tbody {
+        background-color: v.$color-50;
+        tr {
+            td {
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #dfdfdf;
+                #icons {
+                    font-size: 20px;
+                    cursor: pointer;
+                    margin-left: 10px;
+                    color: #797979;
+
+                }
+            }
+            &:hover {
+                background-color: #f5f5f5;
+            }
+        }
+    }
+}
+
+.table-footer {
+    margin-top: 1rem;
+    padding: 0 20px 30px;
+}

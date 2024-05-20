@@ -31,9 +31,9 @@
                         </label>
                     </div>
                     <button class="bg-cyan-500 px-4 py-2 text-white rounded-sm w-7/12 mx-auto hover:bg-cyan-900 hover:text-cyan-100 transition ease-in-out">
-                        Login
+                        <a href="{{ route('clientes.index') }}">Login</a>
                     </button>
-                </form>
+                </form> 
             </div>
         </div>
     </div>

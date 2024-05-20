@@ -1,0 +1,110 @@
+@use '../global/mixins' as m;
+@use '../global/variables' as v;
+
+body {
+    height: 100vh;
+}
+
+.app {
+    height: 100%;
+    display: flex;
+}
+
+.cotenido-principal {
+    width: 100%;
+    overflow-y: auto;
+}
+
+.sidebar-container {
+    width: 300px;
+    height: 100%;
+    background: v.$color-100;
+    transition: left 0.5s;
+    box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.3);
+    @include m.mobile {
+        position: fixed;
+        top: 0;
+        left: -300px;
+
+        &-active {
+            left: 0;
+        }
+    }
+
+    &__title {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 20px;
+        background: v.$color-300;
+        gap: 15px;
+        font-weight: bold;
+        border-bottom-right-radius: 12px;
+        border-bottom: 4px solid v.$color-950;
+        &__logo {
+            color: v.$color-950;
+        }
+
+        &__brand {
+            color: v.$color-950;
+        }
+    }
+
+    &__hamburguer {
+        display: none;
+        color: v.$color-950;
+        cursor: pointer;
+        @include m.mobile{
+            display: block;
+        }
+    }
+
+    &__list {
+        padding-right: 8px;
+        &__item {
+            cursor: pointer;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            color: #164e63;
+            font-weight: 600;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        &__item:hover {
+            background: #67e8f9;
+            border-left: 5px solid v.$color-950;
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0891b2;
+    padding: 10px 8px;
+
+    &__title {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    &__hamburguer {
+        display: none;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+        @include m.mobile {
+            display: block;
+        }
+    }
+}
