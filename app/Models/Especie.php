@@ -12,4 +12,8 @@ class Especie extends Model
     protected $table = "especies";
 
     protected $fillable = ["especie"];
+
+    public function mascota() {
+        return $this->hasMany(Mascota::class);
+    }
 }

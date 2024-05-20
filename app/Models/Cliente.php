@@ -23,6 +23,10 @@ class Cliente extends Model
     ];
 
     protected $casts = [
-        'fecha_nacimiento' => 'date', // Para convertir automáticamente a tipo de fecha
+        'fecha_nacimiento' => 'date',
     ];
+
+    public function mascotas() {
+        return $this->hasMany(Mascota::class);
+    }
 }
