@@ -28,8 +28,8 @@
                     <td>{{$mascota->especie->especie}}</td>
                     <td>{{$mascota->color}}</td>
                     <td>
-                        <i class="ri-file-edit-line" id="icons"></i>
-                        <i class="ri-delete-bin-line" id="icons"></i>
+                        <i class="ri-file-edit-line edit-icon" id="icons"></i>
+                        <i class="ri-delete-bin-line delete-icon" id="icons"></i>
                     </td>
                 </tr>
             @empty
