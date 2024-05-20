@@ -19,5 +19,8 @@ class EspecieSeeder extends Seeder
         DB::table('especies')->insert([
             'especie' => 'Gato'
         ]);
+        DB::table('especies')->insert([
+            'especie' => 'Conejo'
+        ]);
     }
 }
