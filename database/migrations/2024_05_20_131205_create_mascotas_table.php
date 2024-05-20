@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->char('sexo', 6);
             $table->string('color');
-            $table->tinyInteger('pedigree', 1);
+            $table->tinyInteger('pedigree');
+            $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
             $table->date('fecha_nacimiento')->nullable();
             $table->string('raza')->nullable();
             $table->string('imagen')->nullable();
