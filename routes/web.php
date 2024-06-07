@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
 Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+Route::post('/clientes/store', [ClienteController::class, 'store'])->name('clientes.store');
 
 //Medicamentos
 Route::get('/medicamentos', [MedicamentoController::class, 'index'])->name('medicamentos.index');

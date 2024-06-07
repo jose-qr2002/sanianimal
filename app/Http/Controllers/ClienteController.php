@@ -29,7 +29,18 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'n_documento' => 'required|integer',
+            'sexo' => 'required|in:F,M',
+            'email' => 'nullable|email',
+            'direccion' => 'nullable',
+            'fecha_nacimiento' => 'nullable|date'
+        ]);
+
+        Cliente::create($request->all());
+        return redirect()->route('clientes.index');
     }
 
     /**

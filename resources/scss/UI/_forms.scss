@@ -25,6 +25,10 @@
         }
     }
 
+    &__input-group {
+        margin-bottom: 1rem;
+    }
+
     &__label {
         font-weight: bold;
     }
@@ -32,10 +36,15 @@
     &__input {
         width: 100%;
         padding: 10px;
-        margin-bottom: 20px;
         border-radius: 4px;
         border: 1px solid #ccc;
         box-sizing: border-box;
+    }
+
+    &__error {
+        color: #e03d3d;
+        line-height: 1.5;
+        font-size: 14px;
     }
 
     &__button-submit {
