@@ -21,6 +21,12 @@
             <div class="sidebar-container__list__item"><a href="{{ route('medicamentos.index') }}"><i class="ri-medicine-bottle-fill"></i> Medicamentos</a></div>
             <div class="sidebar-container__list__item"><a href=""><i class="ri-scissors-2-fill"></i> Estetica</a></div>
             <div class="sidebar-container__list__item"><a href=""><i class="ri-money-dollar-circle-fill"></i> Ventas</a></div>
+            <div class="sidebar-container__list__item">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" href=""><i class="ri-door-open-fill"></i> Logout</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="cotenido-principal">
@@ -35,5 +41,5 @@
         </div>
     </div>
 </div>
-    
+
 @endsection

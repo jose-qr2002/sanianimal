@@ -10,6 +10,10 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'store'])->name('login.store');
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    // Clientes
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
     Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
     Route::post('/clientes/store', [ClienteController::class, 'store'])->name('clientes.store');
