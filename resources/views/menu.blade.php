@@ -18,6 +18,7 @@
             <div class="sidebar-container__list__item"><a href=""><i class="ri-layout-5-fill"></i> Dashboard</a></div>
             <div class="sidebar-container__list__item"><a href="{{ route('clientes.index') }}"><i class="ri-user-fill"></i> Clientes</a></div>
             <div class="sidebar-container__list__item"><a href="{{ route('mascotas.index') }}"><i class="ri-stethoscope-fill"></i> Mascotas</a></div>
+            <div class="sidebar-container__list__item"><a href=""><i class="ri-clipboard-fill"></i> H. Clinico</a></div>
             <div class="sidebar-container__list__item"><a href="{{ route('medicamentos.index') }}"><i class="ri-medicine-bottle-fill"></i> Medicamentos</a></div>
             <div class="sidebar-container__list__item"><a href=""><i class="ri-scissors-2-fill"></i> Estetica</a></div>
             <div class="sidebar-container__list__item"><a href=""><i class="ri-money-dollar-circle-fill"></i> Ventas</a></div>
