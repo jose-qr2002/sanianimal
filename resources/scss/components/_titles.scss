@@ -1,4 +1,7 @@
+ @use '../global/variables' as v;
+
 .title-menu {
+    font-family: v.$fuente-principal;
     font-size: 30px;
     font-weight: bold;
     text-align: center;

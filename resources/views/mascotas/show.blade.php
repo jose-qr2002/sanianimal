@@ -31,7 +31,7 @@
 
         </div>
         <div class="mascota-box mascota-box__complement-data">
-            a
+            <h2>Titulo</h2>
         </div>
     </section>
 @endsection
