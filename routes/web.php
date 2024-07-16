@@ -24,4 +24,5 @@ Route::middleware(['auth'])->group(function () {
 
     // Mascotas
     Route::get('/mascotas', [MascotaController::class, 'index'])->name('mascotas.index');
+    Route::get('/mascota/{mascota}', [MascotaController::class, 'show'])->name('mascotas.show');
 });

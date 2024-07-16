@@ -6,7 +6,7 @@
     justify-content: space-between;
     gap: 15px;
     flex-wrap: wrap;
-    align-items: center;    
+    align-items: center;
 
     .table-title {
         font-weight: bold;
@@ -76,11 +76,14 @@ table {
                 padding: 10px;
                 text-align: center;
                 border-bottom: 1px solid #dfdfdf;
-                #icons {
+                .icons {
                     font-size: 20px;
                     cursor: pointer;
                     margin-left: 10px;
                     font-weight: bold;
+                    &.show-icon {
+                        color: #1c6b99;
+                    }
                     &.edit-icon {
                         color: #44c1f3;
                     }

@@ -28,8 +28,9 @@
                     <td>{{$mascota->especie->especie}}</td>
                     <td>{{$mascota->color}}</td>
                     <td>
-                        <i class="ri-file-edit-line edit-icon" id="icons"></i>
-                        <i class="ri-delete-bin-line delete-icon" id="icons"></i>
+                        <a href="{{ route('mascotas.show', $mascota->id) }}"><i class="ri-eye-fill show-icon icons"></i></a>
+                        <i class="ri-file-edit-line edit-icon icons"></i>
+                        <i class="ri-delete-bin-line delete-icon icons"></i>
                     </td>
                 </tr>
             @empty
