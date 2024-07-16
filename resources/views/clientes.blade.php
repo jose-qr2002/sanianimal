@@ -35,7 +35,13 @@
                         <a href="{{ route('clientes.edit', $cliente->id) }}">
                             <i class="ri-file-edit-line" id="icons"></i>
                         </a>
-                        <i class="ri-delete-bin-line" id="icons"></i>
+                        <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">
+                                <i class="ri-delete-bin-line" id="icons"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @empty

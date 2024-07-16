@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/clientes/store', [ClienteController::class, 'store'])->name('clientes.store');
     Route::get('/clientes/edit/{cliente}', [ClienteController::class, 'edit'])->name('clientes.edit');
     Route::put('/clientes/update/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
+    Route::delete('/clientes/delete/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
 
     //Medicamentos
     Route::get('/medicamentos', [MedicamentoController::class, 'index'])->name('medicamentos.index');

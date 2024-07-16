@@ -97,6 +97,11 @@ table {
                 background-color: v.$color-100;
             }
         }
+
+        form {
+            display: inline-flex;
+            cursor: pointer;
+        }
     }
 }
 
