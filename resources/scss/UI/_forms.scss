@@ -39,6 +39,7 @@
         border-radius: 4px;
         border: 1px solid #ccc;
         box-sizing: border-box;
+        border: 1px solid lighten(black, 65%);
     }
 
     &__error {
@@ -49,7 +50,8 @@
 
     &__button-submit {
         background-color: v.$color-500;
-        color: white;
+        color: v.$color-950;
+        font-weight: 700;
         padding: 15px 20px;
         border: none;
         border-radius: 4px;
