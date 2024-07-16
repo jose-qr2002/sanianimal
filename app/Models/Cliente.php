@@ -22,10 +22,6 @@ class Cliente extends Model
         'imagen',
     ];
 
-    protected $casts = [
-        'fecha_nacimiento' => 'date',
-    ];
-
     public function mascotas() {
         return $this->hasMany(Mascota::class);
     }

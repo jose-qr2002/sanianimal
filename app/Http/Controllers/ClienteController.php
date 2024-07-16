@@ -62,9 +62,21 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Cliente $cliente)
     {
-        //
+        $request->validate([
+            'nombre' => ['required'],
+            'apellido' => ['required'],
+            'n_documento' => ['required','digits:8'],
+            'sexo' => ['required','in:M,F'],
+            'email' => ['required','email'],
+            'fecha_nacimiento' => ['required','date'],
+            'direccion' => ['required'],
+        ]);
+
+        $cliente->update($request->all());
+
+        return redirect()->route('clientes.index');
     }
 
     /**
