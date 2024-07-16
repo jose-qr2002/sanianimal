@@ -32,7 +32,9 @@
                     <td>{{ $cliente->sexo }}</td>
                     <td>{{ $cliente->email }}</td>
                     <td>
-                        <i class="ri-file-edit-line" id="icons"></i>
+                        <a href="{{ route('clientes.edit', $cliente->id) }}">
+                            <i class="ri-file-edit-line" id="icons"></i>
+                        </a>
                         <i class="ri-delete-bin-line" id="icons"></i>
                     </td>
                 </tr>
@@ -41,7 +43,7 @@
                     <td colspan="6">No hay clientes</td>
                 </tr>
             @endforelse
-            
+
         </tbody>
     </table>
 </div>
