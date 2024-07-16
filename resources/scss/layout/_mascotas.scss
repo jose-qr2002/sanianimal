@@ -51,5 +51,64 @@
             color: black;
             margin-bottom: 10px;
         }
+
+        &__data {
+            &__titulo {
+                position: relative;
+                font-size: 20px;
+                font-family: v.$fuente-principal;
+                font-weight: 700;
+
+                &::after {
+                    content: '';
+                    height: 3px;
+                    width: 100%;
+                    background-color: lighten(black, 25%);
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                }
+            }
+
+            &__content {
+                padding: 10px;
+                border: 1px solid v.$color-600;
+                border-radius: 4px;
+                margin-top: 10px;
+                background-color: white;
+                color: black;
+
+                @include m.minmobile {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                &__left {
+                    label {
+                        font-weight: 600;
+                    }
+                }
+
+                &__right {
+                }
+            }
+
+            &__button {
+                background-color: v.$color-700;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+                transition: background-color 0.4s;
+                font-weight: 600;
+                font-size: 17px;
+                width: 100%;
+
+
+                &:hover {
+                    background-color: v.$color-800;
+                }
+            }
+        }
     }
 }
