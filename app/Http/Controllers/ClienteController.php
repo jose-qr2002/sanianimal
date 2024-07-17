@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use Exception;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -74,9 +75,14 @@ class ClienteController extends Controller
             'direccion' => ['required'],
         ]);
 
-        $cliente->update($request->all());
+        try {
+            $cliente->update($request->all());
 
-        return redirect()->route('clientes.index');
+            return redirect()->route('clientes.index')->with('msn_success', 'El cliente se actualizo exitosamente');
+        } catch (Exception) {
+            return redirect()->route('clientes.edit', $cliente->id)->with('msn_error', 'El Cliente no se logro actualizar correctamente');
+        }
+
     }
 
     /**

@@ -57,4 +57,17 @@
 <div class="table-footer">
     <p>Total de Filas: 10</p>
 </div>
+
+@push('scripts')
+    @session('msn_success')
+        <script>
+            let mensaje="{{ $value }}";
+
+            Swal.fire({
+                icon:"success",
+                html: `<span style="font-size: 16px;">${mensaje}</span>`,
+            });
+        </script>
+    @endsession
+@endpush
 @endsection
