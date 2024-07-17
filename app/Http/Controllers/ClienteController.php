@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -90,7 +91,18 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        $cliente->delete();
-        return redirect()->route('clientes.index');
+        try {
+            $cliente->delete();
+            return redirect()->route('clientes.index')->with('msn_success', 'El cliente se elimino exitosamente');
+        } catch (QueryException $e) {
+            if ($e->getCode() == '23000') {
+                return redirect()->route('clientes.index')->with('msn_error', 'El cliente tiene mascotas registradas');
+            } else {
+                return redirect()->route('clientes.index')->with('msn_error', 'El cliente no se elimino');
+            }
+
+        } catch (Exception $e) {
+            return redirect()->route('clientes.index')->with('msn_error', 'El cliente no se elimino');
+        }
     }
 }
