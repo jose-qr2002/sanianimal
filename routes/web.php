@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     //Medicamentos
     Route::get('/medicamentos', [MedicamentoController::class, 'index'])->name('medicamentos.index');
     Route::get('/medicamentos/create', [MedicamentoController::class, 'create'])->name('medicamentos.create');
+    Route::post('/medicamentos/store', [MedicamentoController::class, 'store'])->name('medicamentos.store');
 
     // Mascotas
     Route::get('/mascotas', [MascotaController::class, 'index'])->name('mascotas.index');

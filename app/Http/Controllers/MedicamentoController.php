@@ -29,7 +29,20 @@ class MedicamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => ['required'],
+            'marca' => ['required'],
+            'stock' => ['required','integer','min:0'],
+            'precio' => ['required','numeric','min:0.10'],
+            'descripcion' => ['nullable','max:1000'],
+        ]);
+
+        try {
+            Medicamento::create($request->all());
+            return redirect()->route('medicamentos.index')->with('msn_success', 'El medicamento fue registrado con exito');
+        } catch (\Exception $e) {
+            return redirect()->route('medicamentos.create')->with('msn_error', 'El medicamento no fue registrado');
+        }
     }
 
     /**
