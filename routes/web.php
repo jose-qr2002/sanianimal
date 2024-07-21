@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/medicamentos/store', [MedicamentoController::class, 'store'])->name('medicamentos.store');
     Route::get('/medicamentos/edit/{medicamento}', [MedicamentoController::class, 'edit'])->name('medicamentos.edit');
     Route::put('/medicamentos/update/{medicamento}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
+    Route::delete('/medicamentos/delete/{medicamento}', [MedicamentoController::class, 'destroy'])->name('medicamentos.destroy');
 
     // Mascotas
     Route::get('/mascotas', [MascotaController::class, 'index'])->name('mascotas.index');

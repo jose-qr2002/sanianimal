@@ -31,7 +31,13 @@
                         <a href="{{ route('medicamentos.edit', $medicamento) }}">
                             <i class="ri-file-edit-line edit-icon icons"></i>
                         </a>
-                        <i class="ri-delete-bin-line delete-icon icons"></i>
+                        <form onsubmit="confirmaEliminarMedicamento(event)" action="{{ route('medicamentos.destroy', $medicamento) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">
+                                <i class="ri-delete-bin-line delete-icon icons"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @empty
@@ -59,5 +65,38 @@
             });
         </script>
     @endsession
+    @session('msn_error')
+        <script>
+            let mensaje="{{ $value }}";
+
+            Swal.fire({
+                icon:"error",
+                html: `<span style="font-size: 16px;">${mensaje}</span>`,
+            });
+        </script>
+    @endsession
+    <script>
+        function confirmaEliminarMedicamento(event){
+            event.preventDefault();
+            let form=event.target;
+
+            Swal.fire({
+                //title: "?",
+                text: "¿Estás seguro de que deseas eliminar este medicamento?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si",
+                cancelButtonText: "No"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+
+        }
+    </script>
+
 @endpush
 @endsection
