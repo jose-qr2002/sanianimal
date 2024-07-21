@@ -28,8 +28,10 @@
                     <td>{{ $medicamento->stock }}</td>
                     <td>S/{{ $medicamento->precio }}</td>
                     <td>
-                        <i class="ri-file-edit-line" id="icons"></i>
-                        <i class="ri-delete-bin-line" id="icons"></i>
+                        <a href="{{ route('medicamentos.edit', $medicamento) }}">
+                            <i class="ri-file-edit-line edit-icon icons"></i>
+                        </a>
+                        <i class="ri-delete-bin-line delete-icon icons"></i>
                     </td>
                 </tr>
             @empty
@@ -37,7 +39,7 @@
                     <td colspan="5">No hay medicamentos</td>
                 </tr>
             @endforelse
-            
+
         </tbody>
     </table>
 </div>

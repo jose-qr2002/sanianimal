@@ -56,17 +56,30 @@ class MedicamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Medicamento $medicamento)
     {
-        //
+        return view('medicamentos.edit', compact('medicamento'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Medicamento $medicamento)
     {
-        //
+        $request->validate([
+            'nombre' => ['required'],
+            'marca' => ['required'],
+            'stock' => ['required','integer','min:1'],
+            'precio' => ['required','numeric','min:0.10'],
+            'descripcion' => ['required']
+        ]);
+
+        try {
+            $medicamento->update($request->all());
+            return redirect()->route('medicamentos.index')->with('msn_success', 'El Medicamento se actualizo exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('medicamentos.edit', $medicamento)->with('msn_error', 'El Medicamento no se logro actualizar correctamente');
+        }
     }
 
     /**

@@ -4,8 +4,9 @@
 @section('contenido')
 <div class="card mt-8 mb-8 max-w-screen-md m-auto">
     <h2>Registro de Medicamentos:</h2>
-    <form class="form" action="{{ route('medicamentos.store') }}" method="POST" novalidate>
+    <form class="form" action="{{ route('medicamentos.update', $medicamento) }}" method="POST" novalidate>
         @csrf
+        @method('PUT')
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="nombre">Nombre:</label>
