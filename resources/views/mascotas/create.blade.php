@@ -4,60 +4,61 @@
 @section('contenido')
 <div class="card mt-8 mb-8 max-w-screen-md m-auto">
     <h2>Registro de Mascotas</h2>
-    <form class="form" action="" method="POST" autocomplete="off" novalidate>
+    <form class="form" action="{{ route('mascotas.store') }}" method="POST" autocomplete="off" novalidate>
         @csrf
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="nombre">Nombre:</label>
-                <input class="form__input" type="text" id="nombre" name="nombre" value="" required>
+                <input class="form__input" type="text" id="nombre" name="nombre" value="{{old('nombre')}}" required>
             </div>
             <div class="form__input-group" id="campoCliente">
-                <label class="form__label" for="apellido">Cliente:</label>
+                <label class="form__label" for="cliente">Cliente:</label>
                 <div class="form__relative">
-                    <input class="form__input form__input-search" type="search" id="cliente" name="apellido" required>
-                    <input type="hidden" name="cliente_id" value="">
+                    <input class="form__input form__input-search" type="search" id="cliente" name="cliente" required value="{{old('cliente')}}">
+                    <input type="hidden" name="cliente_id" value="{{ old('cliente_id') }}">
                     <ul class="form__predictions" id="clientePredicciones"></ul>
                 </div>
             </div>
         </div>
         <div class="form__group">
             <div class="form__input-group">
-                <label class="form__label" for="n_documento">Sexo</label>
+                <label class="form__label" for="sexo">Sexo</label>
                 <select class="form__input" id="sexo" name="sexo" required>
-                    <option value="M">Masculino</option>
-                    <option value="F">Femenino</option>
+                    <option value="Macho" {{ old('sexo') == 'Macho' ? 'selected' : '' }}>Macho</option>
+                    <option value="Hembra" {{ old('sexo') == 'Hembra' ? 'selected' : '' }}>Hembra</option>
+                    <option value="Indefinido" {{ old('sexo') == 'Indefinido' ? 'selected' : '' }}>Indefinido</option>
                 </select>
             </div>
             <div class="form__input-group">
-                <label class="form__label" for="sexo">Color:</label>
-                <input class="form__input" type="email" id="email" name="email">
+                <label class="form__label" for="color">Color:</label>
+                <input class="form__input" type="text" id="color" name="color" value="{{ old('color') }}">
             </div>
         </div>
         <div class="form__group">
             <div class="form__input-group">
-                <label class="form__label" for="especie">Especie</label>
-                <select class="form__input" id="pedigree" name="pedigree" required>
+                <label class="form__label" for="especie_id">Especie</label>
+                <select class="form__input" id="especie_id" name="especie_id" required>
                     @foreach ($especies as $especie)
-                        <option value="{{ $especie->especie }}">{{ $especie->especie }}</option>
+                        <option value="{{ $especie->id }}" {{ old('especie_id') == $especie->id ? 'selected' : ''}} >{{ $especie->especie }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="raza">Raza:</label>
-                <input class="form__input" type="text" id="raza" name="raza">
+                <input class="form__input" type="text" id="raza" name="raza" value="{{old('raza')}}">
             </div>
         </div>
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="pedigree">Pedigree:</label>
                 <select class="form__input" id="pedigree" name="pedigree" required>
-                    <option value="1">Si</option>
-                    <option value="0">No</option>
+                    <option value="1" {{ old('pedigree') == '1' ? 'selected' : '' }}>Si</option>
+                    <option value="0" {{ old('pedigree') == '0' ? 'selected' : '' }}>No</option>
                 </select>
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input class="form__input" type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                <input class="form__input" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}">
             </div>
         </div>
 

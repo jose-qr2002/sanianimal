@@ -21,4 +21,22 @@ class MascotaController extends Controller
         $especies = Especie::all();
         return view('mascotas.create', compact('especies'));
     }
+
+    public function store(Request $request) {
+        $request->validate([
+            'nombre' => ['required'],
+            'sexo' => ['required','in:Macho,Hembra,Indefinido'],
+            'fecha_nacimiento' => ['nullable','date'],
+            'pedigree' => ['required','boolean'],
+            'especie_id' => ['required','integer','exists:especies,id'],
+            'cliente_id' => ['required','integer','exists:clientes,id']
+        ]);
+
+        try {
+            Mascota::create($request->all());
+            return redirect()->route('mascotas.index')->with('msn_success', 'Se registro la mascota');
+        } catch (\Exception $e) {
+            return redirect()->route('clientes.create')->with('msn_error', 'No se logro registrar a la mascota');
+        }
+    }
 }
