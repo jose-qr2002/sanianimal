@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/clientes/update/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
     Route::delete('/clientes/delete/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
 
+    Route::get('/clientes/search/{valor}', [ClienteController::class, 'search'])->name('clientes.search');
+
     //Medicamentos
     Route::get('/medicamentos', [MedicamentoController::class, 'index'])->name('medicamentos.index');
     Route::get('/medicamentos/create', [MedicamentoController::class, 'create'])->name('medicamentos.create');

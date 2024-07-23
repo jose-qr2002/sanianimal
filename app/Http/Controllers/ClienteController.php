@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -104,5 +105,26 @@ class ClienteController extends Controller
         } catch (Exception $e) {
             return redirect()->route('clientes.index')->with('msn_error', 'El cliente no se elimino');
         }
+    }
+
+    public function search(string $value) {
+        $clientes = Cliente::whereRaw("CONCAT(nombre,' ',apellido, ' ', n_documento) LIKE '%{$value}%'")->get();
+        if($clientes->count() < 1) {
+            return response()->json(
+                [
+                    'type' => 'error',
+                    'message' => 'No se encontraron clientes',
+                    'data' => []
+                ]
+            );
+        }
+
+        return response()->json(
+            [
+                'type' => 'success',
+                'message' => 'Se encontraron '.$clientes->count().' clientes',
+                'data' => $clientes
+            ]
+        );
     }
 }

@@ -4,17 +4,20 @@
 @section('contenido')
 <div class="card mt-8 mb-8 max-w-screen-md m-auto">
     <h2>Registro de Mascotas</h2>
-    <form class="form" action="{{ route('clientes.store') }}" method="POST" novalidate>
+    <form class="form" action="" method="POST" autocomplete="off" novalidate>
         @csrf
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="nombre">Nombre:</label>
                 <input class="form__input" type="text" id="nombre" name="nombre" value="" required>
             </div>
-            <div class="form__input-group">
+            <div class="form__input-group" id="campoCliente">
                 <label class="form__label" for="apellido">Cliente:</label>
-                <input class="form__input" type="search" id="apellido" name="apellido" required>
-
+                <div class="form__relative">
+                    <input class="form__input form__input-search" type="search" id="cliente" name="apellido" required>
+                    <input type="hidden" name="cliente_id" value="">
+                    <div class="form__predictions" id="clientePredicciones"></div>
+                </div>
             </div>
         </div>
         <div class="form__group">
@@ -62,4 +65,112 @@
         <button class="form__button-submit" type="submit">Registrar Macota</button>
     </form>
 </div>
+
+@push('scripts')
+    <script>
+        const clienteInput = document.querySelector('#cliente');
+        const clientePredicciones = document.querySelector('#clientePredicciones');
+        const clietenInputId = document.querySelector('[name="cliente_id"]')
+        const campoCliente = document.querySelector('#campoCliente');
+
+
+        clienteInput.addEventListener('input', manejarClienteInput)
+        campoCliente.addEventListener('blur', manejarClienteBlur)
+        clienteInput.addEventListener('focus', manejarClienteFocus)
+
+        async function manejarClienteInput(e) {
+            if (!(e.target.value.length > 2)) {
+                clientePredicciones.style.display = 'none';
+                return;
+            }
+
+            let respuesta = await buscarCliente(e.target.value);
+            if(!respuesta) {
+                return;
+            }
+
+            if(respuesta.type == 'error') {
+                mostrarPredicciones(respuesta);
+            }
+
+            if(respuesta.type == 'success') {
+                mostrarPredicciones(respuesta);
+            }
+        }
+
+        async function buscarCliente(valor) {
+            const apiUrl = `/clientes/search/${valor}`;
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Ocurrio un problema con la operacion fetch:', error);
+                return null;
+            }
+        }
+
+        function mostrarPredicciones(datos) {
+            limpiarPredicciones();
+            const { type , message , data } = datos;
+            clientePredicciones.style.display = 'block';
+            if(type == 'error') {
+                const prediccionHTML = document.createElement('DIV');
+                prediccionHTML.classList.add('form__prediction');
+                prediccionHTML.textContent = message;
+                clientePredicciones.appendChild(prediccionHTML);
+                return;
+            }
+
+            if(type == 'success') {
+
+                data.forEach(dato => {
+                    let cliente = `${dato.nombre} ${dato.apellido} - ${dato.n_documento}`;
+
+                    const prediccionHTML = document.createElement('DIV');
+                    prediccionHTML.classList.add('form__prediction');
+                    // Llenando de datos al HTML
+                    prediccionHTML.textContent = cliente;
+                    prediccionHTML.dataset.clienteId = dato.id;
+                    prediccionHTML.dataset.clienteNombre = cliente;
+                    prediccionHTML.onclick = seleccionarPrediccion;
+                    // Añadir al DOM
+                    clientePredicciones.appendChild(prediccionHTML);
+
+                });
+            }
+
+        }
+
+        function seleccionarPrediccion(e) {
+            const idClienteSeleccionado = e.target.dataset.clienteId;
+            const nombreClienteSeleccionado = e.target.dataset.clienteNombre;
+            clietenInputId.value = idClienteSeleccionado;
+            clienteInput.value = nombreClienteSeleccionado;
+            limpiarPredicciones();
+        }
+
+        function limpiarPredicciones() {
+            while(clientePredicciones.firstChild) {
+                clientePredicciones.removeChild(clientePredicciones.firstChild);
+            }
+        }
+
+        // Funciones De Eventos
+        function manejarClienteBlur(e) {
+            clientePredicciones.style.display = 'none';
+        }
+
+        function manejarClienteFocus(e) {
+            if(!e.target.id == 'cliente') {
+                return;
+            }
+
+            if(!(e.target.value.length > 2 )) {
+                return;
+            }
+            clientePredicciones.style.display = 'block';
+        }
+    </script>
+@endpush
 @endsection

@@ -64,4 +64,27 @@
             background-color: v.$color-600;
         }
     }
+
+    &__relative {
+        position: relative;
+    }
+
+    &__predictions {
+        display: none;
+        position: absolute;
+        outline: 1px solid rgb(219, 219, 219);
+        width: 100%;
+    }
+
+    &__prediction {
+        background-color: rgb(247, 247, 247);
+        padding: 10px;
+        color: black;
+        cursor: pointer;
+
+        &:hover {
+            background-color: v.$color-700;
+            color: white;
+        }
+    }
 }
