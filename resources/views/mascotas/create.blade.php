@@ -74,16 +74,24 @@
         const campoCliente = document.querySelector('#campoCliente');
 
 
-        clienteInput.addEventListener('input', manejarClienteInput)
+        clienteInput.addEventListener('input', debounce(manejarClienteInput, 300) )
         campoCliente.addEventListener('blur', manejarClienteBlur)
         clienteInput.addEventListener('focus', manejarClienteFocus)
+
+        let debounceTimeout;
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
 
         async function manejarClienteInput(e) {
             if (!(e.target.value.length > 2)) {
                 clientePredicciones.style.display = 'none';
                 return;
             }
-
             let respuesta = await buscarCliente(e.target.value);
             if(!respuesta) {
                 return;
