@@ -16,7 +16,7 @@
                 <div class="form__relative">
                     <input class="form__input form__input-search" type="search" id="cliente" name="apellido" required>
                     <input type="hidden" name="cliente_id" value="">
-                    <div class="form__predictions" id="clientePredicciones"></div>
+                    <ul class="form__predictions" id="clientePredicciones"></ul>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
                 data.forEach(dato => {
                     let cliente = `${dato.nombre} ${dato.apellido} - ${dato.n_documento}`;
 
-                    const prediccionHTML = document.createElement('DIV');
+                    const prediccionHTML = document.createElement('LI');
                     prediccionHTML.classList.add('form__prediction');
                     // Llenando de datos al HTML
                     prediccionHTML.textContent = cliente;
