@@ -42,8 +42,13 @@ class ClienteController extends Controller
             'fecha_nacimiento' => 'nullable|date'
         ]);
 
-        Cliente::create($request->all());
-        return redirect()->route('clientes.index');
+        try {
+            Cliente::create($request->all());
+            return redirect()->route('clientes.index')->with('msn_success', 'El cliente se registro exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('clientes.create')->with('msn_error', 'El cliente no se pudo registrar');
+        }
+
     }
 
     /**
