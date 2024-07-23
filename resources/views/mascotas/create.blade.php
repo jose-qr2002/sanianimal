@@ -75,7 +75,7 @@
 
 
         clienteInput.addEventListener('input', debounce(manejarClienteInput, 300) )
-        campoCliente.addEventListener('blur', manejarClienteBlur)
+        clienteInput.addEventListener('blur', manejarClienteBlur)
         clienteInput.addEventListener('focus', manejarClienteFocus)
 
         let debounceTimeout;
@@ -166,7 +166,7 @@
 
         // Funciones De Eventos
         function manejarClienteBlur(e) {
-            clientePredicciones.style.display = 'none';
+            setTimeout(() => { clientePredicciones.style.display = 'none'; }, 120);
         }
 
         function manejarClienteFocus(e) {

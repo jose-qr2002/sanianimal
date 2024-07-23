@@ -108,7 +108,7 @@ class ClienteController extends Controller
     }
 
     public function search(string $value) {
-        $clientes = Cliente::whereRaw("CONCAT(nombre,' ',apellido, ' ', n_documento) LIKE '%{$value}%'")->get();
+        $clientes = Cliente::select('id','nombre','apellido','n_documento')->whereRaw("CONCAT(nombre,' ',apellido, ' ', n_documento) LIKE '%{$value}%'")->limit(5)->get();
         if($clientes->count() < 1) {
             return response()->json(
                 [
