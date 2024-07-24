@@ -29,7 +29,7 @@
                     <td>{{$mascota->color}}</td>
                     <td>
                         <a href="{{ route('mascotas.show', $mascota->id) }}"><i class="ri-eye-fill show-icon icons"></i></a>
-                        <i class="ri-file-edit-line edit-icon icons"></i>
+                        <a href="{{ route('mascotas.edit', $mascota) }}"><i class="ri-file-edit-line edit-icon icons"></i></a>
                         <i class="ri-delete-bin-line delete-icon icons"></i>
                     </td>
                 </tr>

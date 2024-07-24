@@ -39,4 +39,10 @@ class MascotaController extends Controller
             return redirect()->route('clientes.create')->with('msn_error', 'No se logro registrar a la mascota');
         }
     }
+
+    public function edit(Mascota $mascota) {
+        $especies = Especie::all();
+        $cliente = $mascota->cliente;
+        return view('mascotas.edit', compact('mascota', 'especies', 'cliente'));
+    }
 }
