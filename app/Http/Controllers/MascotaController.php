@@ -63,4 +63,14 @@ class MascotaController extends Controller
             return redirect()->route('mascotas.edit', $mascota->id)->with('msn_error', 'La mascota no se logro actualizar correctamente');
         }
     }
+
+    public function destroy(Mascota $mascota)
+    {
+        try {
+            $mascota->delete();
+            return redirect()->route('mascotas.index')->with('msn_success', 'Las mascotas se elimino correctamente');
+        } catch (\Exception $e) {
+            return redirect()->route('mascotas.index')->with('msn_error', 'Las mascotas no se elimino');
+        }
+    }
 }

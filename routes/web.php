@@ -38,4 +38,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/mascotas/store', [MascotaController::class, 'store'])->name('mascotas.store');
     Route::get('/mascotas/edit/{mascota}', [MascotaController::class, 'edit'])->name('mascotas.edit');
     Route::put('/mascotas/update/{mascota}', [MascotaController::class, 'update'])->name('mascotas.update');
+    Route::delete('/mascotas/delete/{mascota}', [MascotaController::class, 'destroy'])->name('mascotas.destroy');
 });

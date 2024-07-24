@@ -30,7 +30,13 @@
                     <td>
                         <a href="{{ route('mascotas.show', $mascota->id) }}"><i class="ri-eye-fill show-icon icons"></i></a>
                         <a href="{{ route('mascotas.edit', $mascota) }}"><i class="ri-file-edit-line edit-icon icons"></i></a>
-                        <i class="ri-delete-bin-line delete-icon icons"></i>
+                        <form onsubmit="confirmaEliminarMascota(event)" action="{{ route('mascotas.destroy', $mascota) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">
+                                <i class="ri-delete-bin-line delete-icon icons"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @empty
@@ -56,5 +62,37 @@
             });
         </script>
     @endsession
+    @session('msn_error')
+        <script>
+            let mensaje="{{ $value }}";
+
+            Swal.fire({
+                icon:"error",
+                html: `<span style="font-size: 16px;">${mensaje}</span>`,
+            });
+        </script>
+    @endsession
+    <script>
+        function confirmaEliminarMascota(event){
+            event.preventDefault();
+            let form=event.target;
+
+            Swal.fire({
+                //title: "?",
+                text: "¿Estás seguro de que deseas eliminar esta mascota?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si",
+                cancelButtonText: "No"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+
+        }
+    </script>
 @endpush
 @endsection
