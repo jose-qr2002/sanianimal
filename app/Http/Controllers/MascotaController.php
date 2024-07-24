@@ -45,4 +45,22 @@ class MascotaController extends Controller
         $cliente = $mascota->cliente;
         return view('mascotas.edit', compact('mascota', 'especies', 'cliente'));
     }
+
+    public function update(Mascota $mascota, Request $request) {
+        $request->validate([
+            'nombre' => ['required'],
+            'sexo' => ['required','in:Macho,Hembra,Indefinido'],
+            'fecha_nacimiento' => ['nullable','date'],
+            'pedigree' => ['required','boolean'],
+            'especie_id' => ['required','integer','exists:especies,id'],
+            'cliente_id' => ['required','integer','exists:clientes,id']
+        ]);
+
+        try {
+            $mascota->update($request->all());
+            return redirect()->route('mascotas.index')->with('msn_success', 'La mascota se actualizo exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('mascotas.edit', $mascota->id)->with('msn_error', 'La mascota no se logro actualizar correctamente');
+        }
+    }
 }

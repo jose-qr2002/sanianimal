@@ -4,8 +4,9 @@
 @section('contenido')
 <div class="card mt-8 mb-8 max-w-screen-md m-auto">
     <h2>Edicion de Mascotas</h2>
-    <form class="form" action="{{-- route() --}}" method="POST" autocomplete="off" novalidate>
+    <form class="form" action="{{ route('mascotas.update', $mascota) }}" method="POST" autocomplete="off" novalidate>
         @csrf
+        @method('PUT')
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="nombre">Nombre:</label>
@@ -19,7 +20,7 @@
             <div class="form__input-group" id="campoCliente">
                 <label class="form__label" for="cliente">Cliente:</label>
                 <div class="form__relative">
-                    <input class="form__input form__input-search" type="search" id="cliente" name="cliente" required value="{{old('cliente', $cliente->nombre . '  ' . $cliente->apellido . ' - ' . $cliente->n_documento)}}">
+                    <input class="form__input form__input-search" type="search" id="cliente" name="cliente" required value="{{old('cliente', $cliente->nombre . ' ' . $cliente->apellido . ' - ' . $cliente->n_documento)}}">
                     <input type="hidden" name="cliente_id" value="{{ old('cliente_id', $cliente->id) }}">
                     <ul class="form__predictions" id="clientePredicciones"></ul>
                 </div>
@@ -108,4 +109,16 @@
     </form>
 </div>
 
+@push('scripts')
+    @session('msn_error')
+        <script>
+            let mensaje="{{ $value }}";
+
+            Swal.fire({
+                icon:"error",
+                html: `<span style="font-size: 16px;">${mensaje}</span>`,
+            });
+        </script>
+    @endsession
+@endpush
 @endsection
