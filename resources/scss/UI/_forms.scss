@@ -2,7 +2,7 @@
 @use '../global/variables' as v;
 
 .card {
-    background-color: v.$color-200;
+    background-color: white;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -37,9 +37,15 @@
         width: 100%;
         padding: 10px;
         border-radius: 4px;
-        border: 1px solid #ccc;
+        border: 1px solid #cfcfcf;
         box-sizing: border-box;
-        border: 1px solid lighten(black, 65%);
+        outline: white;
+        transition: outline .6s linear, box-shadow .6s linear;
+        box-shadow: 0 0 0 0 v.$secondary-color;
+        &:focus {
+            outline: 1px solid v.$secondary-color;
+            box-shadow: 0 0 5px 0 v.$secondary-color;
+        }
     }
 
     &__error {
@@ -49,8 +55,8 @@
     }
 
     &__button-submit {
-        background-color: v.$color-500;
-        color: v.$color-950;
+        background-color: v.$quaternary-color;
+        color: lighten(v.$quaternary-color, 25%);
         font-weight: 700;
         padding: 15px 20px;
         border: none;
@@ -61,7 +67,7 @@
         transition: 0.5s background-color;
 
         &:hover {
-            background-color: v.$color-600;
+            background-color: darken(v.$quaternary-color, 10%);
         }
     }
 

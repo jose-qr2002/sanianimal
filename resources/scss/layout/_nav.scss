@@ -1,0 +1,26 @@
+@use '../global/mixins' as m;
+@use '../global/variables' as v;
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: v.$stroke-color;
+    padding: 10px 8px;
+
+    &__title {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    &__hamburguer {
+        display: none;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+        @include m.mobile {
+            display: block;
+        }
+    }
+}

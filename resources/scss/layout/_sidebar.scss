@@ -44,7 +44,7 @@
 
     &__hamburguer {
         display: none;
-        color: v.$color-950;
+        color: white;
         cursor: pointer;
         @include m.mobile{
             display: block;
@@ -69,32 +69,8 @@
     }
 
     &__enlace:hover {
-        background: darken(v.$sidebar-color, 30%);
+        background: darken(v.$sidebar-color, 15%);
         border-left: 5px solid v.$color-950;
     }
 }
 
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: v.$color-600;
-    border-bottom: 3px solid v.$color-400;
-    padding: 10px 8px;
-
-    &__title {
-        color: white;
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-    &__hamburguer {
-        display: none;
-        color: white;
-        cursor: pointer;
-        font-size: 20px;
-        @include m.mobile {
-            display: block;
-        }
-    }
-}
