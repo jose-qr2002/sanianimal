@@ -59,7 +59,7 @@ table {
     border-spacing: 0;
     margin-top: 1rem;
     thead {
-        background-color: v.$color-700;
+        background-color: v.$color-500;
         color: #fff;
         tr {
             th {
@@ -70,31 +70,28 @@ table {
         }
     }
     tbody {
-        background-color: v.$color-50;
+        background-color: white;
         tr {
             td {
                 padding: 10px;
                 text-align: center;
                 border-bottom: 1px solid #dfdfdf;
                 .icons {
-                    font-size: 20px;
+                    font-size: 22px;
                     cursor: pointer;
                     margin-left: 10px;
                     font-weight: bold;
                     &.show-icon {
-                        color: #1c6b99;
+                        color: #9285e0;
                     }
                     &.edit-icon {
-                        color: #44c1f3;
+                        color: rgb(240, 240, 7);
                     }
                     &.delete-icon {
-                        color: #5356e0;
+                        color: rgb(228, 122, 122);
                     }
                 }
 
-            }
-            &:hover {
-                background-color: v.$color-100;
             }
         }
 

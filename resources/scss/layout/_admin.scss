@@ -1,0 +1,12 @@
+@use '../global/variables' as v;
+
+.app {
+    height: 100vh;
+    display: flex;
+}
+
+.cotenido-principal {
+    width: 100%;
+    overflow-y: auto;
+    background-color: v.$body-color;
+}

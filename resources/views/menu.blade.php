@@ -2,7 +2,7 @@
 
 @section('body')
 <div class="app">
-    <div class="sidebar-container" id="sidebar">
+    <aside class="sidebar-container" id="sidebar">
         <header class="sidebar-container__header">
             <div class="sidebar-container__title">
                 <div class="sidebar-container__header__logo">
@@ -29,7 +29,7 @@
                 </form>
             </li>
         </ul>
-    </div>
+    </aside>
     <div class="cotenido-principal">
         <nav class="nav">
             <h1 class="nav__title">SaniAnimal</h1>
