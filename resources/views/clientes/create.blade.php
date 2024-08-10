@@ -2,8 +2,7 @@
 
 
 @section('contenido')
-<div class="card mt-8 mb-8 max-w-screen-md m-auto">
-    <h2>Registro de Clientes</h2>
+<x-card title="Registro de Clientes" class="mt-8 mb-8 max-w-screen-md m-auto">
     <form class="form" action="{{ route('clientes.store') }}" method="POST" novalidate>
         @csrf
         <div class="form__group">
@@ -81,5 +80,5 @@
 
         <button class="form__button-submit" type="submit">Registrar Cliente</button>
     </form>
-</div>
+</x-card>
 @endsection

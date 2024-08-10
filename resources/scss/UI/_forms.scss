@@ -1,20 +1,6 @@
 @use '../global/mixins' as m;
 @use '../global/variables' as v;
 
-.card {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 25px;
-        font-weight: bold;
-    }
-}
-
 .form {
 
     &__group {
