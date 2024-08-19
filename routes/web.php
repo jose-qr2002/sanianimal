@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\HistoriaClinicaController;
 use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\LoginController;
@@ -39,4 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mascotas/edit/{mascota}', [MascotaController::class, 'edit'])->name('mascotas.edit');
     Route::put('/mascotas/update/{mascota}', [MascotaController::class, 'update'])->name('mascotas.update');
     Route::delete('/mascotas/delete/{mascota}', [MascotaController::class, 'destroy'])->name('mascotas.destroy');
+
+    // Historias Clinicas
+    Route::get('/historias', [HistoriaClinicaController::class, 'index'])->name('historias.index');
+
 });
