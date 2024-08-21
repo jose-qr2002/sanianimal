@@ -3,6 +3,13 @@
 
 .form {
 
+    &__subtitle {
+        text-align: center;
+        color: lighten(black, 60%);
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
     &__group {
         @include m.minmobile {
             display: grid;
@@ -26,7 +33,7 @@
         border: 1px solid #cfcfcf;
         box-sizing: border-box;
         outline: white;
-        transition: outline .6s linear, box-shadow .6s linear;
+        transition: outline .3s linear, box-shadow .3s linear;
         box-shadow: 0 0 0 0 v.$secondary-color;
         &:focus {
             outline: 1px solid v.$secondary-color;
