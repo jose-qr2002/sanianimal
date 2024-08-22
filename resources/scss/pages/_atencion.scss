@@ -83,6 +83,7 @@
     }
 
     &__alerta {
+        margin-top: 14px;
         text-align: center;
         border: 3px double v.$yellow-color;
         background: lighten(v.$yellow-color, 40%);

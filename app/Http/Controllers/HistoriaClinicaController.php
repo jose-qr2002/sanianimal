@@ -16,8 +16,13 @@ class HistoriaClinicaController extends Controller
     public function atenderCliente(Request $request) {
         if ($request->n_documento) {
             $cliente = Cliente::where('n_documento', $request->n_documento)->with('mascotas')->first();
+            if(!$cliente) {
+                $cliente = [];
+            }
+            
             return view('historias.atenderCliente', compact('cliente'));
         }
+        
 
         return view('historias.atenderCliente');
     }
