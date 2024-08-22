@@ -81,4 +81,22 @@
         margin-top: 10px;
         @include m.boton(v.$primary-color, v.$white-color);
     }
+
+    &__alerta {
+        text-align: center;
+        border: 3px double v.$yellow-color;
+        background: lighten(v.$yellow-color, 40%);
+        font-weight: 600;
+        color: v.$yellow-color;
+        padding: 10px 30px;
+    
+        p {
+            margin-bottom: 8px;
+        }
+
+        a {
+            @include m.boton(v.$yellow-color, lighten(v.$yellow-color, 30%))
+        }
+
+    }
 }
