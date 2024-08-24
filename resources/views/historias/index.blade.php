@@ -3,7 +3,7 @@
 @section('contenido')
 <h2 class="title-menu">Historias Clinicas</h2>
 <div class="table-header">
-    <button><a href="{{ route('historias.atenderCliente') }}">Nueva Atencion</a></button>
+    <a class="table-header__button" href="{{ route('historias.atenderCliente') }}">Nueva Atencion</a>
     <div class="table-search">
         <input type="search" placeholder="Buscar">
         <i class="ri-search-line" id="search"></i>
