@@ -26,4 +26,8 @@ class HistoriaClinicaController extends Controller
 
         return view('historias.atenderCliente');
     }
+
+    public function create(Request $request) {
+        return view('historias.create');
+    }
 }

@@ -44,6 +44,6 @@ Route::middleware(['auth'])->group(function () {
     // Historias Clinicas
     Route::get('/historias', [HistoriaClinicaController::class, 'index'])->name('historias.index');
     Route::get('/historias/atencion', [HistoriaClinicaController::class, 'atenderCliente'])->name('historias.atenderCliente');
-    
+    Route::get('/historias/create', [HistoriaClinicaController::class, 'create'])->name('historias.create');
 
 });
