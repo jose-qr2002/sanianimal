@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('historias_clinicas', function (Blueprint $table) {
             $table->id();
             $table->integer('numero')->unique();
-            $table->text('motivo');
+            $table->text('motivo')->nullable();
             $table->text('mucosas')->nullable();
-            $table->text('anamnesis');
-            $table->text('diagnostico');
-            $table->text('tratamiento');
-            $table->decimal('precio', 10,2);
+            $table->text('anamnesis')->nullable();
+            $table->text('diagnostico')->nullable();
+            $table->text('tratamiento')->nullable();
+            $table->decimal('precio', 10,2)->nullable();
+            $table->date('fecha');
             $table->foreignId('mascota_id')->constrained()->onDelete('NO ACTION');
             $table->foreignId('user_id')->constrained()->onDelete('NO ACTION');
             $table->timestamps();

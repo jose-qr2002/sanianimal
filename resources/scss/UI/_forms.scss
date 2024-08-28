@@ -28,6 +28,14 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
+
+        &-3 {
+            @include m.mintablet {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+        }
     }
 
     &__input-group {

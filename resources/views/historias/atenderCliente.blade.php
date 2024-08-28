@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 @if(!$cliente->mascotas->isEmpty())
-                    <a href="" class="atencion__boton">Atender</a>
+                    <a href="{{ route('historias.create', $cliente->id) }}" class="atencion__boton">Atender</a>
                 @else
                     <div class="atencion__alerta">
                         <p>El cliente no tiene mascotas registradas</p>

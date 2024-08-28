@@ -18,7 +18,9 @@ class HistoriaClinica extends Model
         'anamnesis',
         'diagnostico',
         'tratamiento',
+        'peso',
         'precio',
+        'fecha',
         'mascota_id',
         'user_id',
     ];

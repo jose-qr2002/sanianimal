@@ -27,7 +27,32 @@ class HistoriaClinicaController extends Controller
         return view('historias.atenderCliente');
     }
 
-    public function create(Request $request) {
-        return view('historias.create');
+    public function create(Cliente $cliente, Request $request) {
+        $ultimoNumero = HistoriaClinica::max('numero') + 1;
+        return view('historias.create', compact('cliente', 'ultimoNumero'));
+    }
+
+    public function store(Request $request) {
+        $validos = $request->validate([
+            'numero' => ['required','integer','unique:historias_clinicas,numero'],
+            'motivo' => ['nullable','string'],
+            'mucosas' => ['nullable', 'string'],
+            'amnanesis' => ['nullable', 'string'],
+            'diagnostico' => ['nullable', 'string'],
+            'tratamiento' => ['nullable', 'string'],
+            'precio' => ['nullable', 'string'],
+            'peso' => ['nullable', 'decimal:2,4'],
+            'fecha' => ['required', 'date'],
+            'mascota_id' => ['required', 'integer']
+        ]);
+
+        try {
+            $validos['user_id'] = $request->user()->id;
+            HistoriaClinica::create($validos);
+            return redirect()->route('historias.index')->with('success', 'La historia clinica ha sido guardada N° '.$validos['numero']);
+        } catch (\Exception $e) {
+            return redirect()->route('clientes.create')->with('error', 'Ocurrió un problema al guardar la historia');
+        }
+
     }
 }
