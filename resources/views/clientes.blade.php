@@ -53,7 +53,7 @@
 </div>
 
 <div class="table-footer">
-    <p>Total de Filas: 10</p>
+    {{ $clientes->links() }}
 </div>
 
 @endsection
