@@ -49,9 +49,9 @@ class HistoriaClinicaController extends Controller
         try {
             $validos['user_id'] = $request->user()->id;
             HistoriaClinica::create($validos);
-            return redirect()->route('historias.index')->with('success', 'La historia clinica ha sido guardada N° '.$validos['numero']);
+            return redirect()->route('historias.index')->with('msn_success', 'La historia clinica ha sido guardada N° '.$validos['numero']);
         } catch (\Exception $e) {
-            return redirect()->route('clientes.create')->with('error', 'Ocurrió un problema al guardar la historia');
+            return redirect()->route('clientes.create')->with('msn_error', 'Ocurrió un problema al guardar la historia');
         }
 
     }

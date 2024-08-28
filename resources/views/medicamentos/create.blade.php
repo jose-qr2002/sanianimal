@@ -61,16 +61,4 @@
         <button class="form__button-submit" type="submit">Registrar Medicamento</button>
     </form>
 </div>
-@push('scripts')
-    @session('msn_error')
-        <script>
-            let mensaje="{{ $value }}";
-
-            Swal.fire({
-                icon:"error",
-                html: `<span style="font-size: 16px;">${mensaje}</span>`,
-            });
-        </script>
-    @endsession
-@endpush
 @endsection
