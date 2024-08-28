@@ -1,4 +1,4 @@
-@extends('cabecera')
+@extends('app')
 
 @section('body')
 <div class="app">

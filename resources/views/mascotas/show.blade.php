@@ -1,4 +1,4 @@
-@extends('menu')
+@extends('layout.admin')
 
 @section('contenido')
     <section class="mascota-container mt-6">

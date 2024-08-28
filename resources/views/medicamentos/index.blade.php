@@ -1,4 +1,4 @@
-@extends('menu')
+@extends('layout.admin')
 
 @section('contenido')
 <h2 class="title-menu">Medicamentos</h2>

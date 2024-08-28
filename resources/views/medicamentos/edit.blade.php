@@ -1,5 +1,4 @@
-@extends('menu')
-
+@extends('layout.admin')
 
 @section('contenido')
 <x-card title="Editar Medicamento" class="mt-8 mb-8 max-w-screen-md m-auto">

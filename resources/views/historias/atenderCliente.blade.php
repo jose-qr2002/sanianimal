@@ -1,4 +1,4 @@
-@extends('menu')
+@extends('layout.admin')
 
 @section('contenido')
 <x-card title="Atender Cliente" class="mt-8 mb-8 max-w-md m-auto">
