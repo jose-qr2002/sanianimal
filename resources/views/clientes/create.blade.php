@@ -2,7 +2,7 @@
 
 
 @section('contenido')
-<x-card title="Registro de Clientes" class="mt-8 mb-8 max-w-screen-md m-auto">
+<x-card title="Registrar Cliente" class="mt-8 mb-8 max-w-screen-md m-auto">
     <form class="form" action="{{ route('clientes.store') }}" method="POST" novalidate>
         @csrf
         <div class="form__group">

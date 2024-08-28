@@ -2,8 +2,7 @@
 
 
 @section('contenido')
-<div class="card mt-8 mb-8 max-w-screen-md m-auto">
-    <h2>Registro de Mascotas</h2>
+<x-card title="Registrar Mascota" class="mt-8 mb-8 max-w-screen-md m-auto">
     <form class="form" action="{{ route('mascotas.store') }}" method="POST" autocomplete="off" novalidate>
         @csrf
         <div class="form__group">
@@ -106,6 +105,6 @@
 
         <button class="form__button-submit" type="submit">Registrar Macota</button>
     </form>
-</div>
+</x-card>
 
 @endsection

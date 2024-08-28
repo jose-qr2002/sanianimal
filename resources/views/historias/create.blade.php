@@ -2,7 +2,7 @@
 
 
 @section('contenido')
-<x-card title="Registro de Historias" class="mt-8 mb-8 max-w-screen-md m-auto">
+<x-card title="Registrar Historia" class="mt-8 mb-8 max-w-screen-md m-auto">
     <form class="form" action="{{ route('historias.store') }}" method="POST" novalidate>
         @csrf
         <fieldset class="form__fieldset">

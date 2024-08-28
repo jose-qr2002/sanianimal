@@ -2,8 +2,7 @@
 
 
 @section('contenido')
-<div class="card mt-8 mb-8 max-w-screen-md m-auto">
-    <h2>Edicion de Mascotas</h2>
+<x-card title="Editar Mascota" class="mt-8 mb-8 max-w-screen-md m-auto">
     <form class="form" action="{{ route('mascotas.update', $mascota) }}" method="POST" autocomplete="off" novalidate>
         @csrf
         @method('PUT')
@@ -107,6 +106,6 @@
 
         <button class="form__button-submit" type="submit">Modificar Macota</button>
     </form>
-</div>
+</x-card>
 
 @endsection

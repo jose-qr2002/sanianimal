@@ -2,8 +2,7 @@
 
 
 @section('contenido')
-<div class="card mt-8 mb-8 max-w-screen-md m-auto">
-    <h2>Edicion de Clientes</h2>
+<x-card title="Editar CLiente" class="mt-8 mb-8 max-w-screen-md m-auto">
     <form class="form" action="{{ route('clientes.update', $cliente->id) }}" method="POST" novalidate>
         @method('PUT')
         @csrf
@@ -82,5 +81,5 @@
 
         <button class="form__button-submit" type="submit">Guardar Cambios</button>
     </form>
-</div>
+</x-card>
 @endsection
