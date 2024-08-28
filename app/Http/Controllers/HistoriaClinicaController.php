@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class HistoriaClinicaController extends Controller
 {
     public function index(){
-        $historias = HistoriaClinica::all();
+        $historias = HistoriaClinica::paginate(10);
         return view('historias.index', compact('historias'));
     }
 

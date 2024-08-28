@@ -49,7 +49,7 @@
 </div>
 
 <div class="table-footer">
-    <p>Total de Filas: 1</p>
+    {{ $mascotas->links() }}
 </div>
 
 @endsection

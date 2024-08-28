@@ -12,7 +12,7 @@ class MedicamentoController extends Controller
      */
     public function index()
     {
-        $medicamentos = Medicamento::all();
+        $medicamentos = Medicamento::paginate(10);
         return view('medicamentos.index', compact('medicamentos'));
     }
 

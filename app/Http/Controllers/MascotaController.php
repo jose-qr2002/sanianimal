@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class MascotaController extends Controller
 {
     public function index() {
-        $mascotas = Mascota::all();
+        $mascotas = Mascota::paginate(10);
         return view('mascotas.index', compact('mascotas'));
     }
 

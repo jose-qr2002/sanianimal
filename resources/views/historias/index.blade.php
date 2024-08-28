@@ -41,7 +41,7 @@
 </div>
 
 <div class="table-footer">
-    <p>Total de Filas: 1</p>
+    {{ $historias->links() }}
 </div>
 
 @endsection
