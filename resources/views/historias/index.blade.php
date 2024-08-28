@@ -26,7 +26,7 @@
                     <td>{{$historia->numero}}</td>
                     <td>{{$historia->mascota->cliente->nombre}}</td>
                     <td>{{$historia->mascota->nombre}}</td>
-                    <td>{{$historia->created_at}}</td>
+                    <td>{{$historia->fecha}}</td>
                     <td>
 
                     </td>
