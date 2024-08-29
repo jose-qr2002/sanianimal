@@ -22,6 +22,13 @@ class Mascota extends Model
         'imagen',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'fecha_nacimiento' => 'date',
+        ];
+    }
+
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);

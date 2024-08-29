@@ -25,6 +25,13 @@ class HistoriaClinica extends Model
         'user_id',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'fecha' => 'date',
+        ];
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }

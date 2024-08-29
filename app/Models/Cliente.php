@@ -22,6 +22,13 @@ class Cliente extends Model
         'imagen',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'fecha_nacimiento' => 'date',
+        ];
+    }
+
     public function mascotas() {
         return $this->hasMany(Mascota::class);
     }
