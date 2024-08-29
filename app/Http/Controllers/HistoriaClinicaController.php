@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Historia\StoreHistoriaRequest;
 use App\Models\Cliente;
 use App\Models\HistoriaClinica;
 use Illuminate\Http\Request;
@@ -32,20 +33,8 @@ class HistoriaClinicaController extends Controller
         return view('historias.create', compact('cliente', 'ultimoNumero'));
     }
 
-    public function store(Request $request) {
-        $validos = $request->validate([
-            'numero' => ['required','integer','unique:historias_clinicas,numero'],
-            'motivo' => ['nullable','string'],
-            'mucosas' => ['nullable', 'string'],
-            'amnanesis' => ['nullable', 'string'],
-            'diagnostico' => ['nullable', 'string'],
-            'tratamiento' => ['nullable', 'string'],
-            'precio' => ['nullable', 'decimal:2,5'],
-            'peso' => ['nullable', 'decimal:2,4'],
-            'fecha' => ['required', 'date'],
-            'mascota_id' => ['required', 'integer']
-        ]);
-
+    public function store(StoreHistoriaRequest $request) {
+        $validos = $request->validated();
         try {
             $validos['user_id'] = $request->user()->id;
             HistoriaClinica::create($validos);

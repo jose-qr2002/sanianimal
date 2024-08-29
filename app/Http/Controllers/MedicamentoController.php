@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Medicamento\StoreMedicamentoRequest;
+use App\Http\Requests\Medicamento\UpdateMedicamentoRequest;
 use App\Models\Medicamento;
 use Illuminate\Http\Request;
 
@@ -27,18 +29,11 @@ class MedicamentoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMedicamentoRequest $request)
     {
-        $request->validate([
-            'nombre' => ['required'],
-            'marca' => ['required'],
-            'stock' => ['required','integer','min:0'],
-            'precio' => ['required','numeric','min:0.10'],
-            'descripcion' => ['nullable','max:1000'],
-        ]);
-
+        $validos = $request->validated();
         try {
-            Medicamento::create($request->all());
+            Medicamento::create($validos);
             return redirect()->route('medicamentos.index')->with('msn_success', 'El medicamento fue registrado con exito');
         } catch (\Exception $e) {
             return redirect()->route('medicamentos.create')->with('msn_error', 'El medicamento no fue registrado');
@@ -64,18 +59,11 @@ class MedicamentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Medicamento $medicamento)
+    public function update(UpdateMedicamentoRequest $request, Medicamento $medicamento)
     {
-        $request->validate([
-            'nombre' => ['required'],
-            'marca' => ['required'],
-            'stock' => ['required','integer','min:1'],
-            'precio' => ['required','numeric','min:0.10'],
-            'descripcion' => ['required']
-        ]);
-
+        $validos = $request->validated();
         try {
-            $medicamento->update($request->all());
+            $medicamento->update($validos);
             return redirect()->route('medicamentos.index')->with('msn_success', 'El Medicamento se actualizo exitosamente');
         } catch (\Exception $e) {
             return redirect()->route('medicamentos.edit', $medicamento)->with('msn_error', 'El Medicamento no se logro actualizar correctamente');

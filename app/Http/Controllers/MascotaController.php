@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Mascota\StoreMascotaRequest;
+use App\Http\Requests\Mascota\UpdateMascotaRequest;
 use App\Models\Especie;
 use App\Models\Mascota;
 use Illuminate\Http\Request;
@@ -22,18 +24,10 @@ class MascotaController extends Controller
         return view('mascotas.create', compact('especies'));
     }
 
-    public function store(Request $request) {
-        $request->validate([
-            'nombre' => ['required'],
-            'sexo' => ['required','in:Macho,Hembra,Indefinido'],
-            'fecha_nacimiento' => ['nullable','date'],
-            'pedigree' => ['required','boolean'],
-            'especie_id' => ['required','integer','exists:especies,id'],
-            'cliente_id' => ['required','integer','exists:clientes,id']
-        ]);
-
+    public function store(StoreMascotaRequest $request) {
+        $validos = $request->validated();
         try {
-            Mascota::create($request->all());
+            Mascota::create($validos);
             return redirect()->route('mascotas.index')->with('msn_success', 'Se registro la mascota');
         } catch (\Exception $e) {
             return redirect()->route('clientes.create')->with('msn_error', 'No se logro registrar a la mascota');
@@ -46,18 +40,10 @@ class MascotaController extends Controller
         return view('mascotas.edit', compact('mascota', 'especies', 'cliente'));
     }
 
-    public function update(Mascota $mascota, Request $request) {
-        $request->validate([
-            'nombre' => ['required'],
-            'sexo' => ['required','in:Macho,Hembra,Indefinido'],
-            'fecha_nacimiento' => ['nullable','date'],
-            'pedigree' => ['required','boolean'],
-            'especie_id' => ['required','integer','exists:especies,id'],
-            'cliente_id' => ['required','integer','exists:clientes,id']
-        ]);
-
+    public function update(Mascota $mascota, UpdateMascotaRequest $request) {
+        $validos = $request->validated();
         try {
-            $mascota->update($request->all());
+            $mascota->update($validos);
             return redirect()->route('mascotas.index')->with('msn_success', 'La mascota se actualizo exitosamente');
         } catch (\Exception $e) {
             return redirect()->route('mascotas.edit', $mascota->id)->with('msn_error', 'La mascota no se logro actualizar correctamente');

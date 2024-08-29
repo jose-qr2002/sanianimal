@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Cliente\StoreClienteRequest;
+use App\Http\Requests\Cliente\UpdateClienteRequest;
 use App\Models\Cliente;
 use Exception;
 use Illuminate\Database\QueryException;
@@ -11,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class ClienteController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra la lista de todos los clientes
      */
     public function index()
     {
@@ -20,7 +22,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra un formulario para crear un cliente
      */
     public function create()
     {
@@ -28,27 +30,17 @@ class ClienteController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear un registro de Cliente
      */
-    public function store(Request $request)
+    public function store(StoreClienteRequest $request)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'n_documento' => 'required|integer',
-            'sexo' => 'required|in:F,M',
-            'email' => 'nullable|email',
-            'direccion' => 'nullable',
-            'fecha_nacimiento' => 'nullable|date'
-        ]);
-
+        $validos = $request->validated();
         try {
-            Cliente::create($request->all());
+            Cliente::create($validos);
             return redirect()->route('clientes.index')->with('msn_success', 'El cliente se registro exitosamente');
         } catch (\Exception $e) {
             return redirect()->route('clientes.create')->with('msn_error', 'El cliente no se pudo registrar');
         }
-
     }
 
     /**
@@ -70,26 +62,15 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
-        $request->validate([
-            'nombre' => ['required'],
-            'apellido' => ['required'],
-            'n_documento' => ['required','digits:8'],
-            'sexo' => ['required','in:M,F'],
-            'email' => ['required','email'],
-            'fecha_nacimiento' => ['required','date'],
-            'direccion' => ['required'],
-        ]);
-
+        $validos = $request->validated();
         try {
-            $cliente->update($request->all());
-
+            $cliente->update($validos);
             return redirect()->route('clientes.index')->with('msn_success', 'El cliente se actualizo exitosamente');
         } catch (Exception) {
             return redirect()->route('clientes.edit', $cliente->id)->with('msn_error', 'El Cliente no se logro actualizar correctamente');
         }
-
     }
 
     /**
