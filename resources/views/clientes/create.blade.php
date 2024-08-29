@@ -7,7 +7,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="nombre">Nombre:</label>
-                <input class="form__input" type="text" id="nombre" name="nombre" value="" required>
+                <input class="form__input @error('nombre') form__input-error @enderror" type="text" id="nombre" name="nombre" value="" required>
                 @error('nombre')
                     <div class="form__error">
                         {{ $message }}
@@ -16,7 +16,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="apellido">Apellido:</label>
-                <input class="form__input" type="text" id="apellido" name="apellido" required>
+                <input class="form__input @error('apellido') form__input-error @enderror" type="text" id="apellido" name="apellido" required>
                 @error('apellido')
                     <div class="form__error">
                         {{ $message }}
@@ -27,7 +27,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="n_documento">Número de documento:</label>
-                <input class="form__input" type="text" id="n_documento" name="n_documento" required>
+                <input class="form__input @error('n_documento') form__input-error @enderror" type="text" id="n_documento" name="n_documento" required>
                 @error('n_documento')
                     <div class="form__error">
                         {{ $message }}
@@ -36,7 +36,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="sexo">Sexo:</label>
-                <select class="form__input" id="sexo" name="sexo" required>
+                <select class="form__input @error('sexo') form__input-error @enderror" id="sexo" name="sexo" required>
                     <option value="M">Masculino</option>
                     <option value="F">Femenino</option>
                 </select>
@@ -50,7 +50,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="email">Correo electrónico:</label>
-                <input class="form__input" type="email" id="email" name="email">
+                <input class="form__input @error('email') form__input-error @enderror" type="email" id="email" name="email">
                 @error('email')
                     <div class="form__error">
                         {{ $message }}
@@ -59,7 +59,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="fecha_nacimiento">Fecha de nacimiento:</label>
-                <input class="form__input" type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                <input class="form__input @error('fecha_nacimiento') form__input-error @enderror" type="date" id="fecha_nacimiento" name="fecha_nacimiento">
                 @error('fecha_nacimiento')
                     <div class="form__error">
                         {{ $message }}
@@ -69,7 +69,7 @@
         </div>
         <div class="form__input-group">
             <label class="form__label" for="direccion">Dirección:</label>
-            <input class="form__input" type="text" id="direccion" name="direccion">
+            <input class="form__input @error('direccion') form__input-error @enderror" type="text" id="direccion" name="direccion">
             @error('direccion')
                 <div class="form__error">
                     {{ $message }}

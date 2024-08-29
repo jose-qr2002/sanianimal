@@ -8,7 +8,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="nombre">Nombre:</label>
-                <input class="form__input" type="text" id="nombre" name="nombre" value="{{old('nombre')}}" required>
+                <input class="form__input @error('nombre') form__input-error @enderror" type="text" id="nombre" name="nombre" value="{{old('nombre')}}" required>
                 @error('nombre')
                     <div class="form__error">
                         {{ $message }}
@@ -18,7 +18,7 @@
             <div class="form__input-group" id="campoCliente">
                 <label class="form__label" for="cliente">Cliente:</label>
                 <div class="form__relative">
-                    <input class="form__input form__input-search" type="search" id="cliente" name="cliente" required value="{{old('cliente')}}">
+                    <input class="form__input form__input-search @error('cliente_id') form__input-error @enderror" type="search" id="cliente" name="cliente" required value="{{old('cliente')}}">
                     <input type="hidden" name="cliente_id" value="{{ old('cliente_id') }}">
                     <ul class="form__predictions" id="clientePredicciones"></ul>
                 </div>
@@ -32,7 +32,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="sexo">Sexo</label>
-                <select class="form__input" id="sexo" name="sexo" required>
+                <select class="form__input @error('sexo') form__input-error @enderror" id="sexo" name="sexo" required>
                     <option value="Macho" {{ old('sexo') == 'Macho' ? 'selected' : '' }}>Macho</option>
                     <option value="Hembra" {{ old('sexo') == 'Hembra' ? 'selected' : '' }}>Hembra</option>
                     <option value="Indefinido" {{ old('sexo') == 'Indefinido' ? 'selected' : '' }}>Indefinido</option>
@@ -45,7 +45,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="color">Color:</label>
-                <input class="form__input" type="text" id="color" name="color" value="{{ old('color') }}">
+                <input class="form__input @error('color') form__input-error @enderror" type="text" id="color" name="color" value="{{ old('color') }}">
             </div>
             @error('color')
                     <div class="form__error">
@@ -56,7 +56,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="especie_id">Especie</label>
-                <select class="form__input" id="especie_id" name="especie_id" required>
+                <select class="form__input @error('especie_id') form__input-error @enderror" id="especie_id" name="especie_id" required>
                     <option value="" disabled selected>-- Seleccione una especie --</option>
                     @foreach ($especies as $especie)
                         <option value="{{ $especie->id }}" {{ old('especie_id') == $especie->id ? 'selected' : ''}} >{{ $especie->especie }}</option>
@@ -70,7 +70,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="raza">Raza:</label>
-                <input class="form__input" type="text" id="raza" name="raza" value="{{old('raza')}}">
+                <input class="form__input @error('raza') form__input-error @enderror" type="text" id="raza" name="raza" value="{{old('raza')}}">
                 @error('raza')
                     <div class="form__error">
                         {{ $message }}
@@ -81,7 +81,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="pedigree">Pedigree:</label>
-                <select class="form__input" id="pedigree" name="pedigree" required>
+                <select class="form__input @error('pedigree') form__input-error @enderror" id="pedigree" name="pedigree" required>
                     <option value="0" {{ old('pedigree') == '0' ? 'selected' : '' }}>No</option>
                     <option value="1" {{ old('pedigree') == '1' ? 'selected' : '' }}>Si</option>
                 </select>
@@ -93,7 +93,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input class="form__input" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}">
+                <input class="form__input @error('fecha_nacimiento') form__input-error @enderror" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}">
                 @error('fecha_nacimiento')
                     <div class="form__error">
                         {{ $message }}

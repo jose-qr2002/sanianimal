@@ -23,7 +23,7 @@
             <div class="form__group">
                 <div class="form__input-group">
                     <label class="form__label" for="mascota_id">Mascota:</label>
-                    <select class="form__input" name="mascota_id" id="">
+                    <select class="form__input @error('mascota_id') form__input-error @enderror" name="mascota_id" id="">
                         @foreach ($cliente->mascotas as $mascota)
                             <option disabled selected>-- Seleccione una mascota --</option>
                             <option value="{{ $mascota->id }}" {{ old('mascota_id') == $mascota->id ? 'selected' : '' }} >{{ $mascota->nombre }}</option>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form__input-group">
                     <label class="form__label" for="peso">Peso(kg):</label>
-                    <input class="form__input" type="text" id="peso" name="peso" value="{{ old('peso') }}" required>
+                    <input class="form__input @error('peso') form__input-error @enderror" type="text" id="peso" name="peso" value="{{ old('peso') }}" required>
                     @error('peso')
                         <div class="form__error">
                             {{ $message }}
@@ -52,7 +52,7 @@
             <div class="form__group-3">
                 <div class="form__input-group">
                     <label class="form__label" for="numero">Número:</label>
-                    <input class="form__input" type="text" id="numero" name="numero" value="{{ old('numero',$ultimoNumero) }}" required>
+                    <input class="form__input @error('numero') form__input-error @enderror" type="text" id="numero" name="numero" value="{{ old('numero',$ultimoNumero) }}" required>
                     @error('numero')
                         <div class="form__error">
                             {{ $message }}
@@ -61,7 +61,7 @@
                 </div>
                 <div class="form__input-group">
                     <label class="form__label" for="precio">Precio:</label>
-                    <input class="form__input" type="text" id="precio" name="precio" value="{{ old('precio') }}" required>
+                    <input class="form__input @error('precio') form__input-error @enderror" type="text" id="precio" name="precio" value="{{ old('precio') }}" required>
                     @error('precio')
                         <div class="form__error">
                             {{ $message }}
@@ -70,7 +70,7 @@
                 </div>
                 <div class="form__input-group">
                     <label class="form__label" for="fecha">Fecha:</label>
-                    <input class="form__input" type="date" id="fecha" name="fecha" value="{{ old('fecha') }}" required>
+                    <input class="form__input @error('fecha') form__input-error @enderror" type="date" id="fecha" name="fecha" value="{{ old('fecha') }}" required>
                     @error('fecha')
                         <div class="form__error">
                             {{ $message }}
@@ -80,7 +80,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="motivo">Motivo</label>
-                <textarea class="form__input" type="text" id="motivo" name="motivo">{{old('motivo')}}</textarea>
+                <textarea class="form__input @error('motivo') form__input-error @enderror" type="text" id="motivo" name="motivo">{{old('motivo')}}</textarea>
                 @error('motivo')
                     <div class="form__error">
                         {{ $message }}
@@ -89,7 +89,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="mucosas">Mucosas</label>
-                <textarea class="form__input" type="text" id="mucosas" name="mucosas">{{old('mucosas')}}</textarea>
+                <textarea class="form__input @error('mucosas') form__input-error @enderror" type="text" id="mucosas" name="mucosas">{{old('mucosas')}}</textarea>
                 @error('mucosas')
                     <div class="form__error">
                         {{ $message }}
@@ -98,7 +98,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="amnanesis">Anamnesis</label>
-                <textarea class="form__input" type="text" id="amnanesis" name="amnanesis">{{old('amnanesis')}}</textarea>
+                <textarea class="form__input @error('amnanesis') form__input-error @enderror" type="text" id="amnanesis" name="amnanesis">{{old('amnanesis')}}</textarea>
                 @error('amnanesis')
                     <div class="form__error">
                         {{ $message }}
@@ -107,7 +107,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="diagnostico">Diagnostico</label>
-                <textarea class="form__input" type="text" id="diagnostico" name="diagnostico">{{old('diagnostico')}}</textarea>
+                <textarea class="form__input @error('diagnostico') form__input-error @enderror" type="text" id="diagnostico" name="diagnostico">{{old('diagnostico')}}</textarea>
                 @error('diagnostico')
                     <div class="form__error">
                         {{ $message }}
@@ -116,7 +116,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="tratamiento">Tratamiento</label>
-                <textarea class="form__input" type="text" id="tratamiento" name="tratamiento">{{old('tratamiento')}}</textarea>
+                <textarea class="form__input @error('tratamiento') form__input-error @enderror" type="text" id="tratamiento" name="tratamiento">{{old('tratamiento')}}</textarea>
                 @error('tratamiento')
                     <div class="form__error">
                         {{ $message }}

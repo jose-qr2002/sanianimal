@@ -40,7 +40,7 @@ class HistoriaClinicaController extends Controller
             'amnanesis' => ['nullable', 'string'],
             'diagnostico' => ['nullable', 'string'],
             'tratamiento' => ['nullable', 'string'],
-            'precio' => ['nullable', 'string'],
+            'precio' => ['nullable', 'decimal:2,5'],
             'peso' => ['nullable', 'decimal:2,4'],
             'fecha' => ['required', 'date'],
             'mascota_id' => ['required', 'integer']

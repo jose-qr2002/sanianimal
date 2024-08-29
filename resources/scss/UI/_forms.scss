@@ -55,14 +55,23 @@
         outline: white;
         transition: outline .2s linear, box-shadow .2s linear;
         box-shadow: 0 0 0 0 v.$secondary-color;
-        &:focus {
-            outline: 1px solid v.$secondary-color;
+        &:focus:not(:is(&-error)) {
+            border: 1px solid v.$secondary-color;
             box-shadow: 0 0 5px 0 v.$secondary-color;
+        }
+
+        &-error {
+            border: 1px solid v.$red-color;
+
+            &:focus {
+                border: 1px solid darken(v.$red-color, 10%);
+                box-shadow: 0 0 5px 0 v.$red-color;
+            }
         }
     }
 
     &__error {
-        color: #e03d3d;
+        color: v.$red-color;
         line-height: 1.5;
         font-size: 14px;
     }

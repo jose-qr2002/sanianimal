@@ -7,7 +7,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="nombre">Nombre:</label>
-                <input class="form__input" type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
+                <input class="form__input @error('nombre') form__input-error @enderror" type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
                 @error('nombre')
                     <div class="form__error">
                         {{ $message }}
@@ -16,7 +16,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="marca">Marca:</label>
-                <input class="form__input" type="text" id="marca" name="marca" value="{{ old('marca') }}" required>
+                <input class="form__input @error('marca') form__input-error @enderror" type="text" id="marca" name="marca" value="{{ old('marca') }}" required>
                 @error('marca')
                     <div class="form__error">
                         {{ $message }}
@@ -27,7 +27,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="stock">Stock:</label>
-                <input class="form__input" type="text" id="stock" name="stock" value="{{ old('stock') }}" required>
+                <input class="form__input @error('stock') form__input-error @enderror" type="text" id="stock" name="stock" value="{{ old('stock') }}" required>
                 @error('stock')
                     <div class="form__error">
                         {{ $message }}
@@ -36,7 +36,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="precio">Precio:</label>
-                <input class="form__input" type="text" id="precio" name="precio" value="{{ old('precio') }}" required>
+                <input class="form__input @error('precio') form__input-error @enderror" type="text" id="precio" name="precio" value="{{ old('precio') }}" required>
                 @error('precio')
                     <div class="form__error">
                         {{ $message }}
@@ -47,7 +47,7 @@
         <div>
             <div class="form__input-group">
                 <label class="form__label" for="descripcion">Descripcion:</label>
-                <textarea class="form__input" id="descripcion" name="descripcion">{{old('descripcion')}}</textarea>
+                <textarea class="form__input @error('descripcion') form__input-error @enderror" id="descripcion" name="descripcion">{{old('descripcion')}}</textarea>
                 @error('descripcion')
                     <div class="form__error">
                         {{ $message }}
