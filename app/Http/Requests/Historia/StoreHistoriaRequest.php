@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Historia;
 
 use App\Rules\AlphaNumericUnicode;
+use App\Rules\OptionalDecimal;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreHistoriaRequest extends FormRequest
@@ -29,8 +30,8 @@ class StoreHistoriaRequest extends FormRequest
             'amnanesis' => ['nullable', 'string', new AlphaNumericUnicode],
             'diagnostico' => ['nullable', 'string', new AlphaNumericUnicode],
             'tratamiento' => ['nullable', 'string', new AlphaNumericUnicode],
-            'precio' => ['nullable', 'numeric', 'min:0.01', 'max:1000', 'regex:/^\d+(\.\d{1,2})?$/'],
-            'peso' => ['nullable', 'numeric', 'min:0.01', 'max:120', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'precio' => ['nullable', 'numeric', 'min:0.01', 'max:1000', new OptionalDecimal],
+            'peso' => ['nullable', 'numeric', 'min:0.01', 'max:120', new OptionalDecimal],
             'fecha' => ['required', 'date'],
             'mascota_id' => ['required', 'integer']
         ];
