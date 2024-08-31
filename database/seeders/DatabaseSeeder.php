@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             MascotaSeeder::class,
             MedicamentoSeeder::class,
             HistoriaClinicaSeeder::class,
+            VaccineSeeder::class,
         ]);
 
     }

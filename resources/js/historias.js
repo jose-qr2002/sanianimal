@@ -1,3 +1,5 @@
+// Script usado en vista create de Historias
+
 if(document.querySelector('#vaccine-section')) {
 
     /**
