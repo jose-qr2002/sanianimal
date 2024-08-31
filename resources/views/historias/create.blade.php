@@ -124,6 +124,16 @@
                 @enderror
             </div>
         </fieldset>
+        
+        <fieldset class="form__fieldset">
+            <legend class="form__legend">Vacunas</legend>
+            <input type="hidden" id="vaccines" name="vaccines">
+            <section id="vaccine-section">
+
+            </section>
+
+            <button type="button" class="form__button" id="button-vaccine">Agregar Vacuna</button>
+        </fieldset>
 
         <button class="form__button-submit" type="submit">Guardar Historia</button>
     </form>

@@ -1,5 +1,6 @@
 import './bootstrap';
 import './buscador';
+import './historias';
 
 const sidebar = document.querySelector("#sidebar");
 const sidebarOpenButton = document.querySelector("#sidebar-open");
