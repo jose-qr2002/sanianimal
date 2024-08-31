@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             MedicamentoSeeder::class,
             HistoriaClinicaSeeder::class,
             VaccineSeeder::class,
+            AppliedVaccineSeeder::class,
         ]);
 
     }

@@ -39,4 +39,8 @@ class HistoriaClinica extends Model
     public function mascota() {
         return $this->belongsTo(Mascota::class);
     }
+
+    public function vaccines(){
+        return $this->belongsToMany(Vaccine::class, 'applied_vaccines', 'historias_clinica_id', 'vaccine_id');
+    }
 }
