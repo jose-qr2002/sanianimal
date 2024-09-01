@@ -128,9 +128,9 @@
         <fieldset class="form__fieldset">
             <legend class="form__legend">Vacunas</legend>
             <input type="hidden" id="vaccines" name="vaccines">
-            <section id="vaccine-section">
+            <ul id="vaccine-section">
 
-            </section>
+            </ul>
 
             <button type="button" class="form__button" id="button-vaccine">Agregar Vacuna</button>
         </fieldset>

@@ -82,6 +82,14 @@
         border-radius: 10px;
         padding: 10px 8px;
         margin-bottom: 12px;
+
+        &--red {
+            @include m.boton(v.$red-color, white);
+            width: auto;
+            border-radius: 10px;
+            padding: 10px 8px;
+            margin-bottom: 12px;
+        }
     }
 
     &__button-submit {
