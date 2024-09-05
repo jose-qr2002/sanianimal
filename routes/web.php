@@ -5,6 +5,7 @@ use App\Http\Controllers\HistoriaClinicaController;
 use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\VaccineController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -46,5 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/historias/atencion', [HistoriaClinicaController::class, 'atenderCliente'])->name('historias.atenderCliente');
     Route::get('/historias/create/{cliente}', [HistoriaClinicaController::class, 'create'])->name('historias.create');
     Route::post('/historias/store', [HistoriaClinicaController::class, 'store'])->name('historias.store');
+
+    // Vaccines
+    Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
 
 });

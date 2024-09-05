@@ -3,7 +3,7 @@
 
 @section('contenido')
 <x-card title="Registrar Historia" class="mt-8 mb-8 max-w-screen-md m-auto">
-    <form class="form" action="{{ route('historias.store') }}" method="POST" novalidate>
+    <form class="form" id="history-form" action="{{ route('historias.store') }}" method="POST" novalidate>
         @csrf
         <fieldset class="form__fieldset">
             <legend class="form__legend">Información del Dueño</legend>
