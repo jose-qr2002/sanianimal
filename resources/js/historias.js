@@ -15,14 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const formHistory = document.getElementById('history-form');
     
-        console.log(formHistory);
-            
-    
-        /**
-         * Counters
-         */
-    
-        //let countVaccines = 1;
+        
     
         /**
          * Eventos de lista
@@ -31,9 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
         formHistory.addEventListener('submit', prepareHistorySubmit);
     
+        async function preLoad() {
+            vaccinesDatabase = await getVaccines();
+            vaccines = dataVaccines.value !== "" ? JSON.parse(dataVaccines.value) : [];
+            console.log(vaccines);
+            showVaccines();
+        }
+
         async function handleAddVaccine() {
             const vaccine = {
-                id: '',
+                id: 0,
                 vaccine: '',
                 detail: '',
             }
@@ -67,13 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputGroupDetail = inputGroupName.cloneNode(true);
             
             const labelNameVaccine = createLabel('Vacuna: ', `vaccine-${countVaccines}`);
-            const inputNameVaccine = createInput('select', `vaccine-${countVaccines}`, vaccinesDatabase, vaccine);
+            const inputNameVaccine = createInput('select', `vaccine-${countVaccines}`, vaccinesDatabase, vaccine, countVaccines);
             
             inputGroupName.appendChild(labelNameVaccine);
             inputGroupName.appendChild(inputNameVaccine);
             
             const labelDetailVaccine = createLabel('Detalles: ', `vaccine-${countVaccines}-detail`)
-            const textareaDetailVaccine = createInput('textarea', `vaccine-${countVaccines}-detail`, vaccinesDatabase, vaccine)
+            const textareaDetailVaccine = createInput('textarea', `vaccine-${countVaccines}-detail`, vaccinesDatabase, vaccine, countVaccines)
             
             inputGroupDetail.appendChild(labelDetailVaccine);
             inputGroupDetail.appendChild(textareaDetailVaccine);
@@ -88,11 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
         function showVaccines() {
             while(sectionVaccine.firstChild) {
                 sectionVaccine.removeChild(sectionVaccine.firstChild)
+                
             }
-    
+            console.log(vaccines);
+            
             vaccines.forEach((vaccine, index) => {
                 const vaccineElement = createVaccineElement(vaccine, index + 1);
                 sectionVaccine.appendChild(vaccineElement);
+                
             });
     
         }
@@ -105,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return label;
         }
     
-        function createInput(type, attribute, list = [], object = {id: '', detail: ''}) {
+        function createInput(type, attribute, list = [], object = {id: '', detail: ''}, order) {
             // Sacando el id actual por si tiene uno
             const currentId = object.id ? parseInt(object.id) : 0;
             const currentDetail = object.detail ? object.detail : '';
@@ -118,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 textarea.id = attribute;
                 textarea.classList.add('form__input');
                 textarea.textContent = currentDetail;
+                textarea.name = `vaccines[${order-1}][detail]`;
                 textarea.addEventListener('input', writeDetail);
                 return textarea;
             }
@@ -126,10 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const select = document.createElement('SELECT');
                 select.id = attribute;
                 select.classList.add('form__input');
+                select.name = `vaccines[${order-1}][id]`;
     
                 const option = document.createElement('OPTION');
                 option.textContent = 'SELECCIONES UNA VACUNA';
-                option.setAttribute('disabled', true)
+                option.value = ''; // Cuando se envia un string vacio laravel lo toma como null por las validaciones
                 option.setAttribute('selected', true)
                 select.appendChild(option);
                 
@@ -210,12 +215,16 @@ document.addEventListener('DOMContentLoaded', () => {
         function prepareHistorySubmit(event) {
             event.preventDefault();
             const form = event.target;
-    
-            dataVaccines.value = JSON.stringify(vaccines);
+            
+
+
+            //dataVaccines.value = JSON.stringify(vaccines); ELIMINADO POR ERROR EN VALIDACIONES
 
             form.submit();
         }
-    
+        
+
+        preLoad();
     
     }
 })

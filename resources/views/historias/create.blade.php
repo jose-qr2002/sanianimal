@@ -127,7 +127,26 @@
         
         <fieldset class="form__fieldset">
             <legend class="form__legend">Vacunas</legend>
-            <input type="hidden" id="vaccines" name="vaccines">
+            <input type="hidden" id="vaccines" name="vaccines" value="{{ old('vaccines') != null ? json_encode(old('vaccines')) : '' }}"> 
+            @if (old('vaccines'))
+                @php
+                    $errorsArray = $errors->getMessages();
+
+                    $errorsVaccines = [];
+
+                    // Filtra los errores relacionados con 'vaccines'
+                    $vaccinesErrors = [];
+                    foreach ($errorsArray as $key => $messages) {
+                        if (strpos($key, 'vaccines.') === 0) {
+                            $vaccinesErrors[$key] = $messages;
+                        }
+                    }
+
+                    // Convierte los errores a formato JSON
+                    $vaccinesErrorsJson = json_encode($vaccinesErrors);
+                @endphp
+            @endif
+            <input type="hidden" name="errors_json" id="errors_json" value="{{ isset($vaccinesErrorsJson) ? $vaccinesErrorsJson : ''}}">
             <ul id="vaccine-section">
 
             </ul>
