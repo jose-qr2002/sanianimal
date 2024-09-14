@@ -2,15 +2,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     if(document.querySelector('#vaccine-section')) {
 
+        // Lista donde se guardaran todas las vacunas de la base de datos
         let vaccinesDatabase = [];
-    
+        // Lista donde se guardaran todas las vacunas seleccionadas
         let vaccines = [];
     
-        /**
-         * View Elements
-         */
+        // VIEW ELEMENTS
         const buttonAddVaccine = document.querySelector('#button-vaccine');
+        // Variable que seleccionar elemento html que tiene las vacunas ingresadas anteriormente
         const dataVaccines = document.querySelector('#vaccines');
+        // Elemento HTML donde contiene los errores de validacion de las vacunas
+        const vaccinesErrorsElement = document.querySelector('#vaccines_errors')
+        
         const sectionVaccine = document.querySelector('#vaccine-section');
     
         const formHistory = document.getElementById('history-form');
@@ -27,7 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
         async function preLoad() {
             vaccinesDatabase = await getVaccines();
             vaccines = dataVaccines.value !== "" ? JSON.parse(dataVaccines.value) : [];
+            const vaccinesErrors = vaccinesErrorsElement.value !== "" ? JSON.parse(vaccinesErrorsElement.value) : [];
+            
+            vaccines = vaccines.map((vaccine, index) => {
+                vaccine.errors = vaccinesErrors[index];
+                return vaccine;
+            })
+
             console.log(vaccines);
+
             showVaccines();
         }
 
@@ -71,12 +82,21 @@ document.addEventListener('DOMContentLoaded', () => {
             
             inputGroupName.appendChild(labelNameVaccine);
             inputGroupName.appendChild(inputNameVaccine);
-            
+            if(vaccine?.errors?.id !== undefined) {
+                const errorElementId = createElementError(vaccine.errors.id);
+                inputGroupName.appendChild(errorElementId)
+            }
+
             const labelDetailVaccine = createLabel('Detalles: ', `vaccine-${countVaccines}-detail`)
             const textareaDetailVaccine = createInput('textarea', `vaccine-${countVaccines}-detail`, vaccinesDatabase, vaccine, countVaccines)
             
             inputGroupDetail.appendChild(labelDetailVaccine);
             inputGroupDetail.appendChild(textareaDetailVaccine);
+
+            if(vaccine?.errors?.detail !== undefined) {
+                const errorElementDetail = createElementError(vaccine.errors.detail);
+                inputGroupDetail.appendChild(errorElementDetail)
+            }
     
             liElement.appendChild(inputGroupName);
             liElement.appendChild(inputGroupDetail);
@@ -159,7 +179,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return inputElement;
         }
     
-        
+        function createElementError(message) {
+            const errorElement = document.createElement('P');
+            errorElement.classList.add('form__error');
+            errorElement.textContent = message;
+            return errorElement;
+        }
+
+
         /**
          * Elimnar vacuna del formulario
          */

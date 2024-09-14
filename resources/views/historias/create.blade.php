@@ -130,15 +130,22 @@
             <input type="hidden" id="vaccines" name="vaccines" value="{{ old('vaccines') != null ? json_encode(old('vaccines')) : '' }}"> 
             @if (old('vaccines'))
                 @php
-                    $errorsArray = $errors->getMessages();
-
-                    $errorsVaccines = [];
+                    $errorsMessages = $errors->getMessages();
 
                     // Filtra los errores relacionados con 'vaccines'
                     $vaccinesErrors = [];
-                    foreach ($errorsArray as $key => $messages) {
+                    // Recorrer los errores
+                    foreach ($errorsMessages as $key => $messages) {
+
+                        $messagePrincipal = $messages[0];
+                        // Verifica si es una mensaje por parte de vaccines
                         if (strpos($key, 'vaccines.') === 0) {
-                            $vaccinesErrors[$key] = $messages;
+                            
+                            // Separa por puntos para obtener el numero
+                            $keyParts = explode(".", $key);
+
+                            // Guardar el mensaje 
+                            $vaccinesErrors[$keyParts[1]][$keyParts[2]] = $messagePrincipal;
                         }
                     }
 
@@ -146,7 +153,7 @@
                     $vaccinesErrorsJson = json_encode($vaccinesErrors);
                 @endphp
             @endif
-            <input type="hidden" name="errors_json" id="errors_json" value="{{ isset($vaccinesErrorsJson) ? $vaccinesErrorsJson : ''}}">
+            <input type="hidden" name="vaccines_errors" id="vaccines_errors" value="{{ isset($vaccinesErrorsJson) ? $vaccinesErrorsJson : ''}}">
             <ul id="vaccine-section">
 
             </ul>
