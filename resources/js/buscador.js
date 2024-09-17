@@ -1,9 +1,9 @@
 // Habilitar Buscador
-if(document.querySelector('#cliente')) {
-    const clienteInput = document.querySelector('#cliente');
-    const clientePredicciones = document.querySelector('#clientePredicciones');
-    const clietenInputId = document.querySelector('[name="cliente_id"]')
-    const campoCliente = document.querySelector('#campoCliente');
+if(document.querySelector('#customer')) {
+    const clienteInput = document.querySelector('#customer');
+    const clientePredicciones = document.querySelector('#customerPredictions');
+    const clietenInputId = document.querySelector('[name="customer_id"]')
+    const campoCliente = document.querySelector('#fieldCustomer');
 
 
     clienteInput.addEventListener('input', debounce(manejarClienteInput, 300) )
@@ -39,7 +39,7 @@ if(document.querySelector('#cliente')) {
     }
 
     async function buscarCliente(valor) {
-        const apiUrl = `/clientes/search/${valor}`;
+        const apiUrl = `/customers/search/${valor}`;
         try {
             const response = await fetch(apiUrl);
             const data = await response.json();
@@ -65,7 +65,7 @@ if(document.querySelector('#cliente')) {
         if(type == 'success') {
 
             data.forEach(dato => {
-                let cliente = `${dato.nombre} ${dato.apellido} - ${dato.n_documento}`;
+                let cliente = `${dato.name} ${dato.lastname} - ${dato.n_document}`;
 
                 const prediccionHTML = document.createElement('LI');
                 prediccionHTML.classList.add('form__prediction');

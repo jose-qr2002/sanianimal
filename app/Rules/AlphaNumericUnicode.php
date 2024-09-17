@@ -5,6 +5,9 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
+/**
+ * Regla para verificar si un valor solo contiene numeros y letras
+ */
 class AlphaNumericUnicode implements ValidationRule
 {
     /**

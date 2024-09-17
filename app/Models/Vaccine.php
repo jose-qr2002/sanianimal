@@ -16,6 +16,6 @@ class Vaccine extends Model
     ];
 
     public function historys(){
-        return $this->belongsToMany(HistoriaClinica::class, 'applied_vaccines', 'vaccine_id','historias_clinica_id');
+        return $this->belongsToMany(ClinicalHistory::class, 'applied_vaccines', 'vaccine_id','clinical_history_id');
     }
 }

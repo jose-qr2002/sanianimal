@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class VaccineController extends Controller
 {
+    /**
+     * Muestra todo los registros de vacunas en formato json
+     */
     public function index() {
         $vaccines = Vaccine::select('id','vaccine')->get();
         return response()->json($vaccines);

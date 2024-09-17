@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            ClientesSeeder::class,
-            EspecieSeeder::class,
-            MascotaSeeder::class,
-            MedicamentoSeeder::class,
-            HistoriaClinicaSeeder::class,
+            CustomerSeeder::class,
+            SpecieSeeder::class,
+            PetSeeder::class,
+            MedicationSeeder::class,
+            ClinicHistorySeeder::class,
             VaccineSeeder::class,
             AppliedVaccineSeeder::class,
         ]);

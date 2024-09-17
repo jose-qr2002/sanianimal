@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\HistoriaClinicaController;
-use App\Http\Controllers\MascotaController;
-use App\Http\Controllers\MedicamentoController;
+use App\Http\Controllers\ClinicalHistoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MedicationController;
+use App\Http\Controllers\PetController;
 use App\Http\Controllers\VaccineController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,37 +16,37 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     // Clientes
-    Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
-    Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
-    Route::post('/clientes/store', [ClienteController::class, 'store'])->name('clientes.store');
-    Route::get('/clientes/edit/{cliente}', [ClienteController::class, 'edit'])->name('clientes.edit');
-    Route::put('/clientes/update/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
-    Route::delete('/clientes/delete/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/customers/store', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/customers/edit/{customer}', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::put('/customers/update/{customer}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/customers/delete/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 
-    Route::get('/clientes/search/{valor}', [ClienteController::class, 'search'])->name('clientes.search');
+    Route::get('/customers/search/{value}', [CustomerController::class, 'search'])->name('customers.search');
 
     //Medicamentos
-    Route::get('/medicamentos', [MedicamentoController::class, 'index'])->name('medicamentos.index');
-    Route::get('/medicamentos/create', [MedicamentoController::class, 'create'])->name('medicamentos.create');
-    Route::post('/medicamentos/store', [MedicamentoController::class, 'store'])->name('medicamentos.store');
-    Route::get('/medicamentos/edit/{medicamento}', [MedicamentoController::class, 'edit'])->name('medicamentos.edit');
-    Route::put('/medicamentos/update/{medicamento}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
-    Route::delete('/medicamentos/delete/{medicamento}', [MedicamentoController::class, 'destroy'])->name('medicamentos.destroy');
+    Route::get('/medications', [MedicationController::class, 'index'])->name('medications.index');
+    Route::get('/medications/create', [MedicationController::class, 'create'])->name('medications.create');
+    Route::post('/medications/store', [MedicationController::class, 'store'])->name('medications.store');
+    Route::get('/medications/edit/{medication}', [MedicationController::class, 'edit'])->name('medications.edit');
+    Route::put('/medications/update/{medication}', [MedicationController::class, 'update'])->name('medications.update');
+    Route::delete('/medications/delete/{medication}', [MedicationController::class, 'destroy'])->name('medications.destroy');
 
     // Mascotas
-    Route::get('/mascotas', [MascotaController::class, 'index'])->name('mascotas.index');
-    Route::get('/mascota/{mascota}', [MascotaController::class, 'show'])->name('mascotas.show');
-    Route::get('/mascotas/create', [MascotaController::class, 'create'])->name('mascotas.create');
-    Route::post('/mascotas/store', [MascotaController::class, 'store'])->name('mascotas.store');
-    Route::get('/mascotas/edit/{mascota}', [MascotaController::class, 'edit'])->name('mascotas.edit');
-    Route::put('/mascotas/update/{mascota}', [MascotaController::class, 'update'])->name('mascotas.update');
-    Route::delete('/mascotas/delete/{mascota}', [MascotaController::class, 'destroy'])->name('mascotas.destroy');
+    Route::get('/pets', [PetController::class, 'index'])->name('pets.index');
+    Route::get('/mascota/{pet}', [PetController::class, 'show'])->name('pets.show');
+    Route::get('/pets/create', [PetController::class, 'create'])->name('pets.create');
+    Route::post('/pets/store', [PetController::class, 'store'])->name('pets.store');
+    Route::get('/pets/edit/{pet}', [PetController::class, 'edit'])->name('pets.edit');
+    Route::put('/pets/update/{pet}', [PetController::class, 'update'])->name('pets.update');
+    Route::delete('/pets/delete/{pet}', [PetController::class, 'destroy'])->name('pets.destroy');
 
     // Historias Clinicas
-    Route::get('/historias', [HistoriaClinicaController::class, 'index'])->name('historias.index');
-    Route::get('/historias/atencion', [HistoriaClinicaController::class, 'atenderCliente'])->name('historias.atenderCliente');
-    Route::get('/historias/create/{cliente}', [HistoriaClinicaController::class, 'create'])->name('historias.create');
-    Route::post('/historias/store', [HistoriaClinicaController::class, 'store'])->name('historias.store');
+    Route::get('/histories', [ClinicalHistoryController::class, 'index'])->name('histories.index');
+    Route::get('/histories/atencion', [ClinicalHistoryController::class, 'serveCustomer'])->name('histories.serveCustomer');
+    Route::get('/histories/create/{customer}', [ClinicalHistoryController::class, 'create'])->name('histories.create');
+    Route::post('/histories/store', [ClinicalHistoryController::class, 'store'])->name('histories.store');
 
     // Vaccines
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');

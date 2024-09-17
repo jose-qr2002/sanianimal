@@ -16,11 +16,11 @@
         </header>
         <ul class="sidebar-container__list">
             <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('dashboard') ? 'active' : '' }}" href=""><i class="ri-layout-5-fill"></i> Dashboard</a></li>
-            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('clientes.index') ? 'active' : '' }}" href="{{ route('clientes.index') }}"><i class="ri-user-fill"></i> Clientes</a></li>
-            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('mascotas.index') ? 'active' : '' }}" href="{{ route('mascotas.index') }}"><i class="ri-stethoscope-fill"></i> Mascotas</a></li>
-            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('historias.index') ? 'active' : '' }}" href="{{ route('historias.index') }}"><i class="ri-clipboard-fill"></i> H. Clinico</a></li>
-            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('medicamentos.index') ? 'active' : '' }}" href="{{ route('medicamentos.index') }}"><i class="ri-medicine-bottle-fill"></i> Medicamentos</a></li>
-            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('servicios.index') ? 'active' : '' }}" href=""><i class="ri-scissors-2-fill"></i> Estetica</a></li>
+            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('customers.index') ? 'active' : '' }}" href="{{ route('customers.index') }}"><i class="ri-user-fill"></i> Clientes</a></li>
+            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('pets.index') ? 'active' : '' }}" href="{{ route('pets.index') }}"><i class="ri-stethoscope-fill"></i> Mascotas</a></li>
+            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('histories.index') ? 'active' : '' }}" href="{{ route('histories.index') }}"><i class="ri-clipboard-fill"></i> H. Clinico</a></li>
+            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('medications.index') ? 'active' : '' }}" href="{{ route('medications.index') }}"><i class="ri-medicine-bottle-fill"></i> Medicamentos</a></li>
+            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('services.index') ? 'active' : '' }}" href=""><i class="ri-scissors-2-fill"></i> Estetica</a></li>
             <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('ventas.index') ? 'active' : '' }}" href=""><i class="ri-money-dollar-circle-fill"></i> Ventas</a></li>
             <li class="sidebar-container__list__item">
                 <form action="{{ route('logout') }}" method="POST">

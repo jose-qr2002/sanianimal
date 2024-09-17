@@ -17,8 +17,15 @@ return new class extends Migration
             $table->time('time')->nullable();
             $table->text('observation')->nullable();
             $table->foreignId('vaccine_id')->constrained()->onDelete('NO ACTION');
-            $table->foreignId('historias_clinica_id')->constrained()->onDelete('NO ACTION');
+
+            $table->unsignedBigInteger('clinical_history_id')->nullable();
+
             $table->timestamps();
+
+            $table->foreign('clinical_history_id')
+                ->references('id')
+                ->on('clinical_histories')
+                ->onDelete('NO ACTION');
         });
     }
 

@@ -21,7 +21,7 @@ class LoginController extends Controller
             return back()->with('mensaje', 'Credenciales Incorrectas')->withInput();
         }
 
-        return redirect()->intended(route('clientes.index'));
+        return redirect()->intended(route('customers.index'));
     }
 
     public function logout() {

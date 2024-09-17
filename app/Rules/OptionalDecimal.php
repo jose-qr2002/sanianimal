@@ -5,6 +5,10 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
+/**
+ * Regla para verificar si el numero tiene un formato decimal correcto
+ * Si el numero no es decimal no salta error en la validacion
+ */
 class OptionalDecimal implements ValidationRule
 {
     /**
