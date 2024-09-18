@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             PetSeeder::class,
             MedicationSeeder::class,
             ClinicHistorySeeder::class,
+            VisitSeeder::class,
             VaccineSeeder::class,
             AppliedVaccineSeeder::class,
         ]);

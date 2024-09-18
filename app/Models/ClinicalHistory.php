@@ -13,24 +13,9 @@ class ClinicalHistory extends Model
 
     protected$fillable = [
         'number',
-        'reason',
-        'mucous',
-        'anamnesis',
-        'diagnosis',
-        'treatment',
-        'weight',
-        'price',
-        'date',
         'pet_id',
         'user_id',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'date' => 'date',
-        ];
-    }
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -40,7 +25,8 @@ class ClinicalHistory extends Model
         return $this->belongsTo(Pet::class);
     }
 
-    public function vaccines(){
-        return $this->belongsToMany(Vaccine::class, 'applied_vaccines', 'historias_clinica_id', 'vaccine_id');
+    public function visits() {
+        return $this->hasMany(Visit::class);
     }
+    
 }

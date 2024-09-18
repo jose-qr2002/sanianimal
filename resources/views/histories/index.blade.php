@@ -3,7 +3,7 @@
 @section('contenido')
 <h2 class="title-menu">Historias Clinicas</h2>
 <div class="table-header">
-    <a class="table-header__button" href="{{ route('histories.serveCustomer') }}">Nueva Atencion</a>
+    <a class="table-header__button" href="{{ route('histories.create') }}">Nueva Atencion</a>
     <div class="table-search">
         <input type="search" placeholder="Buscar">
         <i class="ri-search-line" id="search"></i>
@@ -16,7 +16,6 @@
                 <th>Nro</th>
                 <th>Dueño</th>
                 <th>Mascota</th>
-                <th>Fecha</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -26,7 +25,6 @@
                     <td>{{$history->number}}</td>
                     <td>{{$history->pet->customer->name}}</td>
                     <td>{{$history->pet->name}}</td>
-                    <td>{{$history->date->locale('es')->isoFormat('D MMMM YYYY')}}</td>
                     <td>
 
                     </td>

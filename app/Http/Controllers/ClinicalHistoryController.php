@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ClinicalHistory\StoreHistoryRequest;
 use App\Models\ClinicalHistory;
-use App\Models\Customer;
+use App\Models\Pet;
 use Illuminate\Http\Request;
 
 class ClinicalHistoryController extends Controller
@@ -21,43 +20,23 @@ class ClinicalHistoryController extends Controller
      * Funcion para buscar clientes en la parte de creacion de historiales clinicos
      * @param Request $request Contiene el dni que se pasa en el formulario
      */
-    public function serveCustomer(Request $request) {
-        if ($request->n_document) {
-            $customer = Customer::where('n_document', $request->n_document)->with('pets')->first();
-            if(!$customer) {
-                $customer = [];
+    public function create(Request $request) {
+        if ($request->searchParameter) {
+            $pet = Pet::where('name', $request->searchParameter)->first();
+            if(!$pet) {
+                $pet = [];
             }
             
-            return view('histories.serveCustomer', compact('customer'));
+            return view('histories.create', compact('pet'));
         }
         
-
-        return view('histories.serveCustomer');
+        return view('histories.create');
     }
 
-    /**
-     * Se encargar de mostrar un formulario para registrar una historia clinica
-     * @param Customer $customer Contiene todos los datos del cliente
-     * @param Request $request Contiene los valores que se pasan del formulario
-     */
-    public function create(Customer $customer, Request $request) {
-        $lastNumber = ClinicalHistory::max('number') + 1;
-        return view('histories.create', compact('customer', 'lastNumber'));
-    }
-
-    /**
-     * Se encarga de procesar los datos para crear un historial clinico
-     * @param StoreHistoryRequest $request Contiene todos los datos enviados y los valida automaticamente
-     */
-    public function store(StoreHistoryRequest $request) {
-        $validData = $request->validated();
-        try {
-            $validData['user_id'] = $request->user()->id;
-            ClinicalHistory::create($validData);
-            return redirect()->route('histories.index')->with('msn_success', 'La historia clinica ha sido guardada N° '.$validData['number']);
-        } catch (\Exception $e) {
-            return redirect()->route('histories.index')->with('msn_error', 'Ocurrió un problema al guardar la historia');
+    public function store(Pet $pet) {
+        if(!$pet->historie()->exists()) {
+            $lastNumber = ClinicalHistory::max('number');
         }
-
+        return redirect()->route('visits.create', $pet->historie->id);
     }
 }

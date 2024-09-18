@@ -14,14 +14,6 @@ return new class extends Migration
         Schema::create('clinical_histories', function (Blueprint $table) {
             $table->id();
             $table->integer('number')->unique();
-            $table->text('reason')->nullable();
-            $table->text('mucous')->nullable();
-            $table->text('anamnesis')->nullable();
-            $table->text('diagnosis')->nullable();
-            $table->text('treatment')->nullable();
-            $table->float('weight', 4, 2)->nullable();
-            $table->decimal('price', 10,2)->nullable();
-            $table->date('date');
             $table->foreignId('pet_id')->constrained()->onDelete('NO ACTION');
             $table->foreignId('user_id')->constrained()->onDelete('NO ACTION');
             $table->timestamps();

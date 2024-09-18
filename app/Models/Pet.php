@@ -37,4 +37,8 @@ class Pet extends Model
     {
         return $this->belongsTo(Specie::class);
     }
+
+    public function historie() {
+        return $this->hasOne(ClinicalHistory::class);
+    }
 }

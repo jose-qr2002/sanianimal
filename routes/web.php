@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\VaccineController;
+use App\Http\Controllers\VisitController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -42,11 +43,16 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/pets/update/{pet}', [PetController::class, 'update'])->name('pets.update');
     Route::delete('/pets/delete/{pet}', [PetController::class, 'destroy'])->name('pets.destroy');
 
-    // Historias Clinicas
+    /**
+     * Rutas para historias clinicas
+     */
     Route::get('/histories', [ClinicalHistoryController::class, 'index'])->name('histories.index');
-    Route::get('/histories/atencion', [ClinicalHistoryController::class, 'serveCustomer'])->name('histories.serveCustomer');
-    Route::get('/histories/create/{customer}', [ClinicalHistoryController::class, 'create'])->name('histories.create');
-    Route::post('/histories/store', [ClinicalHistoryController::class, 'store'])->name('histories.store');
+    Route::get('/histories/serve', [ClinicalHistoryController::class, 'create'])->name('histories.create');
+    Route::post('/histories/store/{pet}', [ClinicalHistoryController::class, 'store'])->name('histories.store');
+
+    /** */
+    Route::get('/visits/{history}', [VisitController::class, 'create'])->name('visits.create');
+    Route::post('/visits/store', [VisitController::class, 'store'])->name('visits.store');
 
     // Vaccines
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
