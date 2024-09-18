@@ -39,6 +39,7 @@
 
         <fieldset class="form__fieldset">
             <legend class="form__legend">Detalles de la Consulta</legend>
+            <input type="hidden" name="clinical_history_id" value="{{ old('clinical_history_id', $history->id) }}">
             <div class="form__group-3">
                 <div class="form__input-group">
                     <label class="form__label" for="number">Número:</label>
