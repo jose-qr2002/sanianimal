@@ -52,4 +52,30 @@
     {{ $pets->links() }}
 </div>
 
+
+@push('scripts')
+    <script>
+        function confirmaEliminarMascota(event){
+            event.preventDefault();
+            let form=event.target;
+
+            Swal.fire({
+                //title: "?",
+                text: "¿Estás seguro de que deseas eliminar esta mascota?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si",
+                cancelButtonText: "No"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
+@endpush
+
 @endsection
+

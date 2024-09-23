@@ -64,27 +64,5 @@
             });
         </script>
     @endsession
-    <script>
-        function confirmaEliminarCliente(event){
-            event.preventDefault();
-            let form=event.target;
-
-            Swal.fire({
-                //title: "?",
-                text: "¿Estás seguro de que deseas eliminar este cliente?",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Si",
-                cancelButtonText: "No"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-
-        }
-    </script>
 @endpush
 @endsection
