@@ -1,0 +1,21 @@
+@use '@/global/variables' as v;
+@use '@/global/mixins' as m;
+
+.alert-card {
+    max-width: 448px;
+    margin-inline: auto;
+    background-color: lighten( v.$yellow-color, 40% );
+    border-inline: 4px solid v.$yellow-color;
+    padding: 16px;
+    color: darken(v.$yellow-color, 20%);
+    text-align: center;
+    &__text {
+        font-weight: 600;
+    }
+
+    &__button {
+        margin-top: 10px;
+        @include m.boton(darken(v.$yellow-color, 8%), darken(white, 5%))
+    }
+    
+}
