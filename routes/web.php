@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
      * Rutas para historias clinicas
      */
     Route::get('/histories', [ClinicalHistoryController::class, 'index'])->name('histories.index');
-    Route::get('/histories/serve', [ClinicalHistoryController::class, 'create'])->name('histories.create');
+    Route::get('/histories/serve', [ClinicalHistoryController::class, 'serve'])->name('histories.serve');
     Route::post('/histories/store/{pet}', [ClinicalHistoryController::class, 'store'])->name('histories.store');
 
     /** */

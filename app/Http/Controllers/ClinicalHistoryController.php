@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ClinicalHistory;
 use App\Models\Pet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClinicalHistoryController extends Controller
 {
@@ -20,17 +21,27 @@ class ClinicalHistoryController extends Controller
      * Funcion para buscar clientes en la parte de creacion de historiales clinicos
      * @param Request $request Contiene el dni que se pasa en el formulario
      */
-    public function create(Request $request) {
+    public function serve(Request $request) {
+        DB::enableQueryLog();
         if ($request->searchParameter) {
-            $pet = Pet::where('name', $request->searchParameter)->first();
-            if(!$pet) {
-                $pet = [];
-            }
+            $searchParameter = $request->searchParameter;
+            // BUILD QUERY PARA OBTENER LAS MASCOTAS CON SU CLIENTES Y SU HISTORIA
+            $pets = Pet::with(['customer:id,name,lastname', 'historie:id,pet_id,number', 'specie:id,specie'])
+                ->where('name', 'like', "%$searchParameter%")
+                ->orWhereHas('customer', function ($query) use ($searchParameter) {
+                    $query->where('name', 'like', "%$searchParameter%") 
+                        ->orWhere('lastname', 'like', "%$searchParameter%"); 
+                })
+                ->get(['id', 'name', 'sex','customer_id','specie_id']);
+
             
-            return view('histories.create', compact('pet'));
+            if(!$pets) {
+                $pets = [];
+            }
+            return view('histories.serve', compact('pets'));
         }
         
-        return view('histories.create');
+        return view('histories.serve');
     }
 
     public function store(Pet $pet) {

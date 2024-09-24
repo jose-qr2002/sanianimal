@@ -1,6 +1,17 @@
 @use '../global/variables' as v;
 @use '../global/mixins' as m;
 
+.found-pets {
+    @include m.minmobile {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);        
+    }
+    @include m.mintablet {
+        grid-template-columns: repeat(4, 1fr);        
+    }
+}
+
 .atencion  {
     padding: 8px;
 
