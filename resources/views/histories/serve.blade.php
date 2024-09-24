@@ -33,7 +33,7 @@
                         <p class="pet-card__history">{{ $pet->historie?->number ?? 'SIN HISTORIA'}}</p>
                         <p class="pet-card__owner">{{ $pet->customer->name}} {{ $pet->customer->lastname}} <span>91716696</span></p>
                         <div class="pet-card__buttons">
-                            <a href="" class="pet-card__button--yellow">INFORMACION</a>
+                            <a href="{{ route('pets.show', $pet) }}" target="_blank" class="pet-card__button--yellow">INFORMACION</a>
                             <a class="pet-card__button">CREAR HISTORIA</a>
                         </div>
                     </div>
