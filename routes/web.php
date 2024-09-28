@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
 
      //Proveedores
-     Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
+    Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
+    Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
+
 
 });
