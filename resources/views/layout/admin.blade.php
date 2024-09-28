@@ -22,7 +22,7 @@
             <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('medications.index') ? 'active' : '' }}" href="{{ route('medications.index') }}"><i class="ri-medicine-bottle-fill"></i> Medicamentos</a></li>
             <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('services.index') ? 'active' : '' }}" href=""><i class="ri-scissors-2-fill"></i> Servicios</a></li>
             <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('sales.index') ? 'active' : '' }}" href=""><i class="ri-money-dollar-circle-fill"></i> Ventas</a></li>
-            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('suppliers.index') ? 'active' : '' }}" href=""><i class="ri-truck-fill"></i></i> Proveedores</a></li>
+            <li class="sidebar-container__list__item"><a class="sidebar-container__enlace {{ request()->routeIs('suppliers.index') ? 'active' : '' }}" href="{{ route('suppliers.index') }}"><i class="ri-truck-fill"></i></i> Proveedores</a></li>
             <li class="sidebar-container__list__item">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
