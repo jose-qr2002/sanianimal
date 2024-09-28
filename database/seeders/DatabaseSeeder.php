@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             VisitSeeder::class,
             VaccineSeeder::class,
             AppliedVaccineSeeder::class,
+            SupplierSeeder::class,
+
         ]);
 
     }
