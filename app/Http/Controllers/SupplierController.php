@@ -12,4 +12,9 @@ class SupplierController extends Controller
         $suppliers = Supplier::paginate(10);
         return view('suppliers.index', compact('suppliers'));
     }
+
+    public function create()
+    {
+        return view('suppliers.create');
+    }
 }
