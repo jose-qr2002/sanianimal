@@ -7,6 +7,7 @@ use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\VisitController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -56,5 +57,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Vaccines
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
+
+     //Proveedores
+     Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
 
 });
