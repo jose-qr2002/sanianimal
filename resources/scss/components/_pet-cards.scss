@@ -1,0 +1,69 @@
+@use '@/global/variables' as v;
+@use '@/global/mixins' as m;
+
+.pet-card {
+    position: relative;
+    background-color: darken(v.$white-color, 2%);
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px double v.$primary-color;
+    overflow: hidden;
+    
+    &__back {
+        position: absolute;
+        content: '';
+        background-color: v.$primary-color;
+        z-index: 1;
+        width: 100%;
+        height: 20%;
+        top: 0;
+        left: 0;
+    }
+
+    &__img {
+        width: max(50%, 60px);
+        border-radius: 50%;
+        border: 1px solid;
+        margin-inline: auto;
+        position: relative;
+        z-index: 10;
+    }
+
+    &__name {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    &__sex {
+        font-size: 14px;
+        color: lighten(black, 40%);
+    }
+
+    &__history {
+        font-size: 20px;
+        color: v.$primary-color;
+        letter-spacing: 2px;
+        font-weight: bold;
+    }
+    
+    &__owner {
+        font-size: 20px;
+
+        span {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    }
+    
+    &__buttons {
+        margin-top: 10px;
+    }
+
+    &__button {
+        @include m.boton(v.$primary-color, v.$white-color)
+    }
+
+    &__button--yellow {
+        @include m.boton(v.$yellow-color, v.$white-color)
+    }
+}
