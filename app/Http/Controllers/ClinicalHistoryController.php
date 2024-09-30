@@ -46,6 +46,10 @@ class ClinicalHistoryController extends Controller
     }
 
     public function create(Pet $pet) {
+        if($pet->historie) {
+            return redirect()->route('histories.index')->with('msn_warning', 'No se puede crear una historia clinica repetida');
+        }
+
         $lastNumber = ClinicalHistory::max('number') + 1;
         $pet->load(['customer:id,name,lastname','specie:id,specie']);
         return view('histories.create', compact('pet', 'lastNumber'));
