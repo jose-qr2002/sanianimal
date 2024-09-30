@@ -49,7 +49,8 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('/histories', [ClinicalHistoryController::class, 'index'])->name('histories.index');
     Route::get('/histories/serve', [ClinicalHistoryController::class, 'serve'])->name('histories.serve');
-    Route::post('/histories/store/{pet}', [ClinicalHistoryController::class, 'store'])->name('histories.store');
+    Route::get('/histories/create/{pet}', [ClinicalHistoryController::class, 'create'])->name('histories.create');
+    Route::post('/histories/store', [ClinicalHistoryController::class, 'store'])->name('histories.store');
 
     /** */
     Route::get('/visits/{history}', [VisitController::class, 'create'])->name('visits.create');

@@ -34,7 +34,7 @@
                         <p class="pet-card__owner">{{ $pet->customer->name}} {{ $pet->customer->lastname}} <span>91716696</span></p>
                         <div class="pet-card__buttons">
                             <a href="{{ route('pets.show', $pet) }}" target="_blank" class="pet-card__button--yellow">INFORMACION</a>
-                            <a class="pet-card__button">CREAR HISTORIA</a>
+                            <a href="{{ route('histories.create', $pet) }}" class="pet-card__button">CREAR HISTORIA</a>
                         </div>
                     </div>
                 @endforeach

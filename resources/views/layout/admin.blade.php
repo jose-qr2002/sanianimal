@@ -64,5 +64,15 @@
             });
         </script>
     @endsession
+    @session('msn_warning')
+        <script>
+            let mensaje="{{ $value }}";
+
+            Swal.fire({
+                icon:"warning",
+                html: `<span style="font-size: 16px;">${mensaje}</span>`,
+            });
+        </script>
+    @endsession
 @endpush
 @endsection
