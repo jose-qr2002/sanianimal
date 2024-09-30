@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('contenido')
-<x-card title="Registrar Medicamento" class="mt-8 mb-8 max-w-screen-md m-auto">
+<x-card title="Registrar Proveedor" class="mt-8 mb-8 max-w-screen-md m-auto">
     <form class="form" action="{{ route('suppliers.store') }}" method="POST" novalidate>
         @csrf
         <div class="form__group">
