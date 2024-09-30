@@ -29,8 +29,13 @@ class SupplierController extends Controller
 
         Supplier::create($request->all());
 
-        return redirect()->route('suppliers.index')->with('success', 'Proveedor registrado correctamente.');
+        return redirect()->route('suppliers.index')->with('msn_success', 'Proveedor registrado correctamente.');
     }
+    public function edit(Supplier $supplier)
+    {
+        return view('suppliers.edit', compact('supplier'));
+    }
+
     public function update(Request $request, Supplier $supplier)
     {
         $request->validate([
@@ -42,7 +47,14 @@ class SupplierController extends Controller
 
         $supplier->update($request->all());
 
-        return redirect()->route('suppliers.index')->with('success', 'Proveedor actualizado correctamente.');
+        return redirect()->route('suppliers.index')->with('msn_success', 'Proveedor actualizado correctamente.');
+    }
+
+    public function destroy(Supplier $supplier)
+    {
+        $supplier->delete();
+
+        return redirect()->route('suppliers.index')->with('msn_success', 'Proveedor eliminado correctamente.');
     }
 
 }

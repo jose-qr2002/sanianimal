@@ -26,12 +26,12 @@
                     <td>{{ $supplier->ruc }}</td>
                     <td>{{ $supplier->name }}</td>
                     <td>{{ $supplier->phone }}</td>
-                    <td>S/{{ $supplier->address }}</td>
+                    <td>{{ $supplier->address }}</td>
                     <td>
-                        <a href="{{-- route('suppliers.edit', $supplier) --}}">
+                        <a href="{{ route('suppliers.edit', $supplier) }}">
                             <i class="ri-file-edit-line edit-icon icons"></i>
                         </a>
-                        <form onsubmit="confirmaEliminarMedicamento(event)" action="{{-- route('suppliers.destroy', $supplier) --}}" method="POST">
+                        <form onsubmit="confirmaEliminarMedicamento(event)" action="{{ route('suppliers.destroy', $supplier) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">
