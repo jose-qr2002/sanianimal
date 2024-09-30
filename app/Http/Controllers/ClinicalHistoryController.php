@@ -44,8 +44,10 @@ class ClinicalHistoryController extends Controller
         return view('histories.serve');
     }
 
-    public function create() {
-        return "correcto";
+    public function create(Pet $pet) {
+        $lastNumber = ClinicalHistory::max('number') + 1;
+        $pet->load(['customer:id,name,lastname','specie:id,specie']);
+        return view('histories.create', compact('pet', 'lastNumber'));
     }
 
     public function store(Pet $pet) {
