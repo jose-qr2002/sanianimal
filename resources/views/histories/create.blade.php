@@ -2,19 +2,19 @@
 
 @section('contenido')
 <x-card title="Registrar Historia Clinica" class="mt-8 mb-8 max-w-screen-md m-auto">
-    <form class="form" action="" method="POST" novalidate>
+    <form class="form" action="{{ route('histories.store') }}" method="POST" novalidate>
         @csrf
         <fieldset class="form__fieldset">
             <legend class="form__legend">Historia Clinica</legend>
             <div class="form__input-group">
                 <label class="form__label" for="number">Numero:</label>
                 <input class="form__input" type="text" id="number" name="number" value="{{ old('number', $lastNumber) }}">
+                @error('number')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-            @error('number')
-                <div class="form__error">
-                    {{ $message }}
-                </div>
-            @enderror
         </fieldset>
         <fieldset class="form__fieldset">
             <legend class="form__legend">Información de la mascota</legend>

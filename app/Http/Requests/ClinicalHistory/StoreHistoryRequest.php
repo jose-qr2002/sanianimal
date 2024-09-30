@@ -24,7 +24,8 @@ class StoreHistoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'number' => ['required', 'integer', 'min:1', 'unique:clinical_histories,number'],
+            'pet_id' => ['required', 'integer', 'exists:pets,id']
         ];
     }
 }

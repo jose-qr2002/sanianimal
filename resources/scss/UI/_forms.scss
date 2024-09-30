@@ -93,7 +93,7 @@
     }
 
     &__button-submit {
-        background-color: v.$quaternary-color;
+        background-color: v.$primary-color;
         color: lighten(v.$quaternary-color, 25%);
         font-weight: 700;
         padding: 15px 20px;
@@ -105,7 +105,7 @@
         transition: 0.5s background-color;
 
         &:hover {
-            background-color: darken(v.$quaternary-color, 10%);
+            background-color: darken(v.$primary-color, 10%);
         }
     }
 

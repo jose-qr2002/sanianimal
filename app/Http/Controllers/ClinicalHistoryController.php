@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClinicalHistory\StoreHistoryRequest;
 use App\Models\ClinicalHistory;
 use App\Models\Pet;
 use Illuminate\Http\Request;
@@ -50,10 +51,14 @@ class ClinicalHistoryController extends Controller
         return view('histories.create', compact('pet', 'lastNumber'));
     }
 
-    public function store(Pet $pet) {
-        if(!$pet->historie()->exists()) {
-            $lastNumber = ClinicalHistory::max('number');
+    public function store(StoreHistoryRequest $request) {
+        $validData = $request->validated();
+        $validData['user_id'] = auth()->user()->id;
+        try {
+            $history = ClinicalHistory::create($validData);
+            return redirect()->route('visits.create', $history->id)->with('msn_success', 'La historia clinica fue creada con exito');
+        } catch (\Exception $e) {
+            return redirect()->route('histories.index')->with('msn_error', 'Ocurrio un error: La historia clinica no fue creada');
         }
-        return redirect()->route('visits.create', $pet->historie->id);
     }
 }
