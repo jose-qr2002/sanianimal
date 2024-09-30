@@ -44,6 +44,10 @@ class ClinicalHistoryController extends Controller
         return view('histories.serve');
     }
 
+    public function create() {
+        return "correcto";
+    }
+
     public function store(Pet $pet) {
         if(!$pet->historie()->exists()) {
             $lastNumber = ClinicalHistory::max('number');
