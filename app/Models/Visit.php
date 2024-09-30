@@ -10,16 +10,23 @@ class Visit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'number',
-        'reason',
-        'mucous',
+        'heart_rate',
+        'respiratory_rate',
+        'temperature',
         'anamnesis',
-        'diagnosis',
+        'symptoms',
+        'exams',
+        'differential_diagnosis',
+        'definitive_diagnosis',
         'treatment',
+        'exam_results',
+        'recommendations',
+        'recipes',
         'weight',
         'price',
         'date',
-        'clinical_history_id'
+        'time',
+        'clinical_history_id',
     ];
 
     protected function casts(): array

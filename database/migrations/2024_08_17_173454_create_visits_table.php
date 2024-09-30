@@ -13,15 +13,22 @@ return new class extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
-            $table->text('reason')->nullable();
-            $table->text('mucous')->nullable();
+            $table->smallInteger('heart_rate')->nullable();
+            $table->smallInteger('respiratory_rate')->nullable();
+            $table->decimal('temperature', 5,2);
             $table->text('anamnesis')->nullable();
-            $table->text('diagnosis')->nullable();
+            $table->text('symptoms')->nullable();
+            $table->text('exams')->nullable();
+            $table->text('differential_diagnosis')->nullable();
+            $table->text('definitive_diagnosis')->nullable();
             $table->text('treatment')->nullable();
+            $table->text('exam_results')->nullable();
+            $table->text('recommendations')->nullable();
+            $table->text('recipes')->nullable();
             $table->float('weight', 4, 2)->nullable();
-            $table->decimal('price', 10,2)->nullable();
+            $table->decimal('price', 8,2);
             $table->date('date');
+            $table->time('time');
             $table->unsignedBigInteger('clinical_history_id');
             $table->timestamps();
 
@@ -29,8 +36,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('clinical_histories')
                 ->onDelete('NO ACTION');
-
-            $table->unique(['number', 'clinical_history_id']);
         });
     }
 
