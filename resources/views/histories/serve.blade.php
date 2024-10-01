@@ -31,7 +31,7 @@
                         <h3 class="pet-card__name">{{$pet->name}}</h3>
                         <p class="pet-card__sex">{{$pet->sex}}</p>
                         <p class="pet-card__history">{{ $pet->historie?->number ?? 'SIN HISTORIA'}}</p>
-                        <p class="pet-card__owner">{{ $pet->customer->name}} {{ $pet->customer->lastname}} <span>91716696</span></p>
+                        <p class="pet-card__owner">{{ $pet->customer->name}} {{ $pet->customer->lastname}} <span>{{ $pet->customer->phone }}</span></p>
                         <div class="pet-card__buttons">
                             <a href="{{ route('pets.show', $pet) }}" target="_blank" class="pet-card__button--yellow">INFORMACION</a>
                             <a href="{{ route('histories.create', $pet) }}" class="pet-card__button">CREAR HISTORIA</a>

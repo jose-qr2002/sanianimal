@@ -14,7 +14,7 @@
                 </div>
                 <div class="form__input-group">
                     <label class="form__label" for="document">Celular:</label>
-                    <input class="form__input" type="text" id="document" value="" disabled>
+                    <input class="form__input" type="text" id="document" value="{{ $history->pet->customer->phone }}" disabled>
                 </div>
             </div>
         </fieldset>

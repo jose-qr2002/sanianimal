@@ -39,12 +39,12 @@
             <legend class="form__legend">Información del dueño</legend>
             <div class="form__group">
                 <div class="form__input-group">
-                    <label class="form__label" for="customer">Nombre:</label>
+                    <label class="form__label" for="customer">Nombres:</label>
                     <input class="form__input" type="text" id="customer" value="{{ $pet->customer->name }} {{ $pet->customer->lastname }}" disabled>
                 </div>
                 <div class="form__input-group">
                     <label class="form__label" for="phone">Celular:</label>
-                    <input class="form__input" type="text" id="phone" value="" disabled>
+                    <input class="form__input" type="text" id="phone" value="{{ $pet->customer->phone }}" disabled>
                 </div>
             </div>
         </fieldset>

@@ -17,7 +17,7 @@
                 <th>Apellido</th>
                 <th>Documento</th>
                 <th>Sexo</th>
-                <th>Email</th>
+                <th>Celular</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -26,9 +26,9 @@
                 <tr>
                     <td>{{ $customer->name }}</td>
                     <td>{{ $customer->lastname }}</td>
-                    <td>{{ $customer->n_document }}</td>
+                    <td>{{ $customer->n_document ?? 'Sin documento'}}</td>
                     <td>{{ $customer->sex }}</td>
-                    <td>{{ $customer->email }}</td>
+                    <td>{{ $customer->phone }}</td>
                     <td>
                         <a href="{{ route('customers.edit', $customer->id) }}">
                             <i class="ri-file-edit-line edit-icon icons"></i>

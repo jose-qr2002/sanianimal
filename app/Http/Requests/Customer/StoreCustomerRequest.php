@@ -27,6 +27,7 @@ class StoreCustomerRequest extends FormRequest
             'n_document' => 'required|integer',
             'sex' => 'required|in:F,M',
             'email' => 'nullable|email',
+            'phone' => 'required|digits:9|starts_with:9',
             'address' => 'nullable',
             'birthdate' => 'nullable|date'
         ];

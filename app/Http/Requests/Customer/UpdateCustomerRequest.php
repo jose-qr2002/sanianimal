@@ -27,6 +27,7 @@ class UpdateCustomerRequest extends FormRequest
             'n_document' => ['required','integer'],
             'sex' => ['required','in:M,F'],
             'email' => ['required','email'],
+            'phone' => ['required','digits:9','starts_with:9'],
             'address' => ['required'],
             'birthdate' => ['required','date'],
         ];

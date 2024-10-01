@@ -24,11 +24,20 @@
                 @enderror
             </div>
         </div>
-        <div class="form__group">
+        <div class="form__group-3">
             <div class="form__input-group">
                 <label class="form__label" for="n_document">Número de documento:</label>
                 <input class="form__input @error('n_document') form__input-error @enderror" type="text" id="n_document" name="n_document" required>
                 @error('n_document')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form__input-group">
+                <label class="form__label" for="phone">Celular:</label>
+                <input class="form__input @error('phone') form__input-error @enderror" type="text" id="phone" name="phone" required>
+                @error('phone')
                     <div class="form__error">
                         {{ $message }}
                     </div>
