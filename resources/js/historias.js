@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
         async function preLoad() {
             vaccinesDatabase = await getVaccines();
             vaccines = dataVaccines.value !== "" ? JSON.parse(dataVaccines.value) : [];
+            console.log(dataVaccines);
+            
             const vaccinesErrors = vaccinesErrorsElement.value !== "" ? JSON.parse(vaccinesErrorsElement.value) : [];
             
             vaccines = vaccines.map((vaccine, index) => {
@@ -44,9 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async function handleAddVaccine() {
             const vaccine = {
-                id: 0,
-                vaccine: '',
-                detail: '',
+                vaccine_id: 0,
+                observation: '',
             }
     
             if(vaccinesDatabase.length === 0) {
@@ -75,31 +76,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputGroupName = document.createElement('DIV');
             inputGroupName.classList.add('form__input-group');
             
-            const inputGroupDetail = inputGroupName.cloneNode(true);
+            const inputGroupObservation = inputGroupName.cloneNode(true);
             
             const labelNameVaccine = createLabel('Vacuna: ', `vaccine-${countVaccines}`);
             const inputNameVaccine = createInput('select', `vaccine-${countVaccines}`, vaccinesDatabase, vaccine, countVaccines);
             
             inputGroupName.appendChild(labelNameVaccine);
             inputGroupName.appendChild(inputNameVaccine);
-            if(vaccine?.errors?.id !== undefined) {
-                const errorElementId = createElementError(vaccine.errors.id);
+            if(vaccine?.errors?.vaccine_id !== undefined) {
+                const errorElementId = createElementError(vaccine.errors.vaccine_id);
                 inputGroupName.appendChild(errorElementId)
             }
 
-            const labelDetailVaccine = createLabel('Detalles: ', `vaccine-${countVaccines}-detail`)
-            const textareaDetailVaccine = createInput('textarea', `vaccine-${countVaccines}-detail`, vaccinesDatabase, vaccine, countVaccines)
+            const labelObservationVaccine = createLabel('Observación: ', `vaccine-${countVaccines}-observation`)
+            const textareaObservationVaccine = createInput('textarea', `vaccine-${countVaccines}-observation`, vaccinesDatabase, vaccine, countVaccines)
             
-            inputGroupDetail.appendChild(labelDetailVaccine);
-            inputGroupDetail.appendChild(textareaDetailVaccine);
+            inputGroupObservation.appendChild(labelObservationVaccine);
+            inputGroupObservation.appendChild(textareaObservationVaccine);
 
-            if(vaccine?.errors?.detail !== undefined) {
-                const errorElementDetail = createElementError(vaccine.errors.detail);
-                inputGroupDetail.appendChild(errorElementDetail)
+            if(vaccine?.errors?.observation !== undefined) {
+                const errorElementObservation = createElementError(vaccine.errors.observation);
+                inputGroupObservation.appendChild(errorElementObservation)
             }
     
             liElement.appendChild(inputGroupName);
-            liElement.appendChild(inputGroupDetail);
+            liElement.appendChild(inputGroupObservation);
             liElement.appendChild(buttonRemove);
             
             return liElement;
@@ -128,21 +129,21 @@ document.addEventListener('DOMContentLoaded', () => {
             return label;
         }
     
-        function createInput(type, attribute, list = [], object = {id: '', detail: ''}, order) {
+        function createInput(type, attribute, list = [], object = {vaccine_id: '', observation: ''}, order) {
             // Sacando el id actual por si tiene uno
-            const currentId = object.id ? parseInt(object.id) : 0;
-            const currentDetail = object.detail ? object.detail : '';
+            const currentId = object.vaccine_id ? parseInt(object.vaccine_id) : 0;
+            const currentObservation = object.observation ? object.observation : '';
             
-            console.log('detalla ' + currentDetail);
+            console.log('detalla ' + currentObservation);
             
     
             if(type === 'textarea') {
                 const textarea = document.createElement('TEXTAREA');
                 textarea.id = attribute;
                 textarea.classList.add('form__input');
-                textarea.textContent = currentDetail;
-                textarea.name = `vaccines[${order-1}][detail]`;
-                textarea.addEventListener('input', writeDetail);
+                textarea.textContent = currentObservation;
+                textarea.name = `vaccines[${order-1}][observation]`;
+                textarea.addEventListener('input', writeObservation);
                 return textarea;
             }
     
@@ -150,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const select = document.createElement('SELECT');
                 select.id = attribute;
                 select.classList.add('form__input');
-                select.name = `vaccines[${order-1}][id]`;
+                select.name = `vaccines[${order-1}][vaccine_id]`;
     
                 const option = document.createElement('OPTION');
                 option.textContent = 'SELECCIONES UNA VACUNA';
@@ -215,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if((index + 1) === orderNumber) {
                     
-                    vaccine.id = idVaccine;
+                    vaccine.vaccine_id = idVaccine;
                 }
                 return vaccine;
             })
@@ -223,8 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
         }
     
-        function writeDetail(e) {
-            const detail = e.target.value
+        function writeObservation(e) {
+            const observation = e.target.value
             const sectionVaccineParent = e.target.parentElement.parentElement;
             const orderNumber = parseInt(sectionVaccineParent.dataset.vaccine);
      
@@ -232,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if((index + 1) === orderNumber) {
                     
-                    vaccine.detail = detail;
+                    vaccine.observation = observation;
                 }
                 return vaccine;
             })

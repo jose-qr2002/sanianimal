@@ -53,8 +53,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/histories/store', [ClinicalHistoryController::class, 'store'])->name('histories.store');
 
     /** */
-    Route::get('/visits/{history}', [VisitController::class, 'create'])->name('visits.create');
-    Route::post('/visits/store', [VisitController::class, 'store'])->name('visits.store');
+    Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');
+    Route::post('/visit/store', [VisitController::class, 'store'])->name('visits.store');
 
     // Vaccines
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');

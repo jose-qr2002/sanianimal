@@ -99,9 +99,9 @@
                 </div>
             </div>
             <div class="form__input-group">
-                <label class="form__label" for="amnanesis">Anamnesis</label>
-                <textarea class="form__input @error('amnanesis') form__input-error @enderror" type="text" id="amnanesis" name="amnanesis">{{old('amnanesis')}}</textarea>
-                @error('amnanesis')
+                <label class="form__label" for="anamnesis">Anamnesis</label>
+                <textarea class="form__input @error('anamnesis') form__input-error @enderror" type="text" id="anamnesis" name="anamnesis">{{old('anamnesis')}}</textarea>
+                @error('anamnesis')
                     <div class="form__error">
                         {{ $message }}
                     </div>
@@ -183,7 +183,7 @@
         
         <fieldset class="form__fieldset">
             <legend class="form__legend">Vacunas</legend>
-            <input type="hidden" id="vaccines" name="vaccines" value="{{ old('vaccines') != null ? json_encode(old('vaccines')) : '' }}"> 
+            <input type="hidden" id="vaccines" value="{{ old('vaccines') != null ? json_encode(old('vaccines')) : '' }}"> 
             @if (old('vaccines'))
                 @php
                     $errorsMessages = $errors->getMessages();

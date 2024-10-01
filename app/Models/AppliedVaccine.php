@@ -16,6 +16,6 @@ class AppliedVaccine extends Model
         'time',
         'observation',
         'vaccine_id',
-        'clinical_history_id',
+        'visit_id',
     ];
 }
