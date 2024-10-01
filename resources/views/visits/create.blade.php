@@ -2,7 +2,7 @@
 
 
 @section('contenido')
-<x-card title="Registrar Historia" class="mt-8 mb-8 max-w-screen-md m-auto">
+<x-card title="Registrar Visita" class="mt-8 mb-8 max-w-screen-lg m-auto">
     <form class="form" id="history-form" action="{{ route('visits.store') }}" method="POST" novalidate>
         @csrf
         <fieldset class="form__fieldset">
@@ -13,8 +13,8 @@
                     <input class="form__input" type="text" id="customer"value="{{ $history->pet->customer->name . ' ' . $history->pet->customer->lastname }}" disabled>
                 </div>
                 <div class="form__input-group">
-                    <label class="form__label" for="document">Documento:</label>
-                    <input class="form__input" type="text" id="document" value="{{  $history->pet->customer->n_document }}" disabled>
+                    <label class="form__label" for="document">Celular:</label>
+                    <input class="form__input" type="text" id="document" value="" disabled>
                 </div>
             </div>
         </fieldset>
@@ -42,14 +42,34 @@
             <input type="hidden" name="clinical_history_id" value="{{ old('clinical_history_id', $history->id) }}">
             <div class="form__group-3">
                 <div class="form__input-group">
-                    <label class="form__label" for="number">Número:</label>
-                    <input class="form__input @error('number') form__input-error @enderror" type="text" id="number" name="number" value="{{ old('number',$lastNumber) }}" required>
-                    @error('number')
+                    <label class="form__label" for="heart_rate">Frecuencia Cardiaca</label>
+                    <input class="form__input @error('heart_rate') form__input-error @enderror" type="number" id="heart_rate" name="heart_rate" value="{{ old('heart_rate') }}" required min="1">
+                    @error('heart_rate')
                         <div class="form__error">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
+                <div class="form__input-group">
+                    <label class="form__label" for="respiratory_rate">Frecuencia Respiratoria</label>
+                    <input class="form__input @error('respiratory_rate') form__input-error @enderror" type="number" id="respiratory_rate" name="respiratory_rate" value="{{ old('respiratory_rate') }}" required min="1">
+                    @error('respiratory_rate')
+                        <div class="form__error">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="form__input-group">
+                    <label class="form__label" for="temperature">Temperatura (C°):</label>
+                    <input class="form__input @error('temperature') form__input-error @enderror" type="number" id="temperature" name="temperature" value="{{ old('temperature') }}" required>
+                    @error('temperature')
+                        <div class="form__error">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="form__group-3">
                 <div class="form__input-group">
                     <label class="form__label" for="price">Precio:</label>
                     <input class="form__input @error('price') form__input-error @enderror" type="text" id="price" name="price" value="{{ old('price') }}" required>
@@ -68,24 +88,15 @@
                         </div>
                     @enderror
                 </div>
-            </div>
-            <div class="form__input-group">
-                <label class="form__label" for="reason">Motivo</label>
-                <textarea class="form__input @error('reason') form__input-error @enderror" type="text" id="reason" name="reason">{{old('reason')}}</textarea>
-                @error('reason')
-                    <div class="form__error">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="form__input-group">
-                <label class="form__label" for="mucous">Mucosas</label>
-                <textarea class="form__input @error('mucous') form__input-error @enderror" type="text" id="mucous" name="mucous">{{old('mucous')}}</textarea>
-                @error('mucous')
-                    <div class="form__error">
-                        {{ $message }}
-                    </div>
-                @enderror
+                <div class="form__input-group">
+                    <label class="form__label" for="time">Hora:</label>
+                    <input class="form__input @error('time') form__input-error @enderror" type="time" id="time" name="time" value="{{ old('time') }}" required>
+                    @error('time')
+                        <div class="form__error">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="amnanesis">Anamnesis</label>
@@ -97,9 +108,45 @@
                 @enderror
             </div>
             <div class="form__input-group">
-                <label class="form__label" for="diagnosis">Diagnostico:</label>
-                <textarea class="form__input @error('diagnosis') form__input-error @enderror" type="text" id="diagnosis" name="diagnosis">{{old('diagnosis')}}</textarea>
-                @error('diagnosis')
+                <label class="form__label" for="symptoms">Sintomas:</label>
+                <textarea class="form__input @error('symptoms') form__input-error @enderror" id="symptoms" name="symptoms">{{old('symptoms')}}</textarea>
+                @error('symptoms')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form__input-group">
+                <label class="form__label" for="exams">Examenes:</label>
+                <textarea class="form__input @error('exams') form__input-error @enderror" id="exams" name="exams">{{old('exams')}}</textarea>
+                @error('exams')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form__input-group">
+                <label class="form__label" for="exam_results">Resultados de Exámenes:</label>
+                <textarea class="form__input @error('exam_results') form__input-error @enderror" id="exam_results" name="exam_results">{{old('exam_results')}}</textarea>
+                @error('exam_results')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form__input-group">
+                <label class="form__label" for="differential_diagnosis">Diagnostico Diferencial:</label>
+                <textarea class="form__input @error('differential_diagnosis') form__input-error @enderror" id="differential_diagnosis" name="differential_diagnosis">{{old('differential_diagnosis')}}</textarea>
+                @error('differential_diagnosis')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form__input-group">
+                <label class="form__label" for="definitive_diagnosis">Diagnostico Definitivo:</label>
+                <textarea class="form__input @error('definitive_diagnosis') form__input-error @enderror" id="definitive_diagnosis" name="definitive_diagnosis">{{old('definitive_diagnosis')}}</textarea>
+                @error('definitive_diagnosis')
                     <div class="form__error">
                         {{ $message }}
                     </div>
@@ -107,8 +154,26 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="treatment">Tratamiento:</label>
-                <textarea class="form__input @error('treatment') form__input-error @enderror" type="text" id="treatment" name="treatment">{{old('treatment')}}</textarea>
+                <textarea class="form__input @error('treatment') form__input-error @enderror" id="treatment" name="treatment">{{old('treatment')}}</textarea>
                 @error('treatment')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form__input-group">
+                <label class="form__label" for="recommendations">Recomendaciones:</label>
+                <textarea class="form__input @error('recommendations') form__input-error @enderror" id="recommendations" name="recommendations">{{old('recommendations')}}</textarea>
+                @error('recommendations')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form__input-group">
+                <label class="form__label" for="recipes">Recetas:</label>
+                <textarea class="form__input @error('recipes') form__input-error @enderror" id="recipes" name="recipes">{{old('recipes')}}</textarea>
+                @error('recipes')
                     <div class="form__error">
                         {{ $message }}
                     </div>
