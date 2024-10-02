@@ -27,7 +27,7 @@ class ClinicalHistoryController extends Controller
         if ($request->searchParameter) {
             $searchParameter = $request->searchParameter;
             // BUILD QUERY PARA OBTENER LAS MASCOTAS CON SU CLIENTES Y SU HISTORIA
-            $pets = Pet::with(['customer:id,name,lastname', 'historie:id,pet_id,number', 'specie:id,specie'])
+            $pets = Pet::with(['customer:id,name,lastname,phone', 'historie:id,pet_id,number', 'specie:id,specie'])
                 ->where('name', 'like', "%$searchParameter%")
                 ->orWhereHas('customer', function ($query) use ($searchParameter) {
                     $query->where('name', 'like', "%$searchParameter%") 
@@ -51,7 +51,7 @@ class ClinicalHistoryController extends Controller
         }
 
         $lastNumber = ClinicalHistory::max('number') + 1;
-        $pet->load(['customer:id,name,lastname','specie:id,specie']);
+        $pet->load(['customer:id,name,lastname,phone','specie:id,specie']);
         return view('histories.create', compact('pet', 'lastNumber'));
     }
 

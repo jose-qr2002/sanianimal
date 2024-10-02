@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('n_document')->unique()->nullable();
             $table->char('sex', 1);
             $table->string('email')->unique()->nullable();
+            $table->string('phone', 9);
             $table->string('address')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('image')->nullable();

@@ -17,6 +17,7 @@ class Customer extends Model
         'n_document',
         'sex',
         'email',
+        'phone',
         'address',
         'birthdate',
         'image',

@@ -24,16 +24,27 @@ class StoreVisitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'number' => ['required','integer','unique:visits,number'],
-            'reason' => ['nullable','string', new AlphaNumericUnicode],
-            'mucous' => ['nullable', 'string', new AlphaNumericUnicode],
-            'amnanesis' => ['nullable', 'string', new AlphaNumericUnicode],
-            'diagnosis' => ['nullable', 'string', new AlphaNumericUnicode],
+            'heart_rate' => ['nullable','integer','min:1'],
+            'respiratory_rate' => ['nullable','integer','min:1'],
+            'temperature' => ['nullable','numeric','between:25,50', new OptionalDecimal],
+            'anamnesis' => ['nullable', 'string', new AlphaNumericUnicode],
+            'symptoms' => ['nullable','string', new AlphaNumericUnicode],
+            'exams' => ['nullable', 'string', new AlphaNumericUnicode],
+            'differential_diagnosis' => ['nullable', 'string', new AlphaNumericUnicode],
+            'definitive_diagnosis' => ['nullable', 'string', new AlphaNumericUnicode],
             'treatment' => ['nullable', 'string', new AlphaNumericUnicode],
+            'exam_results' => ['nullable', 'string', new AlphaNumericUnicode],
+            'recommendations' => ['nullable', 'string', new AlphaNumericUnicode],
+            'recipes' => ['nullable', 'string', new AlphaNumericUnicode],
             'price' => ['nullable', 'numeric', 'min:0.01', 'max:1000', new OptionalDecimal],
             'weight' => ['nullable', 'numeric', 'min:0.01', 'max:120', new OptionalDecimal],
             'date' => ['required', 'date'],
-            'clinical_history_id' => ['required','integer','exists:clinical_histories,id']
+            'time' => ['required','date_format:H:i','after_or_equal:06:00','before_or_equal:24:00'],
+            'clinical_history_id' => ['required','integer','exists:clinical_histories,id'],
+
+            'vaccines' => ['nullable', 'array'],
+            'vaccines.*.vaccine_id' => ['required_with:vaccines','integer'],
+            'vaccines.*.observation' => ['required_with:vaccines','string', new AlphaNumericUnicode],
         ];
     }
 }

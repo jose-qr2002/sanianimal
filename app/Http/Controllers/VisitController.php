@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Visit\StoreVisitRequest;
+use App\Models\AppliedVaccine;
 use App\Models\ClinicalHistory;
 use App\Models\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class VisitController extends Controller
 {
@@ -26,11 +29,27 @@ class VisitController extends Controller
      */
     public function store(StoreVisitRequest $request) {
         $validData = $request->validated();
-
+        
+        
         try {
-            Visit::create($validData);
-            return redirect()->route('histories.index')->with('msn_success', 'La visita ha sido guardada N° '.$validData['number']);
+            DB::beginTransaction();
+            
+            $visit = Visit::create($validData);
+            
+            foreach($validData['vaccines'] ?? [] as $vaccine) {
+                $appliedVaccine = new AppliedVaccine();
+                $appliedVaccine->date = $validData['date'];
+                $appliedVaccine->time = $validData['time'];
+                $appliedVaccine->vaccine_id = $vaccine['vaccine_id'];
+                $appliedVaccine->observation = $vaccine['observation'];
+                $appliedVaccine->visit_id = $visit->id;
+                $appliedVaccine->save();
+            }
+            DB::commit();
+            return redirect()->route('histories.index')->with('msn_success', 'La visita ha sido guardada');
         } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
             return redirect()->route('histories.index')->with('msn_error', 'Ocurrió un problema al guardar la visita');
         }
 

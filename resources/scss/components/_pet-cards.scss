@@ -66,4 +66,8 @@
     &__button--yellow {
         @include m.boton(v.$yellow-color, v.$white-color)
     }
+
+    &__button--brown {
+        @include m.boton(v.$tertiary-color, v.$white-color)
+    }
 }
