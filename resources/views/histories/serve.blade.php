@@ -34,7 +34,11 @@
                         <p class="pet-card__owner">{{ $pet->customer->name}} {{ $pet->customer->lastname}} <span>{{ $pet->customer->phone }}</span></p>
                         <div class="pet-card__buttons">
                             <a href="{{ route('pets.show', $pet) }}" target="_blank" class="pet-card__button--yellow">INFORMACION</a>
-                            <a href="{{ route('histories.create', $pet) }}" class="pet-card__button">CREAR HISTORIA</a>
+                            @if (!$pet->historie)
+                                <a href="{{ route('histories.create', $pet) }}" class="pet-card__button--brown">CREAR HISTORIA</a>
+                            @else
+                                <a href="{{ route('visits.create', $pet->historie->id) }}" class="pet-card__button">CREAR VISITA</a>
+                            @endif
                         </div>
                     </div>
                 @endforeach
