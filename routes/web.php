@@ -8,6 +8,7 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -67,4 +68,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/suppliers/update/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
     Route::delete('/suppliers/delete/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
     
+    // Servicios
+    Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+    Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+    Route::post('/services/store', [ServiceController::class, 'store'])->name('services.store');
 });
