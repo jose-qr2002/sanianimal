@@ -29,7 +29,7 @@
                         <a href="{{ route('services.edit', $service) }}">
                             <i class="ri-file-edit-line edit-icon icons"></i>
                         </a>
-                        <form onsubmit="confirmaEliminarServicio(event)" action="{{-- route('services.destroy', $service) --}}" method="POST">
+                        <form onsubmit="confirmaEliminarServicio(event)" action="{{ route('services.destroy', $service) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">
@@ -54,7 +54,7 @@
 
 @push('scripts')
     <script>
-        function confirmaEliminarMedicamento(event){
+        function confirmaEliminarServicio(event){
             event.preventDefault();
             let form=event.target;
 
