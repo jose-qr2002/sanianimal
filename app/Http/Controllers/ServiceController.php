@@ -57,6 +57,11 @@ class ServiceController extends Controller
     
     public function destroy(Service $service)
     {
-
+        try {
+            $service->delete();
+            return redirect()->route('services.index')->with('msn_success', 'El servicio se elimino correctamente');
+        } catch (\Exception $e) {
+            return redirect()->route('services.index')->with('msn_error', 'El servicio no se elimino');
+        }
     }
 }

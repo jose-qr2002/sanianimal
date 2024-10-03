@@ -14,9 +14,6 @@
                     <div class="form__error">{{ $message }}</div>
                 @enderror
             </div>
-        </div>
-
-        <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="price">Precio:</label>
                 <input class="form__input @error('price') form__input-error @enderror" type="text" id="price" name="price" value="{{ old('price', $service->price) }}" required>
@@ -24,6 +21,10 @@
                     <div class="form__error">{{ $message }}</div>
                 @enderror
             </div>
+        </div>
+
+        <div class="form__group">
+            
             <div class="form__input-group">
                 <label class="form__label" for="description">Descripción:</label>
                 <input class="form__input @error('description') form__input-error @enderror" type="text" id="description" name="description" value="{{ old('description', $service->description) }}" required>
