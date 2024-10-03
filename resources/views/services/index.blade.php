@@ -26,7 +26,7 @@
                     <td>{{ $service->description }}</td>
                     <td>S/{{ $service->price }}</td>
                     <td>
-                        <a href="{{-- route('services.edit', $service) --}}">
+                        <a href="{{ route('services.edit', $service) }}">
                             <i class="ri-file-edit-line edit-icon icons"></i>
                         </a>
                         <form onsubmit="confirmaEliminarServicio(event)" action="{{-- route('services.destroy', $service) --}}" method="POST">
