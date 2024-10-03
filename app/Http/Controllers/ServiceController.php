@@ -20,7 +20,15 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'price' => 'required|numeric',
+        ]);
 
+        Service::create($request->all());
+
+        return redirect()->route('services.index')->with('msn_success', 'Servicio registrado correctamente.');
     }
 
     public function show(Service $service)
