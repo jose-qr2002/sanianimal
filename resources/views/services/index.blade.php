@@ -3,7 +3,7 @@
 @section('contenido')
 <h2 class="title-menu">Servicios</h2>
 <div class="table-header">
-    <a class="table-header__button" href="{{-- route('services.create') --}}">Registrar</a>
+    <a class="table-header__button" href="{{ route('services.create') }}">Registrar</a>
     <div class="table-search">
         <input type="search" placeholder="Buscar">
         <i class="ri-search-line" id="search"></i>
