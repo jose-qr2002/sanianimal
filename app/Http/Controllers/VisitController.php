@@ -54,4 +54,10 @@ class VisitController extends Controller
         }
 
     }
+
+    public function edit(Visit $visit) {
+        $visit->load(['history.pet.customer','vaccines']);
+        
+        return view('visits.edit', compact('visit'));
+    }
 }
