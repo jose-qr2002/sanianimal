@@ -47,4 +47,13 @@ class AppliedVaccineController extends Controller
         }
         
     }
+
+    public function destroy(Visit $visit, AppliedVaccine $appliedVaccine) {
+        try {
+            $visit->vaccines()->detach($appliedVaccine->vaccine_id);
+            return redirect()->route('visits.edit', $visit)->with('msn_success', 'La vacuna se elimino exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('visits.edit', $visit)->with('msn_error', 'Hubo un error al eliminar la vacuna');;
+        }
+    }
 }

@@ -1,0 +1,21 @@
+@use '@/global/variables' as v;
+@use '@/global/mixins' as m;
+
+
+.danger-zone {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lighten(v.$red-color, 30%);
+    padding: 10px 16px;
+    border: 1px solid v.$red-color;
+    border-radius: 4px;
+    
+    p {
+        color: red;
+    }
+    
+    .form__button--red {
+        margin: 0;
+    }
+}

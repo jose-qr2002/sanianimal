@@ -192,8 +192,6 @@
                 @endforeach
             </ul>
             <a href="{{ route('visits.create.vaccine', $visit) }}" type="button" class="form__button--add" id="button-vaccine">Agregar Vacuna</a>
-
-            
         </fieldset>
 
         <button class="form__button-submit" type="submit">Guardar Visita</button>
