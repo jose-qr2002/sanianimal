@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/histories/edit/{history}', [ClinicalHistoryController::class, 'edit'])->name('histories.edit');
     Route::put('/histories/update/{history}', [ClinicalHistoryController::class, 'update'])->name('histories.update');
     Route::get('/histories/show/{history}', [ClinicalHistoryController::class, 'show'])->name('histories.show');
+    Route::delete('/histories/delete/{history}', [ClinicalHistoryController::class, 'destroy'])->name('histories.destroy');
 
     /** VISITAS */
     Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');
