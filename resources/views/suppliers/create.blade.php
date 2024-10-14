@@ -46,6 +46,26 @@
                 @enderror
             </div>
         </div>
+        <div class="form__group">
+            <div class="form__input-group">
+                <label class="form__label" for="email">Correo:</label>
+                <input class="form__input @error('phone') form__input-error @enderror" type="text" id="email" name="email" value="{{ old('email') }}" >
+                @error('email')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form__input-group">
+                <label class="form__label" for="occupation">Ocupación:</label>
+                <input class="form__input @error('occupation') form__input-error @enderror" type="text" id="occupation" name="occupation" value="{{ old('occupation') }}" >
+                @error('occupation')
+                    <div class="form__error">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </div>
        
 
         <button class="form__button-submit" type="submit">Registrar Proveedor</button>
