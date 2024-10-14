@@ -187,7 +187,7 @@
                     <li class="form__li">
                         <p class="form__li__p--primary">{{ $vaccine->vaccine }}</p>
                         <p class="form__li__p--secondary">{{ $vaccine->pivot->observation }}</p>
-                        <button type="button" class="form__button--edit" id="button-vaccine">Modificar Vacuna</button>
+                        <a href="{{ route('visits.edit.vaccine', [$visit, $vaccine->pivot->id]) }}" class="form__button--edit" id="button-vaccine">Modificar Vacuna</a>
                     </li>
                 @endforeach
             </ul>

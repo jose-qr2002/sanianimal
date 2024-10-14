@@ -37,7 +37,7 @@ class Visit extends Model
     }
 
     public function vaccines(){
-        return $this->belongsToMany(Vaccine::class, 'applied_vaccines', 'visit_id', 'vaccine_id')->withPivot('observation', 'created_at');
+        return $this->belongsToMany(Vaccine::class, 'applied_vaccines', 'visit_id', 'vaccine_id')->withPivot('id','observation', 'created_at');
     }
 
     public function history() {

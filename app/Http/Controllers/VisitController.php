@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Visit\StoreVisitRequest;
 use App\Models\AppliedVaccine;
 use App\Models\ClinicalHistory;
+use App\Models\Vaccine;
 use App\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,7 +58,11 @@ class VisitController extends Controller
 
     public function edit(Visit $visit) {
         $visit->load(['history.pet.customer','vaccines']);
-        
         return view('visits.edit', compact('visit'));
+    }
+
+    public function editVaccine(Visit $visit, AppliedVaccine $appliedVaccine) {
+        $vaccines = Vaccine::all();
+        return view('visits.editVaccine', compact('appliedVaccine', 'vaccines'));
     }
 }

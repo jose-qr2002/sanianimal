@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');
     Route::post('/visit/store', [VisitController::class, 'store'])->name('visits.store');
     Route::get('/visit/edit/{visit}', [VisitController::class, 'edit'])->name('visits.edit');
+    Route::get('/visit/edit/{visit}/applied_vaccine/{applied_vaccine}', [VisitController::class, 'editVaccine'])->name('visits.edit.vaccine');
 
     // Vaccines
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
