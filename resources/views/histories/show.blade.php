@@ -43,6 +43,13 @@
                             <td>{{ $visit->temperature }}</td>
                             <td>
                                 <a href="{{ route('visits.edit', $visit->id) }}"><i class="ri-file-edit-line edit-icon icons"></i></a>
+                                <form onsubmit="window.confirmateDeleteVisit(event)" action="{{ route('visits.destroy', $visit->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <i class="ri-delete-bin-line delete-icon icons"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -50,4 +57,27 @@
             </table>
         </section>
     </x-card>
+    @push('scripts')
+        <script>
+            function confirmateDeleteVisit(event){
+                event.preventDefault();
+                let form=event.target;
+
+                Swal.fire({
+                    //title: "?",
+                    text: "¿Estás seguro de que deseas eliminar esta visita?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si",
+                    cancelButtonText: "No"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            }
+        </script>
+    @endpush
 @endsection

@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/visit/store', [VisitController::class, 'store'])->name('visits.store');
     Route::get('/visit/edit/{visit}', [VisitController::class, 'edit'])->name('visits.edit');
     Route::put('/visit/update/{visit}', [VisitController::class, 'update'])->name('visits.update');
+    Route::delete('/visit/destroy/{visit}', [VisitController::class, 'destroy'])->name('visits.destroy');
 
     /** APPLIED VACCINES */
     Route::get('/visit/edit/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'edit'])->name('visits.edit.vaccine');
