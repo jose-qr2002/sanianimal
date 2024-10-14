@@ -2,8 +2,9 @@
 
 @section('contenido')
 <x-card title="Editar Vacuna Aplicada" class="mt-8 mb-8 max-w-screen-md m-auto">
-    <form class="form" action="" method="POST" novalidate>
+    <form class="form" action="{{ route('visits.update.vaccine', [$visit, $appliedVaccine]) }}" method="POST" novalidate>
         @csrf
+        @method('PUT')
         <div class="form__input-group">
             <label class="form__label" for="vaccine_id">Vacuna:</label>
             <select class="form__input" name="vaccine_id" id="vaccine_id">
@@ -28,7 +29,7 @@
             @enderror
         </div>
 
-        <button class="form__button-submit" type="submit">Registrar Proveedor</button>
+        <button class="form__button-submit" type="submit">Actualizar Vacuna Aplicada</button>
     </form>
 </x-card>
 @endsection

@@ -60,9 +60,4 @@ class VisitController extends Controller
         $visit->load(['history.pet.customer','vaccines']);
         return view('visits.edit', compact('visit'));
     }
-
-    public function editVaccine(Visit $visit, AppliedVaccine $appliedVaccine) {
-        $vaccines = Vaccine::all();
-        return view('visits.editVaccine', compact('appliedVaccine', 'vaccines'));
-    }
 }

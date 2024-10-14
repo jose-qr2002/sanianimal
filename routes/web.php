@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppliedVaccineController;
 use App\Http\Controllers\ClinicalHistoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
@@ -57,8 +58,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');
     Route::post('/visit/store', [VisitController::class, 'store'])->name('visits.store');
     Route::get('/visit/edit/{visit}', [VisitController::class, 'edit'])->name('visits.edit');
-    Route::get('/visit/edit/{visit}/applied_vaccine/{applied_vaccine}', [VisitController::class, 'editVaccine'])->name('visits.edit.vaccine');
 
+    /** APPLIED VACCINES */
+    Route::get('/visit/edit/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'edit'])->name('visits.edit.vaccine');
+    Route::put('/visit/update/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'update'])->name('visits.update.vaccine');
     // Vaccines
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
 
