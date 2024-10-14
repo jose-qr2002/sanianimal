@@ -55,12 +55,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/histories/store', [ClinicalHistoryController::class, 'store'])->name('histories.store');
     Route::get('/histories/edit/{history}', [ClinicalHistoryController::class, 'edit'])->name('histories.edit');
     Route::put('/histories/update/{history}', [ClinicalHistoryController::class, 'update'])->name('histories.update');
+    Route::get('/histories/show/{history}', [ClinicalHistoryController::class, 'show'])->name('histories.show');
 
     /** VISITAS */
     Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');
     Route::post('/visit/store', [VisitController::class, 'store'])->name('visits.store');
     Route::get('/visit/edit/{visit}', [VisitController::class, 'edit'])->name('visits.edit');
     Route::put('/visit/update/{visit}', [VisitController::class, 'update'])->name('visits.update');
+    Route::delete('/visit/destroy/{visit}', [VisitController::class, 'destroy'])->name('visits.destroy');
 
     /** APPLIED VACCINES */
     Route::get('/visit/edit/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'edit'])->name('visits.edit.vaccine');

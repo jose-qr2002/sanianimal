@@ -8,6 +8,7 @@ use App\Models\AppliedVaccine;
 use App\Models\ClinicalHistory;
 use App\Models\Vaccine;
 use App\Models\Visit;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -70,6 +71,23 @@ class VisitController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->route('histories.index')->with('msn_error', 'Ocurrió un problema al actualizar la visita');
+        }
+    }
+
+    public function destroy(Visit $visit) {
+        $historyId = $visit->history->id;
+        try {
+            $visit->delete();
+            return redirect()->route('histories.show', $historyId)->with('msn_success', 'La visita se elimino exitosamente');
+        } catch (QueryException $e) {
+            if ($e->getCode() == '23000') {
+                return redirect()->route('histories.show', $historyId)->with('msn_error', 'La visita contiene vacunas aplicadas');
+            } else {
+                return redirect()->route('histories.show', $historyId)->with('msn_error', 'Hubo un error al eliminar la visita');
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->route('customers.index', $historyId)->with('msn_error', 'Hubo un error al eliminar la visita');
         }
     }
 }

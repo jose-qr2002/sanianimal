@@ -1,5 +1,7 @@
 <div class="card {{ $class }}">
-    <h2 class="card__title">{{ $title }}</h2>
+    @if ($title)
+        <h2 class="card__title">{{ $title }}</h2> 
+    @endif
     <div class="card__body">
         {{ $slot }}
     </div>
