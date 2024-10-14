@@ -86,4 +86,13 @@ class ClinicalHistoryController extends Controller
         }
     }
 
+    public function destroy(ClinicalHistory $history) {
+        try {
+            $history->delete();
+            return redirect()->route('histories.index')->with('msn_success', 'La historia clinica se elimino correctamente');
+        } catch (\Exception $e) {
+            return redirect()->route('histories.index')->with('msn_error', 'Hubo un error al eliminar la historia clinica');
+        }
+    }
+
 }
