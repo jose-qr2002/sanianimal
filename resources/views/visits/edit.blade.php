@@ -2,8 +2,9 @@
 
 @section('contenido')
 <x-card title="Editar Visita" class="mt-8 mb-8 max-w-screen-lg m-auto">
-    <form class="form" id="history-form" action="" method="POST" novalidate>
+    <form class="form" id="history-form" action="{{ route('visits.update', $visit) }}" method="POST" novalidate>
         @csrf
+        @method('PUT')
         <fieldset class="form__fieldset">
             <legend class="form__legend">Información del Dueño</legend>
             <div class="form__group">

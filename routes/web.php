@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');
     Route::post('/visit/store', [VisitController::class, 'store'])->name('visits.store');
     Route::get('/visit/edit/{visit}', [VisitController::class, 'edit'])->name('visits.edit');
+    Route::put('/visit/update/{visit}', [VisitController::class, 'update'])->name('visits.update');
 
     /** APPLIED VACCINES */
     Route::get('/visit/edit/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'edit'])->name('visits.edit.vaccine');

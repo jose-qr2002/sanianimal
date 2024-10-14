@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Visit\StoreVisitRequest;
+use App\Http\Requests\Visit\UpdateVisitRequest;
 use App\Models\AppliedVaccine;
 use App\Models\ClinicalHistory;
 use App\Models\Vaccine;
@@ -59,5 +60,16 @@ class VisitController extends Controller
     public function edit(Visit $visit) {
         $visit->load(['history.pet.customer','vaccines']);
         return view('visits.edit', compact('visit'));
+    }
+
+    public function update(UpdateVisitRequest $request ,Visit $visit) {
+        $validData = $request->validated();
+        try {
+            $visit->update($validData);
+            return redirect()->route('histories.index')->with('msn_success', 'La visita ha sido actualizada');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('histories.index')->with('msn_error', 'Ocurrió un problema al actualizar la visita');
+        }
     }
 }
