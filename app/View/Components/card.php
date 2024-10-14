@@ -11,7 +11,7 @@ class card extends Component
     public $title;
     public $class;
 
-    public function __construct($title, $class)
+    public function __construct($title = null, $class = null)
     {
         $this->title = $title;
         $this->class = $class;

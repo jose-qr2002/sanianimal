@@ -19,6 +19,10 @@ class ClinicalHistoryController extends Controller
         return view('histories.index', compact('histories'));
     }
 
+    public function show(ClinicalHistory $history) {
+        return view('histories.show', compact('history'));
+    }
+
     /**
      * Funcion para buscar clientes en la parte de creacion de historiales clinicos
      * @param Request $request Contiene el dni que se pasa en el formulario

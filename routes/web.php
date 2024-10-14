@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/histories/store', [ClinicalHistoryController::class, 'store'])->name('histories.store');
     Route::get('/histories/edit/{history}', [ClinicalHistoryController::class, 'edit'])->name('histories.edit');
     Route::put('/histories/update/{history}', [ClinicalHistoryController::class, 'update'])->name('histories.update');
+    Route::get('/histories/show/{history}', [ClinicalHistoryController::class, 'show'])->name('histories.show');
 
     /** VISITAS */
     Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');

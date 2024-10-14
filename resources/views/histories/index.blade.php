@@ -26,6 +26,7 @@
                     <td>{{$history->pet->customer->name}}</td>
                     <td>{{$history->pet->name}}</td>
                     <td>
+                        <a href="{{ route('histories.show', $history->id) }}"><i class="ri-eye-fill show-icon icons"></i></a>
                         <a href="{{ route('histories.edit', $history) }}">
                             <i class="ri-file-edit-line edit-icon icons"></i>
                         </a>
