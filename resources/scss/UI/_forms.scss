@@ -90,6 +90,22 @@
             padding: 10px 8px;
             margin-bottom: 12px;
         }
+
+        &--edit {
+            @include m.boton(v.$yellow-color, white);
+            width: auto;
+            border-radius: 5px;
+            border: 2px solid darken(v.$yellow-color, 10%);
+            font-size: 14px;
+            padding: 8px 8px;
+            margin-bottom: 12px;
+        }
+
+        &--add {
+            @include m.boton(v.$green-color, white);
+            margin-bottom: 16px;
+            border-radius: 10px;
+        }
     }
 
     &__button-submit {
@@ -129,6 +145,32 @@
         &:hover {
             background-color: v.$color-700;
             color: white;
+        }
+    }
+
+    &__ul {
+        display: grid;
+        gap: 10px;
+
+        &--vaccines {
+            @include m.mintablet {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+    }
+
+    &__li {
+        &__p{
+            &--primary {
+                font-weight: 500;
+                font-size: 18px;
+            }
+
+            &--secondary {
+                font-size: 15px;
+                color: v.$gray-color;
+            }
         }
     }
 }

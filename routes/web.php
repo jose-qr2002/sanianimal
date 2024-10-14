@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppliedVaccineController;
 use App\Http\Controllers\ClinicalHistoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
@@ -53,9 +54,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/histories/create/{pet}', [ClinicalHistoryController::class, 'create'])->name('histories.create');
     Route::post('/histories/store', [ClinicalHistoryController::class, 'store'])->name('histories.store');
 
-    /** */
+    /** VISITAS */
     Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');
     Route::post('/visit/store', [VisitController::class, 'store'])->name('visits.store');
+    Route::get('/visit/edit/{visit}', [VisitController::class, 'edit'])->name('visits.edit');
+    Route::put('/visit/update/{visit}', [VisitController::class, 'update'])->name('visits.update');
+
+    /** APPLIED VACCINES */
+    Route::get('/visit/edit/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'edit'])->name('visits.edit.vaccine');
+    Route::put('/visit/update/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'update'])->name('visits.update.vaccine');
+    Route::get('/visit/create/{visit}/applied_vaccine/', [AppliedVaccineController::class, 'create'])->name('visits.create.vaccine');
+    Route::post('/visit/store/{visit}/applied_vaccine/', [AppliedVaccineController::class, 'store'])->name('visits.store.vaccine');
+    Route::delete('/visit/delete/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'destroy'])->name('visits.destroy.vaccine');
 
     // Vaccines
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
