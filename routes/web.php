@@ -53,6 +53,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/histories/serve', [ClinicalHistoryController::class, 'serve'])->name('histories.serve');
     Route::get('/histories/create/{pet}', [ClinicalHistoryController::class, 'create'])->name('histories.create');
     Route::post('/histories/store', [ClinicalHistoryController::class, 'store'])->name('histories.store');
+    Route::get('/histories/edit/{history}', [ClinicalHistoryController::class, 'edit'])->name('histories.edit');
+    Route::put('/histories/update/{history}', [ClinicalHistoryController::class, 'update'])->name('histories.update');
 
     /** VISITAS */
     Route::get('/visit/create/{history}', [VisitController::class, 'create'])->name('visits.create');

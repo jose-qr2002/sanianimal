@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClinicalHistory\StoreHistoryRequest;
+use App\Http\Requests\ClinicalHistory\UpdateHistoryRequest;
 use App\Models\ClinicalHistory;
 use App\Models\Pet;
 use Illuminate\Http\Request;
@@ -65,4 +66,20 @@ class ClinicalHistoryController extends Controller
             return redirect()->route('histories.index')->with('msn_error', 'Ocurrio un error: La historia clinica no fue creada');
         }
     }
+
+    public function edit(ClinicalHistory $history) {
+        return view('histories.edit', compact('history'));
+    }
+
+    public function update(UpdateHistoryRequest $request, ClinicalHistory $history) {
+        
+        $validData = $request->validated();
+        try {
+            $history->update($validData);
+            return redirect()->route('histories.index')->with('msn_success', 'La historia clinica fue actualizada con exito');
+        } catch (\Exception $e) {
+            return redirect()->route('histories.index')->with('msn_error', 'Hubo un error al actualizar la historia clinica');
+        }
+    }
+
 }
