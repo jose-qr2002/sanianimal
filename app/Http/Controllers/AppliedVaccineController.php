@@ -2,13 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AppliedVaccine\StoreAppliedVaccineRequest;
 use App\Http\Requests\AppliedVaccine\UpdateAppliedVaccineRequest;
 use App\Models\AppliedVaccine;
 use App\Models\Vaccine;
 use App\Models\Visit;
+use Illuminate\Support\Facades\Log;
 
 class AppliedVaccineController extends Controller
 {
+    public function create(Visit $visit) {
+        $vaccines = Vaccine::all();
+        return view('visits.applied_vaccines.create', compact('visit', 'vaccines'));
+    }
+
+    public function store(StoreAppliedVaccineRequest $request,Visit $visit) {
+        $validData = $request->validated();
+        try {
+            $visit->vaccines()->attach($validData['vaccine_id'], 
+                                            [
+                                                'observation' => $validData['observation'], 
+                                                'date' => $visit->date,
+                                                'time' => $visit->time
+                                            ]);
+            return redirect()->route('visits.edit', $visit)->with('msn_success', 'La vacuna aplicada se registro exitosamente');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('visits.edit', $visit)->with('msn_error', 'Hubo un error al registrar la vacuna aplicada');
+        }
+    }
+
     public function edit(Visit $visit, AppliedVaccine $appliedVaccine) {
         $vaccines = Vaccine::all();
         return view('visits.applied_vaccines.edit', compact('appliedVaccine', 'vaccines', 'visit'));

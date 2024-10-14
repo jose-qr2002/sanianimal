@@ -191,7 +191,7 @@
                     </li>
                 @endforeach
             </ul>
-            <button type="button" class="form__button--add" id="button-vaccine">Agregar Vacuna</button>
+            <a href="{{ route('visits.create.vaccine', $visit) }}" type="button" class="form__button--add" id="button-vaccine">Agregar Vacuna</a>
 
             
         </fieldset>

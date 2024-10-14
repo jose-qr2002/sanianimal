@@ -62,6 +62,9 @@ Route::middleware(['auth'])->group(function () {
     /** APPLIED VACCINES */
     Route::get('/visit/edit/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'edit'])->name('visits.edit.vaccine');
     Route::put('/visit/update/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'update'])->name('visits.update.vaccine');
+    Route::get('/visit/create/{visit}/applied_vaccine/', [AppliedVaccineController::class, 'create'])->name('visits.create.vaccine');
+    Route::post('/visit/store/{visit}/applied_vaccine/', [AppliedVaccineController::class, 'store'])->name('visits.store.vaccine');
+
     // Vaccines
     Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
 
