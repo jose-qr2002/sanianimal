@@ -28,16 +28,10 @@
                     <td>{{ $supplier->phone }}</td>
                     <td>{{ $supplier->address }}</td>
                     <td>
-                        <a href="{{ route('suppliers.edit', $supplier) }}">
+                    <a href="{{ route('suppliers.show', $supplier->id) }}"><i class="ri-eye-fill show-icon icons"></i></a>
+                            <a href="{{ route('suppliers.edit', $supplier) }}">
                             <i class="ri-file-edit-line edit-icon icons"></i>
                         </a>
-                        <form onsubmit="confirmaEliminarMedicamento(event)" action="{{ route('suppliers.destroy', $supplier) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">
-                                <i class="ri-delete-bin-line delete-icon icons"></i>
-                            </button>
-                        </form>
                     </td>
                 </tr>
             @empty
@@ -54,27 +48,4 @@
     {{ $suppliers->links() }}
 </div>
 
-@push('scripts')
-    <script>
-        function confirmaEliminarMedicamento(event){
-            event.preventDefault();
-            let form=event.target;
-
-            Swal.fire({
-                //title: "?",
-                text: "¿Estás seguro de que deseas eliminar este proveedor?",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Si",
-                cancelButtonText: "No"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-        }
-    </script>
-@endpush
 @endsection
