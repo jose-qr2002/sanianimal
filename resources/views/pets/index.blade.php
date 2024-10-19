@@ -5,8 +5,12 @@
 <div class="table-header">
     <a class="table-header__button" href="{{ route('pets.create') }}">Registrar</a>
     <div class="table-search">
-        <input type="search" placeholder="Buscar">
-        <i class="ri-search-line" id="search"></i>
+        <form action="{{ route('pets.index') }}" method="GET">
+            <input type="search" name="parameter" placeholder="Buscar" value="{{ request('parameter') }}">
+            <button type="submit">
+                <i class="ri-search-line" id="search"></i>
+            </button>
+        </form>
     </div>
 </div>
 <div class="table-container">
@@ -24,7 +28,7 @@
             @forelse ($pets as $pet)
                 <tr>
                     <td>{{$pet->name}}</td>
-                    <td>{{$pet->customer->name}}</td>
+                    <td>{{$pet->customer->name}}  {{ $pet->customer->lastname }}</td>
                     <td>{{$pet->specie->specie}}</td>
                     <td>{{$pet->color}}</td>
                     <td>
