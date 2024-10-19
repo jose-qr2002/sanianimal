@@ -5,8 +5,12 @@
 <div class="table-header">
     <a class="table-header__button" href="{{ route('histories.serve') }}">Nueva Atencion</a>
     <div class="table-search">
-        <input type="search" placeholder="Buscar">
-        <i class="ri-search-line" id="search"></i>
+        <form action="{{ route('histories.index') }}" method="GET">
+            <input type="search" name="parameter" placeholder="Buscar" value="{{ request('parameter') }}">
+            <button type="submit">
+                <i class="ri-search-line" id="search"></i>
+            </button>
+        </form>
     </div>
 </div>
 <div class="table-container">
@@ -23,7 +27,7 @@
             @forelse ($histories as $history)
                 <tr>
                     <td>{{$history->number}}</td>
-                    <td>{{$history->pet->customer->name}}</td>
+                    <td>{{$history->pet->customer->getFullName()}}</td>
                     <td>{{$history->pet->name}}</td>
                     <td>
                         <a href="{{ route('histories.show', $history->id) }}"><i class="ri-eye-fill show-icon icons"></i></a>
