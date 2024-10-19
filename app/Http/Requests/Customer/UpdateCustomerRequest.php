@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Customer;
 
+use App\Rules\AlphaNumericUnicode;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCustomerRequest extends FormRequest
@@ -22,14 +23,14 @@ class UpdateCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'lastname' => ['required'],
-            'n_document' => ['required','integer'],
+            'name' => ['required', new AlphaNumericUnicode],
+            'lastname' => ['required', new AlphaNumericUnicode],
+            'n_document' => ['nullable','integer','digits:8'],
             'sex' => ['required','in:M,F'],
-            'email' => ['required','email'],
+            'email' => ['nullable','email'],
             'phone' => ['required','digits:9','starts_with:9'],
-            'address' => ['required'],
-            'birthdate' => ['required','date'],
+            'address' => ['nullable'],
+            'birthdate' => ['nullable','date'],
         ];
     }
 }
