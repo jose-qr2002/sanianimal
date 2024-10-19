@@ -69,7 +69,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="birthdate">Fecha de nacimiento:</label>
-                <input class="form__input @error('birthdate') form__input-error @enderror" type="date" id="birthdate" name="birthdate" value="{{$customer->birthdate->toDateString()}}">
+                <input class="form__input @error('birthdate') form__input-error @enderror" type="date" id="birthdate" name="birthdate" value="{{ old('birthdate', $customer->birthdate?->toDateString()) }}">
                 @error('birthdate')
                     <div class="form__error">
                         {{ $message }}

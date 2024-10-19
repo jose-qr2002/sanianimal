@@ -30,14 +30,15 @@ class Customer extends Model
     }
 
 
-    // Relaciones
+    
     protected function casts(): array
     {
         return [
             'birthdate' => 'date',
         ];
     }
-
+    
+    // Relaciones
     public function pets() {
         return $this->hasMany(Pet::class);
     }
