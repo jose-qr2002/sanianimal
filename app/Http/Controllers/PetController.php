@@ -13,8 +13,35 @@ class PetController extends Controller
     /**
      * Muestra todos los registros de las mascotas
      */
-    public function index() {
-        $pets = Pet::paginate(10);
+    public function index(Request $request) {
+        // Inicializa la variable donde almacenera las mascotas
+        $pets = null;
+
+        // Verifica si se ingreso un parametro de busqueda
+        if($request->parameter) {
+            $searchParameter = $request->parameter;
+            // Se utiliza with para eager loading, esto permite cargar antes las relaciones de cada 
+            // registro de mascota y evitar caer en el problema n + 1 donde se ejecutan multiples querys 
+            // relentizando la aplicacion
+            $pets = Pet::with(['customer:id,name,lastname,phone', 'specie:id,specie'])
+                        ->where('name', 'LIKE', "%$searchParameter%")
+                        ->orWhere('color', 'LIKE', "%$searchParameter%")
+                        // orWhereHas verifica primero si tiene una relacion con cliente para 
+                        // comparar el parametro con los registro de cada campo de su cliente respectivo
+                        // ahi se registrarn consultas where, es necesario usar un closure (funcion anonima)
+                        // pasando como parametro el query y el use sirve para utilizar una variable fuera de su
+                        // ambito dentro de la funcion anonima, en este caso usamos el searchparamter
+                        ->orWhereHas('customer', function($query) use ($searchParameter) {
+                            $query->where('name', 'LIKE', "%$searchParameter%")
+                                  ->orWhere('lastname','LIKE',"%$searchParameter%")
+                                  ->orWhere('n_document','LIKE',"%$searchParameter%")
+                                  ->orWhere('phone', 'LIKE', "%$searchParameter%");
+                        })->paginate(10)
+                        // Appends es necesario para que el parametro de busqueda no se pierda  al paginar
+                        ->appends(['parameter' => $searchParameter]);
+        } else {
+            $pets = Pet::with(['customer:id,name,lastname,phone', 'specie:id,specie'])->paginate(10);
+        }
         return view('pets.index', compact('pets'));
     }
 
