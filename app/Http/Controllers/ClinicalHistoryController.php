@@ -14,8 +14,26 @@ class ClinicalHistoryController extends Controller
     /**
      * Muestran todos los datos de historiales clinicos
      */
-    public function index(){
-        $histories = ClinicalHistory::paginate(10);
+    public function index(Request $request){
+        $histories = null;
+        if($request->parameter) {
+            $searchParameter = $request->parameter;
+            $histories = ClinicalHistory::select('id','number','pet_id')
+                    ->with(['pet:id,name,customer_id', 'pet.customer:id,name,lastname'])
+                    ->where('number', 'LIKE', "%$searchParameter%")
+                    ->orWhereHas('pet', function ($query) use ($searchParameter) {
+                        $query->where('name', 'LIKE', "%$searchParameter%");
+                    })
+                    ->orWhereHas('pet.customer', function($query) use ($searchParameter) {
+                        $query->where('name', 'LIKE', "%$searchParameter%")
+                                ->orWhere('lastname', 'LIKE', "%$searchParameter%")
+                                ->orWhere('phone', 'LIKE', "%$searchParameter%");
+                    })
+                    ->paginate(10)->appends(['parameter' => $searchParameter]);;
+        } else {
+            $histories = ClinicalHistory::select('id','number','pet_id')
+                ->with(['pet:id,name,customer_id', 'pet.customer:id,name,lastname'])->paginate(10);
+        }
         return view('histories.index', compact('histories'));
     }
 

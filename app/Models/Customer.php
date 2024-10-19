@@ -23,6 +23,14 @@ class Customer extends Model
         'image',
     ];
 
+    // Metodos
+    public function getFullName()
+    {
+        return $this->name . ' ' . $this->lastname;
+    }
+
+
+    // Relaciones
     protected function casts(): array
     {
         return [
