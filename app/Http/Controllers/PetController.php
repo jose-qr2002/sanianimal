@@ -69,6 +69,15 @@ class PetController extends Controller
     public function store(StorePetRequest $request) {
         $validData = $request->validated();
         try {
+            
+            // Guardamos la imagen
+            if($request->file('image')){
+                $image = $request->file('image');
+                $fileName = $validData['name'].time().'.'.$image->getClientOriginalExtension(); 
+                $path = $image->storeAs('public/images/pets', $fileName);
+                $validData['image'] = $fileName;
+            }
+            
             Pet::create($validData);
             return redirect()->route('pets.index')->with('msn_success', 'Se registro la mascota');
         } catch (\Exception $e) {
