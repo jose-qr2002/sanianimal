@@ -138,9 +138,13 @@ class PetController extends Controller
     {
         try {
             $pet->delete();
-            return redirect()->route('pets.index')->with('msn_success', 'Las mascotas se elimino correctamente');
+            // Eliminar la imagen que contenga
+            if($pet->image && Storage::disk('public')->exists("images/pets/{$pet->image}")) {
+                Storage::disk('public')->delete("images/pets/{$pet->image}");
+            }
+            return redirect()->route('pets.index')->with('msn_success', 'La mascota se eliminó correctamente.');
         } catch (\Exception $e) {
-            return redirect()->route('pets.index')->with('msn_error', 'Las mascotas no se elimino');
+            return redirect()->route('pets.index')->with('msn_error', 'La mascota no se eliminó');
         }
     }
 }
