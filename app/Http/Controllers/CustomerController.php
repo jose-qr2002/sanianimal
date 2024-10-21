@@ -13,9 +13,23 @@ class CustomerController extends Controller
     /**
      * Muestra la lista de todos los clientes
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::paginate(10);
+        $customers = null;
+
+        if ($request->parameter) {
+            $searchParameter = $request->parameter;
+
+            $customers = Customer::where('name', 'LIKE', "%$searchParameter%")
+                ->orWhere('lastname', 'LIKE', "%$searchParameter%")
+                ->orWhere('n_document', 'LIKE', "%$searchParameter%")
+                ->orWhere('phone', 'LIKE', "%$searchParameter%")
+                ->paginate(10)
+                ->appends(['parameter' => $searchParameter]);
+        } else {
+            $customers = Customer::paginate(10);
+        }
+
         return view('customers.index', compact('customers'));
     }
 
