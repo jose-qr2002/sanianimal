@@ -12,10 +12,17 @@ class MedicationController extends Controller
     /**
      * Muestra una vista con todos los registros de los medicamentos
      */
-    public function index()
+    public function index(Request $request)
     {
-        $medications = Medication::paginate(10);
-        return view('medications.index', compact('medications'));
+        $search = $request->input('search');
+        
+        $medications = Medication::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")
+                         ->orWhere('brand', 'like', "%{$search}%")
+                         ->orWhere('price', 'like', "%{$search}%");
+        })->paginate(10);
+
+        return view('medications.index', compact('medications', 'search'));
     }
 
     /**
