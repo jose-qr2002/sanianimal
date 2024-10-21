@@ -7,6 +7,7 @@ use App\Http\Requests\Pet\UpdatePetRequest;
 use App\Models\Pet;
 use App\Models\Specie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PetController extends Controller
 {
@@ -69,6 +70,15 @@ class PetController extends Controller
     public function store(StorePetRequest $request) {
         $validData = $request->validated();
         try {
+            
+            // Guardamos la imagen
+            if($request->file('image')){
+                $image = $request->file('image');
+                $fileName = $validData['name'].time().'.'.$image->getClientOriginalExtension(); 
+                $path = $image->storeAs('public/images/pets', $fileName);
+                $validData['image'] = $fileName;
+            }
+            
             Pet::create($validData);
             return redirect()->route('pets.index')->with('msn_success', 'Se registro la mascota');
         } catch (\Exception $e) {
@@ -93,9 +103,25 @@ class PetController extends Controller
      * Route Model Biding
      * @param UpdatePetRequest $request FormRequest que valida los datos de la mascota enviada
      */
-    public function update(Pet $pet, UpdatePetRequest $request) {
+    public function update(UpdatePetRequest $request, Pet $pet) {
         $validData = $request->validated();
         try {
+            if($request->file('image')){
+                // Obtiene la imagen
+                $image = $request->file('image');
+                // Verifica si existe la imagen
+                if (Storage::disk('public')->exists('/images/pets/'.$pet->image)) {
+                    // Elimina la imagen
+                    Storage::disk('public')->delete('/images/pets/'.$pet->image);
+                }
+                // Establece un nombre para la imagen
+                $fileName = $validData['name'].time().'.'.$image->getClientOriginalExtension(); 
+                // Guarda la imagen
+                Storage::disk('public')->putFileAs('images/pets', $image, $fileName);
+                // Cambia el valor de la imagen
+                $validData['image'] = $fileName;
+            }
+            
             $pet->update($validData);
             return redirect()->route('pets.index')->with('msn_success', 'La mascota se actualizo exitosamente');
         } catch (\Exception $e) {
@@ -112,9 +138,13 @@ class PetController extends Controller
     {
         try {
             $pet->delete();
-            return redirect()->route('pets.index')->with('msn_success', 'Las mascotas se elimino correctamente');
+            // Eliminar la imagen que contenga
+            if($pet->image && Storage::disk('public')->exists("images/pets/{$pet->image}")) {
+                Storage::disk('public')->delete("images/pets/{$pet->image}");
+            }
+            return redirect()->route('pets.index')->with('msn_success', 'La mascota se eliminó correctamente.');
         } catch (\Exception $e) {
-            return redirect()->route('pets.index')->with('msn_error', 'Las mascotas no se elimino');
+            return redirect()->route('pets.index')->with('msn_error', 'La mascota no se eliminó');
         }
     }
 }

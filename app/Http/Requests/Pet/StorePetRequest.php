@@ -30,6 +30,7 @@ class StorePetRequest extends FormRequest
             'customer_id' => ['required','integer','exists:customers,id'],
             'color' => ['nullable','string'],
             'race' => ['nullable','string'],
+            'image' => ['nullable','image','mimes:png,jpg,png,jpeg','max:2048']
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 @section('contenido')
 <x-card title="Editar Mascota" class="mt-8 mb-8 max-w-screen-md m-auto">
-    <form class="form" action="{{ route('pets.update', $pet) }}" method="POST" autocomplete="off" novalidate>
+    <form class="form" action="{{ route('pets.update', $pet) }}" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
         @csrf
         @method('PUT')
         <div class="form__group">
@@ -93,7 +93,7 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="birthdate">Fecha de Nacimiento:</label>
-                <input class="form__input @error('birthdate') form__input-error @enderror" type="date" id="birthdate" name="birthdate" value="{{ old('birthdate', $pet->birthdate->toDateString()) }}">
+                <input class="form__input @error('birthdate') form__input-error @enderror" type="date" id="birthdate" name="birthdate" value="{{ old('birthdate', $pet->birthdate?->toDateString()) }}">
                 @error('birthdate')
                     <div class="form__error">
                         {{ $message }}
@@ -101,10 +101,43 @@
                 @enderror
             </div>
         </div>
-
-
+        <div class="form__input-group">
+            <label class="form__label" for="image">Imagen</label>
+            <label class="form__file" for="image">Subir Imagen</label>
+            <input class="form__input" type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+            @error('image')
+                <div class="form__error">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="form__img-preview mb-5">
+            @if ($pet->image)
+                <img id="img-preview" src="{{ asset('storage/images/pets/'.$pet->image) }}" alt="Vista previa de la imagen">            
+            @else
+                <img id="img-preview" src="#" alt="Vista previa de la imagen" style="display: none;">
+            @endif
+        </div>
         <button class="form__button-submit" type="submit">Modificar Macota</button>
     </form>
 </x-card>
 
+@push('scripts')
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                const preview = document.getElementById('img-preview');
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            };
+
+            if (input.files && input.files[0]) {
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+@endpush
 @endsection

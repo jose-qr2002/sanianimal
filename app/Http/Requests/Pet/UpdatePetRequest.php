@@ -29,7 +29,8 @@ class UpdatePetRequest extends FormRequest
             'specie_id' => ['required','integer','exists:species,id'],
             'customer_id' => ['required','integer','exists:customers,id'],
             'color' => ['nullable','string'],
-            'race' => ['nullable','string']
+            'race' => ['nullable','string'],
+            'image' => ['nullable','image','mimes:png,jpg,jpeg','max:2048']
         ];
     }
 }
