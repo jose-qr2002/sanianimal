@@ -7,6 +7,7 @@ use App\Http\Requests\Pet\UpdatePetRequest;
 use App\Models\Pet;
 use App\Models\Specie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PetController extends Controller
 {
@@ -102,9 +103,25 @@ class PetController extends Controller
      * Route Model Biding
      * @param UpdatePetRequest $request FormRequest que valida los datos de la mascota enviada
      */
-    public function update(Pet $pet, UpdatePetRequest $request) {
+    public function update(UpdatePetRequest $request, Pet $pet) {
         $validData = $request->validated();
         try {
+            if($request->file('image')){
+                // Obtiene la imagen
+                $image = $request->file('image');
+                // Verifica si existe la imagen
+                if (Storage::disk('public')->exists('/images/pets/'.$pet->image)) {
+                    // Elimina la imagen
+                    Storage::disk('public')->delete('/images/pets/'.$pet->image);
+                }
+                // Establece un nombre para la imagen
+                $fileName = $validData['name'].time().'.'.$image->getClientOriginalExtension(); 
+                // Guarda la imagen
+                Storage::disk('public')->putFileAs('images/pets', $image, $fileName);
+                // Cambia el valor de la imagen
+                $validData['image'] = $fileName;
+            }
+            
             $pet->update($validData);
             return redirect()->route('pets.index')->with('msn_success', 'La mascota se actualizo exitosamente');
         } catch (\Exception $e) {
