@@ -92,3 +92,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/services/update/{service}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('/services/delete/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
 });
+
+
+Route::get('/livewire-test', function() { return view('test.livewire-test');});
