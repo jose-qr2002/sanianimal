@@ -1,13 +1,15 @@
 @extends('layout.admin')
-
+ 
 @section('contenido')
 <h2 class="title-menu">Proveedores</h2>
 <div class="table-header">
     <a class="table-header__button" href="{{ route('suppliers.create') }}">Registrar</a>
-    <div class="table-search">
-        <input type="search" placeholder="Buscar">
-        <i class="ri-search-line" id="search"></i>
-    </div>
+    <form class="table-search" method="GET" action="{{ route('suppliers.index') }}">
+        <input type="search" name="search" placeholder="Buscar" value="{{ request()->input('search') }}">
+        <button type="submit">
+            <i class="ri-search-line" id="search"></i>
+        </button>
+    </form>
 </div>
 <div class="table-container">
     <table>
@@ -28,8 +30,10 @@
                     <td>{{ $supplier->phone }}</td>
                     <td>{{ $supplier->address }}</td>
                     <td>
-                    <a href="{{ route('suppliers.show', $supplier->id) }}"><i class="ri-eye-fill show-icon icons"></i></a>
-                            <a href="{{ route('suppliers.edit', $supplier) }}">
+<a href="{{ route('suppliers.show', $supplier->id) }}">
+                            <i class="ri-eye-fill show-icon icons"></i>
+                        </a>
+                        <a href="{{ route('suppliers.edit', $supplier) }}">
                             <i class="ri-file-edit-line edit-icon icons"></i>
                         </a>
                     </td>
@@ -39,13 +43,12 @@
                     <td colspan="5">No hay proveedores</td>
                 </tr>
             @endforelse
-
         </tbody>
     </table>
 </div>
-
+ 
 <div class="table-footer">
     {{ $suppliers->links() }}
 </div>
-
+ 
 @endsection
