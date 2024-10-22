@@ -1,13 +1,15 @@
 @extends('layout.admin')
-
+ 
 @section('contenido')
 <h2 class="title-menu">Servicios</h2>
 <div class="table-header">
     <a class="table-header__button" href="{{ route('services.create') }}">Registrar</a>
-    <div class="table-search">
-        <input type="search" placeholder="Buscar">
-        <i class="ri-search-line" id="search"></i>
-    </div>
+    <form class="table-search" method="GET" action="{{ route('services.index') }}">
+        <input type="search" name="search" placeholder="Buscar" value="{{ request()->input('search') }}">
+        <button type="submit">
+            <i class="ri-search-line" id="search"></i>
+        </button>
+    </form>
 </div>
 <div class="table-container">
     <table>
@@ -40,32 +42,30 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">No hay servicios</td>
+                    <td colspan="4">No hay servicios</td>
                 </tr>
             @endforelse
-
         </tbody>
     </table>
 </div>
-
+ 
 <div class="table-footer">
     {{ $services->links() }}
 </div>
-
+ 
 @push('scripts')
     <script>
         function confirmaEliminarServicio(event){
             event.preventDefault();
             let form=event.target;
-
+ 
             Swal.fire({
-                //title: "?",
                 text: "¿Estás seguro de que deseas eliminar este servicio?",
                 icon: "question",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Si",
+                confirmButtonText: "Sí",
                 cancelButtonText: "No"
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -76,4 +76,3 @@
     </script>
 @endpush
 @endsection
-

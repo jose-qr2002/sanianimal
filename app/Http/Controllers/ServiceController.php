@@ -8,10 +8,17 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::paginate(10);
-        return view('services.index', compact('services'));
+        $search = $request->input('search');
+ 
+        $services = Service::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")
+                         ->orWhere('description', 'like', "%{$search}%")
+                         ->orWhere('price', $search);
+        })->paginate(10);
+ 
+        return view('services.index', compact('services', 'search'));
     }
 
     public function create()
