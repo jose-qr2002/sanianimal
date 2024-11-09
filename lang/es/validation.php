@@ -249,6 +249,7 @@ return [
         'skills'                   => 'habilidades',
         'slug'                     => 'slug',
         'specialization'           => 'especialización',
+        'specie_id'                => 'especie',
         'started_at'               => 'comenzado el',
         'state'                    => 'estado',
         'status'                   => 'estado',
@@ -299,5 +300,8 @@ return [
         'recipes'                 => 'recetas',
         'weight'                  => 'peso',
         'clinical_history_id'     => 'ID del historial clínico',
+        'vaccines'                => 'vacunas',
+        'vaccines.*.vaccine_id'   => 'vacuna N° :position',
+        'vaccines.*.observation'  => 'observación de la vacuna N° :position'
     ],
 ];

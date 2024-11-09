@@ -19,7 +19,7 @@ class OptionalDecimal implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if(!preg_match('/^\d+(\.\d{1,2})?$/', $value)) {
-            $fail("El campo $attribute debe tener dos decimales");
+            $fail("El campo :attribute debe tener dos decimales");
         }
     }
 }
