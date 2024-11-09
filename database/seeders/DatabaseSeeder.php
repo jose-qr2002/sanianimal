@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             VaccineSeeder::class,
             AppliedVaccineSeeder::class,
             SupplierSeeder::class,
-            ServiceSeeder::class
+            ServiceSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class
         ]);
 
     }
