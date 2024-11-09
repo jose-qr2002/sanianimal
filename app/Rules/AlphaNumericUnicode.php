@@ -18,7 +18,7 @@ class AlphaNumericUnicode implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if(!preg_match('/^[\p{L}\p{N}\s]+$/u', $value)) {
-            $fail("El campo $attribute no es alfanumerico");
+            $fail("El campo :attribute no es alfanumerico");
         }
     }
 }
