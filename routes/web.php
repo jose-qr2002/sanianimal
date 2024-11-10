@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\PetController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\SupplierController;
@@ -36,6 +37,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/medications/edit/{medication}', [MedicationController::class, 'edit'])->name('medications.edit');
     Route::put('/medications/update/{medication}', [MedicationController::class, 'update'])->name('medications.update');
     Route::delete('/medications/delete/{medication}', [MedicationController::class, 'destroy'])->name('medications.destroy');
+
+    //Productos
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/update/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/delete/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
     // Mascotas
     Route::get('/pets', [PetController::class, 'index'])->name('pets.index');
