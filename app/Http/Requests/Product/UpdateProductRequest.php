@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Product;
 
+use App\Rules\OptionalDecimal;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProductRequest extends FormRequest
@@ -21,11 +22,17 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $product = $this->route('product');
+
         return [
+            'code' => ['nullable','string','alpha_num','unique:products,code,'.$product->id],
             'name' => ['required'],
-            'brand' => ['required'],
             'stock' => ['required','integer','min:0'],
-            'price' => ['required','numeric','min:0.10'],
+            'price' => ['required','numeric','min:0.10', new OptionalDecimal],
+            'measurement' => ['required', 'in:units,mi,grams'],
+            'brand' => ['nullable'],
+            'category_id' => ['nullable', 'integer'],
+            'supplier_id' => ['nullable','integer'],
             'description' => ['nullable','max:1000'],
         ];
     }

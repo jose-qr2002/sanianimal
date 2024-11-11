@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -30,7 +32,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        return view('products.create', compact('categories', 'suppliers'));
     }
 
     /**
@@ -45,7 +49,7 @@ class ProductController extends Controller
             Product::create($validData);
             return redirect()->route('products.index')->with('msn_success', 'El producto fue registrado con exito');
         } catch (\Exception $e) {
-            return redirect()->route('products.create')->with('msn_error', 'El producto no fue registrado');
+            return redirect()->route('products.create')->with('msn_error', 'El producto no fue registrado ' . $e->getMessage());
         }
     }
 
@@ -62,7 +66,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        return view('products.edit', compact('product', 'categories', 'suppliers'));
     }
 
     /**
