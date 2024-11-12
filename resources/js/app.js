@@ -1,4 +1,5 @@
 import './bootstrap';
+import './livewire-alerts'
 import './buscador';
 import './historias';
 
