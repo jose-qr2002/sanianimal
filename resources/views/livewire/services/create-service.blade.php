@@ -8,9 +8,9 @@
             @enderror
         </div>
         <div class="form__input-group">
-            <label class="form__label" for="lastname">Precio:</label>
-            <input class="form__input @error('precio') form__input-error @enderror" type="text" id="precio" wire:model="precio" autocomplete="off">
-            @error('precio')
+            <label class="form__label" for="price">Precio:</label>
+            <input class="form__input @error('price') form__input-error @enderror" type="text" id="price" wire:model="price" autocomplete="off">
+            @error('price')
                 <div class="form__error">{{ $message }}</div>
             @enderror
         </div>

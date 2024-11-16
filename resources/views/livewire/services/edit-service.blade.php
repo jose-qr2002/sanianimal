@@ -10,9 +10,9 @@
             @enderror
         </div>
         <div class="form__input-group">
-            <label class="form__label" for="lastname">Apellido:</label>
-            <input class="form__input @error('lastname') form__input-error @enderror" type="text" id="lastname" wire:model="lastname" required>
-            @error('lastname')
+            <label class="form__label" for="price">Precio:</label>
+            <input class="form__input @error('price') form__input-error @enderror" type="text" id="price" wire:model="price" required>
+            @error('price')
                 <div class="form__error">
                     {{ $message }}
                 </div>
