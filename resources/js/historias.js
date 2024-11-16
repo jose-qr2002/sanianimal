@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
          */
         buttonAddVaccine.addEventListener('click', handleAddVaccine);
     
-        formHistory.addEventListener('submit', prepareHistorySubmit);
-    
         async function preLoad() {
             vaccinesDatabase = await getVaccines();
             vaccines = dataVaccines.value !== "" ? JSON.parse(dataVaccines.value) : [];
@@ -239,17 +237,13 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             console.log(vaccines);
         }
-    
+        /*
         function prepareHistorySubmit(event) {
             event.preventDefault();
             const form = event.target;
-            
-
-
             //dataVaccines.value = JSON.stringify(vaccines); ELIMINADO POR ERROR EN VALIDACIONES
-
             form.submit();
-        }
+        }*/
         
 
         preLoad();

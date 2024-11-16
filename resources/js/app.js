@@ -1,7 +1,6 @@
 import './bootstrap';
 import './livewire-alerts'
 import './buscador';
-import './historias';
 
 const sidebar = document.querySelector("#sidebar");
 const sidebarOpenButton = document.querySelector("#sidebar-open");
