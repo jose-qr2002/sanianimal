@@ -26,7 +26,7 @@ class StoreVisitRequest extends FormRequest
         return [
             'heart_rate' => ['nullable','integer','min:1'],
             'respiratory_rate' => ['nullable','integer','min:1'],
-            'temperature' => ['nullable','numeric','between:25,50', new OptionalDecimal],
+            'temperature' => ['required','numeric','between:25,50', new OptionalDecimal],
             'anamnesis' => ['nullable', 'string', new AlphaNumericUnicode],
             'symptoms' => ['nullable','string', new AlphaNumericUnicode],
             'exams' => ['nullable', 'string', new AlphaNumericUnicode],
@@ -36,11 +36,10 @@ class StoreVisitRequest extends FormRequest
             'exam_results' => ['nullable', 'string', new AlphaNumericUnicode],
             'recommendations' => ['nullable', 'string', new AlphaNumericUnicode],
             'recipes' => ['nullable', 'string', new AlphaNumericUnicode],
-            'price' => ['nullable', 'numeric', 'min:0.01', 'max:1000', new OptionalDecimal],
+            'price' => ['required', 'numeric', 'min:0.01', 'max:1000', new OptionalDecimal],
             'weight' => ['nullable', 'numeric', 'min:0.01', 'max:120', new OptionalDecimal],
             'date' => ['required', 'date'],
             'time' => ['required','date_format:H:i','after_or_equal:06:00','before_or_equal:24:00'],
-            'clinical_history_id' => ['required','integer','exists:clinical_histories,id'],
 
             'vaccines' => ['nullable', 'array'],
             'vaccines.*.vaccine_id' => ['required_with:vaccines','integer'],
