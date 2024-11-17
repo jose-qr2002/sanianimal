@@ -33,8 +33,7 @@ class AppliedVaccineController extends Controller
     }
 
     public function edit(Visit $visit, AppliedVaccine $appliedVaccine) {
-        $vaccines = Vaccine::all();
-        return view('visits.applied_vaccines.edit', compact('appliedVaccine', 'vaccines', 'visit'));
+        return view('visits.applied_vaccines.edit', compact('appliedVaccine', 'visit'));
     }
 
     public function update(UpdateAppliedVaccineRequest $request, Visit $visit, AppliedVaccine $appliedVaccine) {
