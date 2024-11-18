@@ -12,16 +12,15 @@ use Illuminate\Support\Facades\Log;
 class AppliedVaccineController extends Controller
 {
     public function create(Visit $visit) {
-        $vaccines = Vaccine::all();
-        return view('visits.applied_vaccines.create', compact('visit', 'vaccines'));
+        return view('visits.applied_vaccines.create', compact('visit'));
     }
 
     public function store(StoreAppliedVaccineRequest $request,Visit $visit) {
         $validData = $request->validated();
         try {
-            $visit->vaccines()->attach($validData['vaccine_id'], 
+            $visit->vaccines()->attach($validData['vaccine_id'],
                                             [
-                                                'observation' => $validData['observation'], 
+                                                'observation' => $validData['observation'],
                                                 'date' => $visit->date,
                                                 'time' => $visit->time
                                             ]);
@@ -33,8 +32,7 @@ class AppliedVaccineController extends Controller
     }
 
     public function edit(Visit $visit, AppliedVaccine $appliedVaccine) {
-        $vaccines = Vaccine::all();
-        return view('visits.applied_vaccines.edit', compact('appliedVaccine', 'vaccines', 'visit'));
+        return view('visits.applied_vaccines.edit', compact('appliedVaccine', 'visit'));
     }
 
     public function update(UpdateAppliedVaccineRequest $request, Visit $visit, AppliedVaccine $appliedVaccine) {
@@ -45,7 +43,7 @@ class AppliedVaccineController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('visits.edit', $visit)->with('msn_error', 'Hubo un error al actualizar la vacuna');
         }
-        
+
     }
 
     public function destroy(Visit $visit, AppliedVaccine $appliedVaccine) {
