@@ -35,7 +35,7 @@ class CreateAppliedVaccine extends Component
             return redirect()->route('visits.edit', $this->visit)->with('msn_success', 'La vacuna aplicada se registro exitosamente');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            $this->dispatch('sweet-alert', message: 'Hubo un error al registrar la vacuna aplicada', icon:'error');
+            $this->dispatch('alert-sweet', message: 'Hubo un error al registrar la vacuna aplicada', icon:'error');
         }
     }
 
