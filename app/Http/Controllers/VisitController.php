@@ -21,9 +21,7 @@ class VisitController extends Controller
      * @param Request $request Contiene los valores que se pasan del formulario
      */
     public function create(ClinicalHistory $history, Request $request) {
-        $lastNumber = $history->visits->max('number') + 1;
-
-        return view('visits.create', compact('history', 'lastNumber'));
+        return view('visits.create', compact('history'));
     }
 
     /**
