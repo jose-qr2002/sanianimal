@@ -27,7 +27,7 @@ class StoreProductRequest extends FormRequest
             'name' => ['required'],
             'stock' => ['required','integer','min:0'],
             'price' => ['required','numeric','min:0.10', new OptionalDecimal],
-            'measurement' => ['required', 'in:units,mi,grams'],
+            'measurement' => ['required', 'in:units,kilograms,grams'],
             'brand' => ['nullable'],
             'category_id' => ['nullable', 'integer'],
             'supplier_id' => ['nullable','integer'],

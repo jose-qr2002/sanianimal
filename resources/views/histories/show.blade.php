@@ -27,35 +27,7 @@
             <h2 class="card__title">Visitas</h2>
 
             <section class="history__visits">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Temperatura</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($history->visits as $visit)
-                            <tr>
-                                <td>{{ $visit->date->toDateString() }}</td>
-                                <td>{{ $visit->time }}</td>
-                                <td>{{ $visit->temperature }}</td>
-                                <td>
-                                    <a href="{{ route('visits.edit', $visit->id) }}"><i class="ri-file-edit-line edit-icon icons"></i></a>
-                                    <form onsubmit="window.confirmateDeleteVisit(event)" action="{{ route('visits.destroy', $visit->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">
-                                            <i class="ri-delete-bin-line delete-icon icons"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <livewire:visits.show-visits :history='$history'/>
             </section>
         @endif
         
@@ -75,26 +47,6 @@
     </x-card>
     @push('scripts')
         <script>
-            function confirmateDeleteVisit(event){
-                event.preventDefault();
-                let form=event.target;
-
-                Swal.fire({
-                    //title: "?",
-                    text: "¿Estás seguro de que deseas eliminar esta visita?",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Si",
-                    cancelButtonText: "No"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
-                });
-            }
-
             function confirmateDeleteHistory(event){
                 event.preventDefault();
                 let form=event.target;
