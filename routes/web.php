@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\SupplierController;
@@ -100,6 +101,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/services/edit/{service}', [ServiceController::class, 'edit'])->name('services.edit');
     Route::put('/services/update/{service}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('/services/delete/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
+
+    // Ventas
+    Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
+
 });
 
 

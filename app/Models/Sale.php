@@ -12,7 +12,7 @@ class Sale extends Model
     protected $fillable = [
         'date',
         'time',
-        'payment_methdd',
+        'payment_method',
         'status',
         'customer_id',
         'subtotal',
