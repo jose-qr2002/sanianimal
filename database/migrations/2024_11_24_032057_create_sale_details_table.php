@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('unit_price');
             $table->integer('quantity');
             $table->decimal('total', 10, 2);
+            $table->timestamps();
         });
     }
 
