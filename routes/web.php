@@ -104,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Ventas
     Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
 
 });
 

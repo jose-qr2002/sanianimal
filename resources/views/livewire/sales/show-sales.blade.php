@@ -1,7 +1,7 @@
 <div>
     <h2 class="title-menu">Ventas</h2>
     <div class="table-header">
-        <a class="table-header__button" href="{{-- route('products.create') --}}">Registrar Venta</a>
+        <a class="table-header__button" href="{{ route('sales.create') }}">Registrar Venta</a>
         <div class="table-search">
                 <form wire:submit.prevent='searching'>
                     <input type="search" wire:model='search' placeholder="Buscar">
