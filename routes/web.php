@@ -82,8 +82,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/visit/delete/{visit}/applied_vaccine/{applied_vaccine}', [AppliedVaccineController::class, 'destroy'])->name('visits.destroy.vaccine');
 
     // Vaccines
-    Route::get('/api/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
-
+    Route::get('/vaccines', [VaccineController::class, 'index'])->name('vaccines.index');
+    Route::get('/vaccines/create', [VaccineController::class, 'create'])->name('vaccines.create');
+    Route::post('/vaccines/store', [VaccineController::class, 'store'])->name('vaccines.store');
+    Route::get('/vaccines/edit/{vaccine}', [VaccineController::class, 'edit'])->name('vaccines.edit');
+    Route::put('/vaccines/update/{vaccine}', [VaccineController::class, 'update'])->name('vaccines.update');
+    
      //Proveedores
     Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
     Route::get('/suppliers/show/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show');
