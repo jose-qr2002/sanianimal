@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Livewire\Vaccines;
-
+use App\Http\Requests\Vaccine\StoreVaccineRequest;
+use App\Models\Vaccine;
 use Livewire\Component;
 
 class CreateVaccine extends Component
@@ -20,10 +21,10 @@ class CreateVaccine extends Component
         // Crear al cliente
         try {
             Vaccine::create($validData);
-            return redirect()->route('customers.index')->with('msn_success', 'El cliente se registro exitosamente');
+            return redirect()->route('vaccines.index')->with('msn_success', 'La vacuna se registro exitosamente');
         } catch (\Exception $e) {
             // Emite eventos para que javascript los escuche
-            $this->dispatch('alert-sweet', message: "El cliente no se pudo registrar", icon: "error");
+            $this->dispatch('alert-sweet', message: "La vacuna no se pudo registrar", icon: "error");
         }
     }
 
