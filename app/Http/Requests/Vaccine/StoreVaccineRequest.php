@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Vaccine;
-
+use App\Rules\AlphaNumericUnicode;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreVaccineRequest extends FormRequest
@@ -24,8 +24,8 @@ class StoreVaccineRequest extends FormRequest
     {
         return [
             'vaccine' => ['required', 'string'],
-            'stock' => ['required','numeric'],
-            'detail' => ['nullable','string','max:1000'],
+            'stock' => ['required','integer', 'min:0'],
+            'detail' => ['nullable','string', new AlphaNumericUnicode],
         ];
     }
 }
