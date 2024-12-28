@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AppliedVaccineController;
 use App\Http\Controllers\ClinicalHistoryController;
 use App\Http\Controllers\CustomerController;
@@ -105,6 +106,9 @@ Route::middleware(['auth'])->group(function () {
     // Ventas
     Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
     Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
+
+    // Api
+    Route::get('api/customers', [ApiController::class, 'getCustomers'])->name('api.customers');
 
 });
 
