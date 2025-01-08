@@ -94,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/suppliers/edit/{supplier}', [SupplierController::class, 'edit'])->name('suppliers.edit');
     Route::put('/suppliers/update/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
     Route::delete('/suppliers/delete/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
-    
+
     // Servicios
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
@@ -109,7 +109,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Api
     Route::get('api/customers', [ApiController::class, 'getCustomers'])->name('api.customers');
-
+    Route::get('api/products', [ApiController::class, 'getProducts'])->name('api.products');
+    Route::get('api/services', [ApiController::class, 'getServices'])->name('api.services');
 });
 
 

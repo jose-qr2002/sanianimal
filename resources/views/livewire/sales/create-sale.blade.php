@@ -1,4 +1,4 @@
-<form class="form" x-data="salesForm()" x-init="getCustomersDB()">
+<form class="form" x-data="salesForm()" x-init="initApi()">
     <x-card class="mt-8 mb-8 w-full m-auto">
         <h1 class="card__title-secondary">Informacion de la venta</h1>
         <div class="form__group">
@@ -43,8 +43,8 @@
         <h2 class="card__title-secondary">Agregar Articulos</h2>
         <div class="form__group">
             <div class="form__input-group">
-                <label class="form__label" for="type">Tipo:</label>
-                <select class="form__input" id="type">
+                <label class="form__label" for="articleType">Tipo:</label>
+                <select class="form__input" id="articleType" x-model="articleType">
                     <option value="">-- Seleccione un tipo --</option>
                     <option value="1">Producto</option>
                     <option value="2">Servicio</option>
@@ -52,7 +52,14 @@
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="article">Articulo</label>
-                <input class="form__input" id="article" type="text">
+                <div class="form__relative" @click.away="showArticlesPredictions = false">
+                    <input class="form__input form__input-search" id="article" type="text" @click="showArticlesPredictions = true" @input='searchArticle($el)'>
+                    <ul class="form__predictions" x-bind:class="showArticlesPredictions ? 'show' : ''">
+                        <template x-for="article in articlesPredictions">
+                            <li x-text="article.name" class="form__prediction"></li>
+                        </template>
+                    </ul>
+                </div>
             </div>
         </div>
         <div>
@@ -139,18 +146,41 @@
     function salesForm(){
         return {
             // Bases de datos
-            customersDB: [], // Clientes de la base de datos
-            productsDB: [], // Productos de la base de datos
-            servicesDB: [], // Servicios de la base de datos
+            customersDB: [],
+            productsDB: [],
+            servicesDB: [],
+            // Variables
+            articleType: 0,
             // Listas de Predicciones
             customersPredictions: [],
+            articlesPredictions: [],
             showCustomersPredictions: false,
             showArticlesPredictions: false,
+            // API METHODS
+            async initApi() {
+                await Promise.all([
+                    this.getCustomersDB(),
+                    this.getProductsDB(),
+                    this.getServicesDB()
+                ]);
+            },
             async getCustomersDB() {
                 const apiUrl = '/api/customers';
                 const customersAPI = await fetch(apiUrl);
                 const data = await customersAPI.json();
                 this.customersDB = data;
+            },
+            async getProductsDB() {
+                const apiUrl = '/api/products';
+                const productsAPI = await fetch(apiUrl);
+                const data = await productsAPI.json();
+                this.productsDB = data;
+            },
+            async getServicesDB() {
+                const apiUrl = '/api/services';
+                const servicesAPI = await fetch(apiUrl);
+                const data = await servicesAPI.json();
+                this.servicesDB = data;
             },
             // Eventos
             showCustPredictions() {
@@ -191,6 +221,29 @@
                 this.showCustomersPredictions = false;
                 this.customersPredictions = [];
                 this.$wire.set('customer_id', customer.id);
+            },
+            fetchArticles() {
+                console.log(this.articleType);
+            },
+            searchArticle(element) {
+                if(element.value.length < 2) {
+                    this.showArticlesPredictions = false;
+                    return
+                }
+
+                if (this.articleType == 1) {
+                    this.articlesPredictions = this.productsDB.filter((product) => {
+                        return product.name.toLowerCase().includes(element.value.toLowerCase());
+                    })
+                    this.showArticlesPredictions = true;
+                } else if (this.articleType == 2) {
+                    this.articlesPredictions = this.servicesDB.filter((service) => {
+                        return service.name.toLowerCase().includes(element.value.toLowerCase());
+                    })
+                    this.showArticlesPredictions = true;
+                } else {
+                    this.showArticlesPredictions = false;
+                }
             }
         }
     }
