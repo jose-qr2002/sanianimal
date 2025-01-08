@@ -4,11 +4,11 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="customerParam">Cliente:</label>
-                <div class="form__relative">
-                    <input class="form__input form__input-search" id="customerParam" type="text">
-                    <ul class="form__predictions" x-bind:class="showPredictionsCustomers ? 'show' : ''">
-                        <template x-for="customer in customersDB">
-                            <li x-text="customer.name" class="form__prediction"></li>
+                <div class="form__relative" @click.away="hidePredictions()">
+                    <input @click="showCustPredictions" @input='searchCustomer($el)' class="form__input form__input-search" id="customerParam" type="text">
+                    <ul class="form__predictions" x-bind:class="showCustomersPredictions ? 'show' : ''">
+                        <template x-for="customer in customersPredictions">
+                            <li @click="selectCustomer(customer)" x-text="customer.name" class="form__prediction"></li>
                         </template>
                     </ul>
                 </div>
@@ -144,8 +144,8 @@
             servicesDB: [], // Servicios de la base de datos
             // Listas de Predicciones
             customersPredictions: [],
-            showPredictionsCustomers: false,
-            showPredictionsArticles: false,
+            showCustomersPredictions: false,
+            showArticlesPredictions: false,
             async getCustomersDB() {
                 const apiUrl = '/api/customers';
                 const customersAPI = await fetch(apiUrl);
@@ -153,10 +153,44 @@
                 this.customersDB = data;
             },
             // Eventos
-            searchCustomer() {
-                customersPredictions = customersDB.filter((customer) => {
+            showCustPredictions() {
+                this.showCustomersPredictions = true;
+                console.log('enabled');
+            },
+            hidePredictions() {
+                this.showCustomersPredictions = false;
+                console.log('disabled');
+            },
+            searchCustomer(elemento) {
+                console.log(this.customersPredictions);
+
+                this.customersDB.forEach((customer) => {
+                    //console.log(customer);
 
                 })
+
+                if(elemento.value.length < 2) {
+                    this.showCustomersPredictions = false;
+                    return
+                }
+
+
+
+                this.customersPredictions = this.customersDB.filter((customer) => {
+                    const fullName =  `${customer.name} ${customer.lastname}`;
+                    return customer.name.toLowerCase().includes(elemento.value.toLowerCase()) ||
+                        customer.lastname.toLowerCase().includes(elemento.value.toLowerCase()) ||
+                        customer.phone.includes(elemento.value) ||
+                        fullName.toLowerCase().includes(elemento.value.toLowerCase());
+                })
+                this.showCustomersPredictions = true;
+                console.log(this.customersPredictions);
+            },
+            selectCustomer(customer) {
+                document.getElementById('customerParam').value = `${customer.name} ${customer.lastname}`;
+                this.showCustomersPredictions = false;
+                this.customersPredictions = [];
+                this.$wire.set('customer_id', customer.id);
             }
         }
     }
