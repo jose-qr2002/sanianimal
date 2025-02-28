@@ -15,7 +15,7 @@ class ApiController extends Controller
     }
 
     public function getProducts(){
-        $products = Product::select(['id','name','price'])->get();
+        $products = Product::select(['id','name','price','measurement'])->get();
         return json_encode($products);
     }
 

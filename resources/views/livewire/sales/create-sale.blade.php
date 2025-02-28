@@ -44,7 +44,7 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="articleType">Tipo:</label>
-                <select class="form__input" id="articleType" x-model="articleType">
+                <select class="form__input" id="articleType" x-model="articleTypeSelected">
                     <option value="">-- Seleccione un tipo --</option>
                     <option value="1">Producto</option>
                     <option value="2">Servicio</option>
@@ -53,10 +53,10 @@
             <div class="form__input-group">
                 <label class="form__label" for="article">Articulo</label>
                 <div class="form__relative" @click.away="showArticlesPredictions = false">
-                    <input class="form__input form__input-search" id="article" type="text" @click="showArticlesPredictions = true" @input='searchArticle($el)'>
+                    <input class="form__input form__input-search" id="article" type="text" x-model="articleToSelect" @click="showArticlesPredictions = true" @input='searchArticle($el)'>
                     <ul class="form__predictions" x-bind:class="showArticlesPredictions ? 'show' : ''">
                         <template x-for="article in articlesPredictions">
-                            <li x-text="article.name" class="form__prediction"></li>
+                            <li @click="selectArticle(article)" x-text="article.name" class="form__prediction"></li>
                         </template>
                     </ul>
                 </div>
@@ -67,15 +67,15 @@
             <div class="form__group-3">
                 <div class="form__input-group">
                     <label class="form__label">Nombre</label>
-                    <input class="form__input" disabled type="text">
+                    <input class="form__input" x-model="articleSelected.name" disabled type="text">
                 </div>
                 <div class="form__input-group">
                     <label class="form__label">Precio Original</label>
-                    <input class="form__input" disabled type="text">
+                    <input class="form__input" x-model="articleSelected.price" disabled type="text">
                 </div>
                 <div class="form__input-group">
                     <label class="form__label">Unidad de medida</label>
-                    <input class="form__input" disabled type="text">
+                    <input class="form__input" x-model="articleSelected.measurement" disabled type="text">
                 </div>
             </div>
         </div>
@@ -83,12 +83,15 @@
         <div class="form__group">
             <div class="form__input-group">
                 <label class="form__label" for="unit_price">Precio Unitario</label>
-                <input class="form__input" type="text">
+                <input class="form__input" x-model="articleParam.price" type="text">
             </div>
             <div class="form__input-group">
                 <label class="form__label" for="quantity">Cantidad</label>
-                <input class="form__input" id="quantity" type="text">
+                <input class="form__input" x-model="articleParam.quantity" id="quantity" type="text">
             </div>
+        </div>
+        <div class="flex justify-end">
+            <button class="form__button--add--inline" @click="addArticleToList()" type="button">Agregar</button>
         </div>
     </x-card>
     <x-card class="mt-8 mb-8 w-full m-auto">
@@ -105,26 +108,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Servicio</td>
-                    <td>Corte</td>
-                    <td>S/12</td>
-                    <td>1</td>
-                    <td>S/12</td>
-                    <td>
-                        <button class="form__button--red" style="margin-bottom: 0;">Remover</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Producto</td>
-                    <td>Pastillas</td>
-                    <td>S/4</td>
-                    <td>5</td>
-                    <td>S/20</td>
-                    <td>
-                        <button class="form__button--red" style="margin-bottom: 0;">Remover</button>
-                    </td>
-                </tr>
+                <template x-for="sale in saleList">
+                    <tr>
+                        <td x-text="sale.type"></td>
+                        <td x-text="sale.name"></td>
+                        <td x-text="formatPrice(sale.price)"></td>
+                        <td x-text="sale.quantity"></td>
+                        <td x-text="formatPrice(sale.total)"></td>
+                        <td>
+                            <button type="button" class="form__button--red" @click="removeArticleFromList(sale)" style="margin-bottom: 0;">Remover</button>
+                        </td>
+                    </tr>
+                </template>
+                
             </tbody>
         </table>
         <div class="sales-info">
@@ -150,12 +146,24 @@
             productsDB: [],
             servicesDB: [],
             // Variables
-            articleType: 0,
+            articleToSelect: '',
+            articleTypeSelected: 0,
+            articleSelected: {},
+            articleParam: {
+                price: '',
+                quantity: '',
+            },
+            // Lista Venta
+            saleList: [],
             // Listas de Predicciones
             customersPredictions: [],
             articlesPredictions: [],
             showCustomersPredictions: false,
             showArticlesPredictions: false,
+            // HELPERS
+            formatPrice(value) {
+                return parseFloat(value).toFixed(2);
+            },
             // API METHODS
             async initApi() {
                 await Promise.all([
@@ -231,12 +239,12 @@
                     return
                 }
 
-                if (this.articleType == 1) {
+                if (this.articleTypeSelected == 1) {
                     this.articlesPredictions = this.productsDB.filter((product) => {
                         return product.name.toLowerCase().includes(element.value.toLowerCase());
                     })
                     this.showArticlesPredictions = true;
-                } else if (this.articleType == 2) {
+                } else if (this.articleTypeSelected == 2) {
                     this.articlesPredictions = this.servicesDB.filter((service) => {
                         return service.name.toLowerCase().includes(element.value.toLowerCase());
                     })
@@ -244,6 +252,40 @@
                 } else {
                     this.showArticlesPredictions = false;
                 }
+            },
+            selectArticle(article) {
+                console.log(article);
+                document.getElementById('article').value = article.name;
+                this.showArticlesPredictions = false;
+                this.articlesPredictions = [];
+                this.articleSelected = article;
+                this.articleParam.price = article.price;
+                this.articleParam.quantity = 1;
+            },
+            // Eventos de lista
+            addArticleToList() {
+                console.log(this.articleSelected);
+                console.log(this.articleParam);
+                this.saleList.push({
+                    id: this.articleSelected.id,
+                    type: this.articleTypeSelected == 1 ? 'Producto' : 'Servicio',
+                    name: this.articleSelected.name,
+                    price: this.articleParam.price,
+                    quantity: this.articleParam.quantity,
+                    total: this.articleParam.price * this.articleParam.quantity
+
+                });
+                // Limpiando datos
+                this.articleParam.price = '';
+                this.articleParam.quantity = '';
+                this.articleSelected = {}
+                this.articleToSelect = '';
+                this.articleTypeSelected = 0;
+            },
+            removeArticleFromList(article) {
+                this.saleList = this.saleList.filter((sale) => {
+                    return !(sale.type === article.type && sale.id === article.id);
+                });
             }
         }
     }

@@ -129,6 +129,13 @@
             @include m.boton(v.$green-color, white);
             margin-bottom: 16px;
             border-radius: 10px;
+            &--inline {
+                @include m.boton(v.$green-color, white);
+                margin-bottom: 0;
+                border-radius: 10px;
+                width: auto;
+                padding-inline: 20px;
+            }
         }
     }
 
