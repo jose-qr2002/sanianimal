@@ -25,7 +25,7 @@
             <tbody>
                 @forelse ($sales as $sale)
                     <tr>
-                        <td>{{ $sale->customer->name }} {{ $sale->customer->lastname }}</td>
+                        <td>{{ $sale->customer?->name }} {{ $sale->customer?->lastname }}</td>
                         <td>{{ $sale->date }}</td>
                         <td>S/{{ $sale->discount }}</td>
                         <td>S/{{ $sale->total }}</td>

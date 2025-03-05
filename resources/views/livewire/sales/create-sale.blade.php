@@ -1,4 +1,4 @@
-<form class="form" x-data="salesForm()" x-init="initApi()">
+<form class="form" @submit.prevent="submitSale" x-data="salesForm()" x-init="initApi()">
     <x-card class="mt-8 mb-8 w-full m-auto">
         <h1 class="card__title-secondary">Informacion de la venta</h1>
         <div class="form__group">
@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="flex justify-end">
-            <button class="form__button--add--inline" @click="addArticleToList()" type="button">Agregar</button>
+            <button x-bind:disabled="Object.keys(articleSelected).length === 0" class="form__button--add--inline" @click="addArticleToList()" type="button">Agregar</button>
         </div>
     </x-card>
     <x-card class="mt-8 mb-8 w-full m-auto">
@@ -125,15 +125,15 @@
         </table>
         <div class="sales-info">
             <div class="sales-info__group">
-                <p class="font-semibold">Subtotal S/</p><span class="">12.00</span>
+                <p class="font-semibold">Subtotal S/</p><span class="" x-text="formatPrice(subtotal)"></span>
             </div>
             <div class="sales-info__group items-center gap-4">
-                <label class="font-semibold whitespace-nowrap">Decuento S/</label><input class="form__input form__input--number-reset text-right" type="number" notvalidate>
+                <label class="font-semibold whitespace-nowrap">Decuento S/</label><input @input="calculateTotal" x-model="discount" class="form__input form__input--number-reset text-right" type="number" notvalidate>
             </div>
             <div class="sales-info__group">
-                <p class="font-semibold">Total S/</p><span>12</span>
+                <p class="font-semibold">Total S/</p><span x-text="formatPrice(total)">12</span>
             </div>
-            <button class="form__button-submit inline">Confirmar Venta</button>
+            <button x-bind:disabled="saleList.length === 0" class="form__button-submit inline">Confirmar Venta</button>
         </div>
     </x-card>
 </form>
@@ -155,6 +155,9 @@
             },
             // Lista Venta
             saleList: [],
+            subtotal: 0,
+            discount: 0,
+            total: 0,
             // Listas de Predicciones
             customersPredictions: [],
             articlesPredictions: [],
@@ -191,16 +194,20 @@
                 this.servicesDB = data;
             },
             // Eventos
+            calculateTotal() {
+                this.subtotal = this.saleList.reduce((sum, sale) => sum + sale.total, 0);
+                this.total = this.subtotal - this.discount;
+            },  
             showCustPredictions() {
                 this.showCustomersPredictions = true;
-                console.log('enabled');
+                //console.log('enabled');
             },
             hidePredictions() {
                 this.showCustomersPredictions = false;
-                console.log('disabled');
+                //console.log('disabled');
             },
             searchCustomer(elemento) {
-                console.log(this.customersPredictions);
+                //console.log(this.customersPredictions);
 
                 this.customersDB.forEach((customer) => {
                     //console.log(customer);
@@ -264,8 +271,20 @@
             },
             // Eventos de lista
             addArticleToList() {
-                console.log(this.articleSelected);
-                console.log(this.articleParam);
+                console.log(typeof this.subtotal);
+                
+
+                // Verificar si el artículo ya existe en la lista
+                const exists = this.saleList.some(sale => sale.type === (this.articleTypeSelected == 1 ? 'Producto' : 'Servicio') && sale.id === this.articleSelected.id);
+                if (exists) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'El artículo ya está en la lista.',
+                    });
+                    return;
+                }
+
                 this.saleList.push({
                     id: this.articleSelected.id,
                     type: this.articleTypeSelected == 1 ? 'Producto' : 'Servicio',
@@ -281,12 +300,38 @@
                 this.articleSelected = {}
                 this.articleToSelect = '';
                 this.articleTypeSelected = 0;
+                // Calucular total
+                this.calculateTotal();
             },
             removeArticleFromList(article) {
                 this.saleList = this.saleList.filter((sale) => {
                     return !(sale.type === article.type && sale.id === article.id);
                 });
-            }
+                // Calucular total
+                this.calculateTotal();
+            },
+            async submitSale() {
+                console.log('subiendo');
+                
+                if(this.total < 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'El descuento no puede ser mayor al total.',
+                    });
+                    return;
+                }
+
+                let saleData = {
+                    total: this.total,
+                    subtotal: this.subtotal,
+                    discount: this.discount,
+                    saleList: this.saleList
+                }
+
+                @this.call('store', saleData);
+            }    
+            
         }
     }
 </script>
