@@ -1,0 +1,12 @@
+.sales-info {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 8px;
+
+    &__group {
+        display: flex;
+        width: 240px;
+        justify-content: space-between;
+    }
+}

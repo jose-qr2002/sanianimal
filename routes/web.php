@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AppliedVaccineController;
 use App\Http\Controllers\ClinicalHistoryController;
 use App\Http\Controllers\CustomerController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\SupplierController;
@@ -96,7 +98,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/suppliers/edit/{supplier}', [SupplierController::class, 'edit'])->name('suppliers.edit');
     Route::put('/suppliers/update/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
     Route::delete('/suppliers/delete/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
-    
+
     // Servicios
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
@@ -104,6 +106,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/services/edit/{service}', [ServiceController::class, 'edit'])->name('services.edit');
     Route::put('/services/update/{service}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('/services/delete/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
+
+    // Ventas
+    Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
+
+    // Api
+    Route::get('api/customers', [ApiController::class, 'getCustomers'])->name('api.customers');
+    Route::get('api/products', [ApiController::class, 'getProducts'])->name('api.products');
+    Route::get('api/services', [ApiController::class, 'getServices'])->name('api.services');
 });
 
 

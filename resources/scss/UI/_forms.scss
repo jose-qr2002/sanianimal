@@ -72,6 +72,12 @@
         &[type="file"] {
             display: none;
         }
+
+        &--number-reset::-webkit-outer-spin-button,
+        &--number-reset::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
     }
 
     &__file {
@@ -123,6 +129,13 @@
             @include m.boton(v.$green-color, white);
             margin-bottom: 16px;
             border-radius: 10px;
+            &--inline {
+                @include m.boton(v.$green-color, white);
+                margin-bottom: 0;
+                border-radius: 10px;
+                width: auto;
+                padding-inline: 20px;
+            }
         }
     }
 
@@ -137,6 +150,11 @@
         width: 100%;
         font-size: 16px;
         transition: 0.5s background-color;
+        &.inline {
+            width: auto;
+            border-radius: 8px;
+            padding: 10px;
+        }
 
         &:hover {
             background-color: darken(v.$primary-color, 10%);
@@ -150,8 +168,12 @@
     &__predictions {
         display: none;
         position: absolute;
+        top: 105%;
         outline: 1px solid rgb(219, 219, 219);
         width: 100%;
+        &.show {
+            display: block;
+        }
     }
 
     &__prediction {
