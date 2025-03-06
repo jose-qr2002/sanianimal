@@ -30,7 +30,9 @@
                         <td>S/{{ $sale->discount }}</td>
                         <td>S/{{ $sale->total }}</td>
                         <td>
-                            
+                            <button wire:click="$dispatch('show-alert-delete', {{ $sale->id }})">
+                                <i class="ri-delete-bin-line delete-icon icons"></i>
+                            </button>
                         </td>
                     </tr>
                 @empty
@@ -46,3 +48,27 @@
         {{ $sales->links() }}
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('show-alert-delete', (saleId) => {
+
+                Swal.fire({
+                    text: "¿Estás seguro de que deseas eliminar esta venta?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí",
+                    cancelButtonText: "No"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Eliminar el cliente
+                        @this.call('deleteSale',saleId);
+                    }
+                })
+            });
+        })
+    </script>
+@endpush
